@@ -2,7 +2,11 @@
   "name": "@foody-delivery-app/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "client": "npx nx serve foody-client",
+    "admin": "npx nx serve foody-admin",
+    "api": "npx nx serve foody-api"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^10.0.2",
@@ -18,6 +22,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@babel/preset-react": "^7.14.5",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
