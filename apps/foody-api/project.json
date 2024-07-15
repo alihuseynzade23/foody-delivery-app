@@ -1,0 +1,24 @@
+{
+  "name": "foody-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/foody-api/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "foody-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "foody-api:build:development"
+        },
+        "production": {
+          "buildTarget": "foody-api:build:production"
+        }
+      }
+    }
+  }
+}
