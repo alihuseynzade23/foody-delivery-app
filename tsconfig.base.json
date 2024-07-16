@@ -16,9 +16,8 @@
     "baseUrl": ".",
     "strictPropertyInitialization": false,
     "paths": {
-      "@org/foody-shared-components": [
-        "libs/foody-shared-components/src/index.ts"
-      ]
+      "@org/foody-shared-components": ["libs/foody-shared-components/src/index.ts"],
+      "@org/shared": ["libs/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
