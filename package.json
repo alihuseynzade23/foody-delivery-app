@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "npx nx affected -t lint",
+    "test": "npx nx affected -t test",
     "client": "npx nx serve foody-client",
     "admin": "npx nx serve foody-admin",
     "api": "npx nx serve foody-api",
