@@ -1,0 +1,42 @@
+@import 'fonts/fonts';
+
+:root {
+  // Colors
+  --primary-red: #d63626;
+  --secondary-red: #ffe7e7;
+
+  --primary-black: #1e1e30;
+  --secondary-black: #27283C
+
+  --primary-orange: #fb9300;
+  --secondary-orange: #eb5757;
+
+  --primary-gray: #828282;
+  --secondary-gray: #f3f4f6;
+
+  --primary-violet: #c035a2;
+  --secondary-violet: #c74feb;
+
+  --primary-green: #6fcf97;
+
+  --primary-white: #fff;
+  --secondary-white: #f2f2f2;
+
+  // Font sizes
+  --font-size-s: 0.875rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.125rem;
+  --font-size-xl: 1.375rem;
+
+  // Font families
+  --font-family-roboto: 'Roboto', sans-serif;
+  --font-family-mukta: 'Mukta', sans-serif;
+  --font-family-montserrat: 'Montserrat', sans-serif;
+
+  // Font weights
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+  --font-weight-black: 900;
+}

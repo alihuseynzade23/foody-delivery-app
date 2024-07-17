@@ -1,0 +1,40 @@
+@import 'reset';
+@import 'variables/globals';
+
+
+/* Responsive layout */
+@media screen and (max-width: 1050px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  html {
+    font-size: 12px;
+  }
+}
