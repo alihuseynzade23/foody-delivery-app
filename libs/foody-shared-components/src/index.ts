@@ -1,3 +1,3 @@
-export * from './lib/ui/NotFoundPage';
+export * from './lib/components/business/NotFoundPage';
 
 export * from './lib/providers/GlobalStyles';

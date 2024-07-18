@@ -8,7 +8,7 @@
     "types": ["vite/client"]
   },
   "files": [],
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "jest.config.ts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

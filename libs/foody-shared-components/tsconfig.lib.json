@@ -29,5 +29,5 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "../foody-shared-components/src/lib/**/*.ts"
-  ]
+, "jest.config.ts"  ]
 }
