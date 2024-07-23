@@ -1,6 +1,6 @@
 .LoginForm {
   background-color: #38394e;
-  padding: 40px 48px;
+  padding: 48px 58px;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -20,17 +20,26 @@
 
   .input {
     padding: 8px 16px;
+
+    &::placeholder {
+      color: var(--secondary-dark-gray);
+      opacity: 1;
+    }
+  }
+
+  .loginBtn {
+    border-radius: 4px;
   }
 }
 
 @media screen and (max-width: 1024px) {
   .LoginForm {
     background-color: transparent;
-    padding: 0 48px;
+    padding: 0 0 48px 0;
     gap: 24px;
 
     .inputWrapper {
-        gap: 10px;
+      gap: 10px;
     }
   }
 }

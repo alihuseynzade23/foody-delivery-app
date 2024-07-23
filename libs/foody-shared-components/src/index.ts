@@ -1,5 +1,6 @@
 // Business
 export * from './lib/components/business/NotFoundPage';
+export * from './lib/components/business/LangSwitcher';
 
 // Providers
 export * from './lib/providers/GlobalStyles';

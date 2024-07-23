@@ -5,10 +5,11 @@ import styles from './Button.module.scss';
 
 export enum ButtonTheme {
   CLEAR = 'clear',
-  CLEAR_INVERTED = 'clearInverted',
-  OUTLINE = 'outline',
-  BACKGROUND = 'background',
-  BACKGROUND_INVERTED = 'backgroundInverted',
+  BG_VIOLET = 'bgViolet',
+  BG_GRAY = 'bgGray',
+  BG_RED = 'bgRed',
+  BG_ORANGE = 'bgOrange',
+  BG_GREEN = 'bgGreen',
 }
 
 export enum ButtonSize {
@@ -27,11 +28,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
 }
 
-export const Button: React.FC = memo((props: ButtonProps) => {
+export const Button: React.FC<ButtonProps> = memo((props: ButtonProps) => {
   const {
     className,
     children,
-    theme = ButtonTheme.OUTLINE,
+    theme = ButtonTheme.CLEAR,
     square,
     disabled,
     size = ButtonSize.M,

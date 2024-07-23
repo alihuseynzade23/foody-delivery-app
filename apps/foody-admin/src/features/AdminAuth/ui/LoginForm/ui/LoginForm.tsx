@@ -1,4 +1,5 @@
-import { Input, InputTheme, Button } from '@org/foody-shared-components';
+import React from 'react';
+import { Input, InputTheme, Button, ButtonTheme, ButtonSize } from '@org/foody-shared-components';
 
 import styles from './LoginForm.module.scss';
 
@@ -12,7 +13,9 @@ export const LoginForm = () => {
         <Input inputClassName={styles.input} theme={InputTheme.BG_ADMIN} placeholder="Password" />
       </div>
       {/* Change to our Button component */}
-      <button>Login</button>
+      <Button theme={ButtonTheme.BG_VIOLET} size={ButtonSize.XL} className={styles.loginBtn}>
+        Sign in
+      </Button>
     </div>
   );
 };
