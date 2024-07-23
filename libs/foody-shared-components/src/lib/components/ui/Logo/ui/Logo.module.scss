@@ -9,14 +9,25 @@
 }
 
 .secondary {
-    color: var(--primary-black);
+    color: var(--primary-black);    
 }
 
 .dot {
-    &.dotprimary {
-        color: var(--primary-orange);
+    &::after {
+        content: '';
+        display: inline-block;
+        width: 0.2em;
+        height: 0.2em;
+        background-color: currentColor;
+        border-radius: 50%;
+        margin-left: -0.1em;
     }
-    &.dotsecondary {
-        color: var(--primary-red);
+
+    &.dotprimary::after {
+        background-color: var(--primary-orange);
+    }
+
+    &.dotsecondary::after {
+        background-color: var(--primary-red);
     }
 }
