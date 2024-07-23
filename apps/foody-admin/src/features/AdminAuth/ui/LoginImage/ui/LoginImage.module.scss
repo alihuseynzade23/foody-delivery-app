@@ -1,0 +1,27 @@
+.LoginImage {
+  background-color: var(--primary-white);
+  position: relative;
+
+  .langSwitcher {
+    position: absolute;
+    right: 15px;
+    top: -25px;
+  }
+
+  img {
+    // padding: 3.1rem 1.8rem;
+    padding: 2.3rem 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .LoginImage {
+    background-color: transparent;
+  }
+  img {
+    width: 20rem;
+  }
+  .langSwitcher {
+    display: none;
+  }
+}
