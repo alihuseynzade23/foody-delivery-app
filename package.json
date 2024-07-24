@@ -10,7 +10,8 @@
     "api": "npx nx serve foody-api",
     "prepare": "husky",
     "storybook:admin": "nx storybook foody-admin",
-    "storybook:client": "nx storybook foody-client"
+    "storybook:client": "nx storybook foody-client",
+    "storybook:shared": "nx storybook foody-shared-components"
   },
   "private": true,
   "dependencies": {

@@ -13,6 +13,8 @@
       "vite/client"
     ]
   },
+
+  
   "exclude": [
     "**/*.spec.ts",
     "**/*.test.ts",
@@ -21,13 +23,18 @@
     "**/*.spec.js",
     "**/*.test.js",
     "**/*.spec.jsx",
-    "**/*.test.jsx"
+    "**/*.test.jsx",
+    "**/*.stories.ts",
+    "**/*.stories.js",
+    "**/*.stories.jsx",
+    "**/*.stories.tsx"
   ],
   "include": [
     "src/**/*.js",
     "src/**/*.jsx",
     "src/**/*.ts",
     "src/**/*.tsx",
-    "../foody-shared-components/src/lib/**/*.ts"
-, "jest.config.ts"  ]
+    "../foody-shared-components/src/lib/**/*.ts",
+    "jest.config.ts"
+  ]
 }

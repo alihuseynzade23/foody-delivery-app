@@ -7,7 +7,7 @@ export enum LogoTheme {
   SECONDARY = 'secondary',
 }
 
-type LogoProps = {
+export type LogoProps = {
   className?: string;
   theme: LogoTheme;
 };
