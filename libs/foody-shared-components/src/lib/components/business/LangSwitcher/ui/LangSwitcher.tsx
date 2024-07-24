@@ -5,7 +5,7 @@ import { Button, ButtonTheme } from '../../../ui/Button';
 
 import enIcon from '../../../../assets/en.svg';
 
-interface LangSwitcherProps {
+export interface LangSwitcherProps {
   className?: string;
 }
 

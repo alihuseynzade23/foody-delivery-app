@@ -17,7 +17,7 @@ export enum ButtonSize {
   XL = 'size_xl',
 }
 
-interface InputProps extends HTMLInputProps {
+export interface InputProps extends HTMLInputProps {
   className?: string;
   value?: string;
   onChange?: (value: string) => void;

@@ -3,10 +3,6 @@
   color: var(--primary-color);
   padding: 6px 15px;
   font-family: var(--font-family-roboto);
-
-  &::placeholder {
-    font-family: var(--font-family-roboto);
-  }
 }
 
 .clear {
@@ -42,25 +38,6 @@
   background-color: var(--primary-green);
   color: var(--primary-white);
 }
-
-// .square {
-//   padding: 0;
-// }
-
-// .size_m {
-//   width: var(--font-line-m);
-//   height: var(--font-line-m);
-// }
-
-// .size_l {
-//   width: var(--font-line-l);
-//   height: var(--font-line-l);
-// }
-
-// .size_xl {
-//   width: var(--font-line-xl);
-//   height: var(--font-line-xl);
-// }
 
 .size_s {
   font-size: 0.75rem;

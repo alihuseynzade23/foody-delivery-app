@@ -5,13 +5,19 @@
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
   },
   "files": [],
   "include": ["src/**/*.ts", "src/**/*.tsx", "jest.config.ts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.storybook.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
     }
   ],
   "extends": "../../tsconfig.base.json"

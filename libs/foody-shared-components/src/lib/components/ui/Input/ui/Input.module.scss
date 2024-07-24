@@ -3,63 +3,38 @@
 }
 
 .Input {
-    width: 100%;
-    border: none;
+  width: 100%;
+  border: none;
+
+  &::placeholder {
+    font-family: var(--font-family-roboto);
+  }
 }
 
 .bgWhite {
-  padding: 0;
-  border: none;
-  background: none;
-  outline: none;
   background-color: var(--primary-white);
+  border: 1px solid var(--primary-dark-gray);
 }
 
 .bgAdmin {
   background-color: var(--primary-dark-gray);
+  border: 1px solid var(--primary-dark-gray);
 }
 
-.background {
-  background: var(--bg-color);
-  color: var(--primary-color);
-  border: none;
-}
-
-.backgroundInverted {
-  background: var(--inverted-bg-color);
-  color: var(--inverted-primary-color);
-  border: none;
-}
-
-.square {
-  padding: 0;
-}
-
-.square.size_m {
-  width: var(--font-line-m);
-  height: var(--font-line-m);
-}
-
-.square.size_l {
-  width: var(--font-line-l);
-  height: var(--font-line-l);
-}
-
-.square.size_xl {
-  width: var(--font-line-xl);
-  height: var(--font-line-xl);
+.size_s {
+  font-size: 0.75rem;
 }
 
 .size_m {
-  font: var(--font-m);
+  font-size: 1rem;
 }
 
 .size_l {
-  font: var(--font-l);
+  font-size: 1.125rem;
 }
 
 .size_xl {
-  font: var(--font-xl);
+  font-size: 1.5rem;
 }
 
 .disabled {
