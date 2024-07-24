@@ -2,6 +2,10 @@
 @import 'variables/globals';
 
 
+body {
+  height: 100vh;
+}
+
 /* Responsive layout */
 @media screen and (max-width: 1050px) {
   html {

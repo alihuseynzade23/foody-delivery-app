@@ -1,22 +1,50 @@
-.Text {
-   
-  }
-  
-  .s {
-    font-size: 12px;
-  }
-  
-  .m {
-    font-size: 16px;
-  }
-  
-  .l {
-    font-size: 20px;
-  }
-  
-  .xl {
-    font-size: 24px;
-  }
-  
+.clear {
+  color: var(--primary-gray);
+}
 
-  
+.gray {
+  color: var(--primary-gray);
+}
+
+.white {
+  color: var(--primary-white);
+}
+.size_s {
+  font-size: 0.75rem;
+}
+
+.size_m {
+  font-size: 1rem;
+}
+
+.size_l {
+  font-size: 1.125rem;
+}
+
+.size_xl {
+  font-size: 1.5rem;
+}
+
+.textLight {
+  font-weight: 300;
+}
+
+.textNormal {
+  font-weight: 400;
+}
+
+.textMedium {
+  font-weight: 500;
+}
+
+.textBold {
+  font-weight: 700;
+}
+
+.fontMontserrat {
+  font-family: 'Montserrat';
+}
+
+.fontRoboto {
+  font-family: 'Roboto';
+}

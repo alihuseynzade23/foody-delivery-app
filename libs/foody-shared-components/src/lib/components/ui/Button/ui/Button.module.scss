@@ -1,0 +1,83 @@
+.Button {
+  cursor: pointer;
+  color: var(--primary-color);
+  padding: 6px 15px;
+  font-family: var(--font-family-roboto);
+
+  &::placeholder {
+    font-family: var(--font-family-roboto);
+  }
+}
+
+.clear {
+  background: transparent;
+  color: var(--primary-gray);
+  border: 1px solid var(--primary-gray);
+}
+
+.bgViolet {
+  background-color: var(--primary-violet);
+  color: var(--primary-white);
+  border: 1px solid var(--primary-violet);
+}
+
+.bgGray {
+  background-color: var(--secondary-black);
+  color: var(--primary-white);
+}
+
+.bgRed {
+  background-color: var(--primary-red);
+  color: var(--primary-white);
+  border: 1px solid var(--primary-black);
+}
+
+.bgOrange {
+  background-color: var(--primary-orange);
+  color: var(--primary-white);
+  border: 1px solid var(--primary-black);
+}
+
+.bgGreen {
+  background-color: var(--primary-green);
+  color: var(--primary-white);
+}
+
+// .square {
+//   padding: 0;
+// }
+
+// .size_m {
+//   width: var(--font-line-m);
+//   height: var(--font-line-m);
+// }
+
+// .size_l {
+//   width: var(--font-line-l);
+//   height: var(--font-line-l);
+// }
+
+// .size_xl {
+//   width: var(--font-line-xl);
+//   height: var(--font-line-xl);
+// }
+
+.size_s {
+  font-size: 0.75rem;
+}
+
+.size_m {
+  font-size: 1rem;
+}
+
+.size_l {
+  font-size: 1.125rem;
+}
+
+.size_xl {
+  font-size: 1.5rem;
+}
+
+.disabled {
+  opacity: 0.5;
+}
