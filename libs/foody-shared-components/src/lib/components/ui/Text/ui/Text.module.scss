@@ -2,13 +2,34 @@
   color: var(--primary-gray);
 }
 
-.gray {
-  color: var(--primary-gray);
-}
-
 .white {
   color: var(--primary-white);
 }
+
+.secondaryBlack {
+  color: var(--secondary-black);
+}
+
+.secondaryOrange {
+  color: var(--secondary-orange);
+}
+
+.red {
+  color: var(--primary-red);
+}
+
+.darkGray {
+  color: var(--dark-gray);
+}
+
+.green {
+  color: var(--primary-green);
+}
+
+.blue {
+  color: var(--midnight-blue);
+}
+
 .size_s {
   font-size: 0.75rem;
 }
@@ -38,13 +59,20 @@
 }
 
 .textBold {
+  font-weight: 600;
+}
+.textExtraBold {
   font-weight: 700;
 }
 
 .fontMontserrat {
-  font-family: 'Montserrat';
+  font-family: var(--font-family-montserrat);
 }
 
 .fontRoboto {
-  font-family: 'Roboto';
+  font-family: var(--font-family-roboto);
+}
+
+.fontMukta {
+  font-family: var(--font-family-mukta);
 }

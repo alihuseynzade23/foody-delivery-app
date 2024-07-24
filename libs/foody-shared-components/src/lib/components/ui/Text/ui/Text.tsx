@@ -4,8 +4,14 @@ import styles from './Text.module.scss';
 
 export enum TextTheme {
   CLEAR = 'clear',
-  white = 'white',
+  WHITE = 'white',
   GRAY = 'gray',
+  SECONDARY_BLACK = 'secondaryBlack',
+  ORANGE = 'secondaryOrange',
+  RED = 'red',
+  DARK_GRAY = 'darkGray',
+  GREEN = 'green',
+  BLUE = 'blue',
 }
 
 export enum TextSize {
@@ -20,11 +26,13 @@ export enum TextFontWeight {
   NORMAL = 'textNormal',
   MEDIUM = 'textMedium',
   BOLD = 'textBold',
+  EXTRABOLD = 'textExtraBold',
 }
 
 export enum TextFont {
   MONTSERRAT = 'fontMontserrat',
   ROBOTO = 'fontRoboto',
+  MUKTA = 'fontMukta',
 }
 
 interface TextProps {
