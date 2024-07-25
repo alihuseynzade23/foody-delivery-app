@@ -11,6 +11,5 @@ export * from './lib/shared/ui/Input';
 export * from './lib/shared/ui/Text';
 export * from './lib/shared/ui/Button';
 
-
 // Custom lib
 export * from './lib/shared/lib/classNames/classNames';
