@@ -1,8 +1,10 @@
 import { classNames } from '../../../lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import { memo } from 'react';
-import { Button, ButtonTheme } from '../../../ui/Button';
+import { memo, useState } from 'react';
 
+import styles from './LangSwitcher.module.scss';
+
+import azIcon from '../../../../shared/assets/az.svg';
 import enIcon from '../../../../shared/assets/en.svg';
 
 export interface LangSwitcherProps {
@@ -12,12 +14,18 @@ export interface LangSwitcherProps {
 export const LangSwitcher = memo(({ className }: LangSwitcherProps) => {
   const { t, i18n } = useTranslation();
 
-  // Change to our custom toggle function
   const toggle = async () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'az' : 'en');
   };
 
   return (
-    <img src={enIcon} alt="lang" className={classNames('', {}, [className])} onClick={toggle} />
+    <>
+      <img
+        onClick={toggle}
+        src={i18n.language === 'en' ? enIcon : azIcon}
+        alt="lang"
+        className={classNames(styles.LangSwitcher, {}, [className])}
+      />
+    </>
   );
 });
