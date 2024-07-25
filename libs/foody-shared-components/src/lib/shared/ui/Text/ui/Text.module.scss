@@ -1,3 +1,74 @@
-.Text {
-    
+.clear {
+  color: var(--primary-gray);
+}
+
+.white {
+  color: var(--primary-white);
+}
+
+.black {
+  color: var(--secondary-black);
+}
+
+.orange {
+  color: var(--secondary-orange);
+}
+
+.red {
+  color: var(--primary-red);
+}
+
+.gray {
+  color: var(--dark-gray);
+}
+
+.green {
+  color: var(--primary-green);
+}
+
+.size_s {
+  font-size: 0.75rem;
+}
+
+.size_m {
+  font-size: 1rem;
+}
+
+.size_l {
+  font-size: 1.125rem;
+}
+
+.size_xl {
+  font-size: 1.5rem;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.normal {
+  font-weight: 400;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 600;
+}
+.extraBold {
+  font-weight: 700;
+}
+
+.montserrat {
+  font-family: var(--font-family-montserrat);
+}
+
+.roboto {
+  font-family: var(--font-family-roboto);
+}
+
+.mukta {
+  font-family: var(--font-family-mukta);
 }

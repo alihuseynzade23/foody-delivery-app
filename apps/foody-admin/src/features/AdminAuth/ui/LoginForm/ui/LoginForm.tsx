@@ -1,4 +1,15 @@
-import { Input, InputTheme, Button, ButtonTheme, ButtonSize } from '@org/foody-shared-components';
+import {
+  Input,
+  InputTheme,
+  Button,
+  ButtonTheme,
+  ButtonSize,
+  Text,
+  TextSize,
+  TextTheme,
+  TextFont,
+  TextWeight,
+} from '@org/foody-shared-components';
 
 import styles from './LoginForm.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +20,14 @@ export const LoginForm = () => {
   return (
     <div className={styles.LoginForm}>
       {/* Change to our Text component */}
-      <p className={styles.title}>{t`Welcome Admin`}</p>
+      {/* <p className={styles.title}>{t`Welcome Admin`}</p> */}
+      <Text
+        className={styles.title}
+        size={TextSize.XL}
+        theme={TextTheme.ORANGE}
+        font={TextFont.MONTSERRAT}
+        weight={TextWeight.EXTRABOLD}
+      >{t`Welcome Admin`}</Text>
       <div className={styles.inputWrapper}>
         <Input inputClassName={styles.input} theme={InputTheme.BG_ADMIN} placeholder="Username" />
         <Input inputClassName={styles.input} theme={InputTheme.BG_ADMIN} placeholder="Password" />
