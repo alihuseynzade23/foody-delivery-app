@@ -1,22 +1,32 @@
 .Logo {
-    font-size: 1.75rem;
-    font-family: var(--font-family-mukta);
-    font-weight: 800;
+  font-size: 1.75rem;
+  font-family: var(--font-family-mukta);
+  font-weight: 800;
 }
 
 .primary {
-    color: var(--primary-white);
+  color: var(--primary-white);
 }
 
 .secondary {
-    color: var(--primary-black);
+  color: var(--primary-black);
 }
-
 .dot {
-    &.dotprimary {
-        color: var(--primary-orange);
-    }
-    &.dotsecondary {
-        color: var(--primary-red);
-    }
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 0.2em;
+    height: 0.2em;
+    background-color: currentColor;
+    border-radius: 50%;
+    margin-left: -0.1em;
+  }
+
+  &.dotprimary::after {
+    background-color: var(--primary-orange);
+  }
+
+  &.dotsecondary::after {
+    background-color: var(--primary-red);
+  }
 }
