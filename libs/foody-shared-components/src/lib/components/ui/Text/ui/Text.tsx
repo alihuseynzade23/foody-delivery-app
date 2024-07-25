@@ -6,8 +6,8 @@ export enum TextTheme {
   CLEAR = 'clear',
   WHITE = 'white',
   GRAY = 'gray',
-  SECONDARY_BLACK = 'secondaryBlack',
-  ORANGE = 'secondaryOrange',
+  SECONDARY_BLACK = 'black',
+  ORANGE = 'orange',
   RED = 'red',
   DARK_GRAY = 'darkGray',
   GREEN = 'green',
@@ -22,17 +22,17 @@ export enum TextSize {
 }
 
 export enum TextFontWeight {
-  LIGHT = 'textLight',
-  NORMAL = 'textNormal',
-  MEDIUM = 'textMedium',
-  BOLD = 'textBold',
-  EXTRABOLD = 'textExtraBold',
+  LIGHT = 'light',
+  NORMAL = 'normal',
+  MEDIUM = 'medium',
+  BOLD = 'bold',
+  EXTRABOLD = 'extraBold',
 }
 
 export enum TextFont {
-  MONTSERRAT = 'fontMontserrat',
-  ROBOTO = 'fontRoboto',
-  MUKTA = 'fontMukta',
+  MONTSERRAT = 'montserrat',
+  ROBOTO = 'roboto',
+  MUKTA = 'mukta',
 }
 
 interface TextProps {

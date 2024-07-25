@@ -6,11 +6,11 @@
   color: var(--primary-white);
 }
 
-.secondaryBlack {
+.black {
   color: var(--secondary-black);
 }
 
-.secondaryOrange {
+.orange {
   color: var(--secondary-orange);
 }
 
@@ -46,33 +46,33 @@
   font-size: 1.5rem;
 }
 
-.textLight {
+.light {
   font-weight: 300;
 }
 
-.textNormal {
+.normal {
   font-weight: 400;
 }
 
-.textMedium {
+.medium {
   font-weight: 500;
 }
 
-.textBold {
+.bold {
   font-weight: 600;
 }
-.textExtraBold {
+.extraBold {
   font-weight: 700;
 }
 
-.fontMontserrat {
+.montserrat {
   font-family: var(--font-family-montserrat);
 }
 
-.fontRoboto {
+.roboto {
   font-family: var(--font-family-roboto);
 }
 
-.fontMukta {
+.mukta {
   font-family: var(--font-family-mukta);
 }
