@@ -1,9 +1,9 @@
-import { classNames } from '../../../../lib/classNames/classNames';
+import { classNames } from '../../../lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { Button, ButtonTheme } from '../../../ui/Button';
 
-import enIcon from '../../../../assets/en.svg';
+import enIcon from '../../../../shared/assets/en.svg';
 
 export interface LangSwitcherProps {
   className?: string;

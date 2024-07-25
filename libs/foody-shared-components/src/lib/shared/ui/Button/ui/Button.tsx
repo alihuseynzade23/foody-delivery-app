@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes, memo, ReactNode } from 'react';
-import { classNames, Mods } from '../../../../lib/classNames/classNames';
+import { classNames, Mods } from '../../../lib/classNames/classNames';
 
 import styles from './Button.module.scss';
 
