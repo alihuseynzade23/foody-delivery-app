@@ -1,4 +1,4 @@
-import { classNames } from '../../../../lib/classNames/classNames';
+import { classNames } from '../../../lib/classNames/classNames';
 import { memo } from 'react';
 import styles from './Text.module.scss';
 

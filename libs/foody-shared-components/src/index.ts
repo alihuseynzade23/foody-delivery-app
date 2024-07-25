@@ -1,12 +1,16 @@
 // Business
-export * from './lib/components/business/NotFoundPage';
-export * from './lib/components/business/LangSwitcher';
+export * from './lib/pages/NotFoundPage';
+export * from './lib/shared/ui/LangSwitcher';
 
 // Providers
-export * from './lib/providers/GlobalStyles';
+export * from './lib/app/providers/GlobalStyles';
 
 // UI
-export * from './lib/components/ui/Logo';
-export * from './lib/components/ui/Input';
-export * from './lib/components/ui/Text';
-export * from './lib/components/ui/Button';
+export * from './lib/shared/ui/Logo';
+export * from './lib/shared/ui/Input';
+export * from './lib/shared/ui/Text';
+export * from './lib/shared/ui/Button';
+
+
+// Custom lib
+export * from './lib/shared/lib/classNames/classNames';

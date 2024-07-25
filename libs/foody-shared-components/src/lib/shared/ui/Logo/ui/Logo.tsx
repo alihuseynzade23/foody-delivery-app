@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { classNames } from '../../../../lib/classNames/classNames';
+import { classNames } from '../../../lib/classNames/classNames';
 import styles from './Logo.module.scss';
 
 export enum LogoTheme {
