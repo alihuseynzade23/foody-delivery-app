@@ -19,7 +19,7 @@ export const Navbar: FC<NavbarProps> = ({ className }) => {
   const { t } = useTranslation('dashboard');
 
   return (
-    <div className={classNames(styles.AdminNavbar, {}, [className])}>
+    <div className={classNames(styles.Navbar, {}, [className])}>
       <Logo theme={LogoTheme.PRIMARY} />
 
       <div className={classNames(styles.infoWrapper)}>
