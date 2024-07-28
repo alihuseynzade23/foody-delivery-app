@@ -1,3 +1,34 @@
 .LangSwitcher {
   cursor: pointer;
 }
+
+.LangSwitcherContainer {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+}
+
+.Dropdown {
+  position: absolute;
+  left: 83%;
+  top: 2.9rem;
+  z-index: 1;
+  background-color: white;
+}
+
+.DropdownItem {
+  padding: 10px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.black {
+  background-color: var(--primary-black);
+}
+
+@media screen and (max-width: 1024px) {
+  .LangSwitcherContainer {
+    display: none;
+  }
+}
