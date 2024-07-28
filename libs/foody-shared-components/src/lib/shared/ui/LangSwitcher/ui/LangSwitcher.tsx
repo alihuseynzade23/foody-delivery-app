@@ -24,6 +24,8 @@ export const LangSwitcher = memo(({ className }: LangSwitcherProps) => {
         onClick={toggle}
         src={i18n.language === 'en' ? enIcon : azIcon}
         alt="lang"
+        height={41}
+        width={41}
         className={classNames(styles.LangSwitcher, {}, [className])}
       />
     </>

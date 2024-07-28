@@ -1,0 +1,25 @@
+.AdminNavbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  background-color: var(--secondary-black);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+
+  .infoWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+
+    .addBtn {
+        border-radius: 14px;
+    }
+}
+
+  .userInfoWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
