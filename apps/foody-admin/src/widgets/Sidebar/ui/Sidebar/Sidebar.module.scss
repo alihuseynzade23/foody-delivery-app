@@ -1,0 +1,19 @@
+.Sidebar {
+  background: var(--secondary-violet);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  max-width: 16rem;
+  flex-shrink: 0;
+  border-radius: 14px;
+  padding: 2.5rem 4.5rem 5.5rem 1.5rem;
+  gap: 1.5rem;
+
+  .logout {
+    display: flex;
+    gap: 1.25rem;
+    text-decoration: none;
+    margin-top: 2rem;
+    padding: 0.625rem 0.75rem;
+  }
+}
