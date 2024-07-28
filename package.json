@@ -30,6 +30,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "tslib": "^2.3.0",
+    "uncomment": "^0.3.0",
     "zustand": "^4.5.4"
   },
   "devDependencies": {
