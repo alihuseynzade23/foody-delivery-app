@@ -6,7 +6,6 @@ import styles from './LangSwitcher.module.scss';
 
 import azIcon from '../../../../shared/assets/az.svg';
 import enIcon from '../../../../shared/assets/en.svg';
-import frIcon from '../../../../shared/assets/fr.svg';
 import { Line } from '../../Line/ui/Line';
 
 export enum LangSwitcherTheme {
@@ -47,7 +46,7 @@ export const LangSwitcher = memo((props: LangSwitcherProps) => {
     >
       <img
         onClick={toggleDropdown}
-        src={i18n.language === 'en' ? enIcon : i18n.language === 'az' ? azIcon : frIcon}
+        src={i18n.language === 'en' ? enIcon : azIcon}
         alt="lang"
         className={classNames(styles.LangSwitcher, {}, [className])}
       />
@@ -66,13 +65,7 @@ export const LangSwitcher = memo((props: LangSwitcherProps) => {
           >
             <img src={azIcon} alt="Azerbaijani" />
           </div>
-          <Line />
-          <div
-            onClick={() => changeLanguage('fr')}
-            className={styles.DropdownItem}
-          >
-            <img src={frIcon} alt="France" />
-          </div>
+       
         </div>
       )}
     </div>
