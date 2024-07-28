@@ -1,5 +1,5 @@
 import { classNames, Mods } from '../../../lib/classNames/classNames';
-import { memo } from 'react';
+import { memo, ReactNode } from 'react';
 import styles from './Text.module.scss';
 
 export enum TextTheme {
@@ -34,7 +34,7 @@ export enum TextFont {
 }
 
 interface TextProps {
-  children: string;
+  children: string | ReactNode;
   className?: string;
   size?: TextSize;
   theme?: TextTheme;
@@ -47,7 +47,7 @@ export const Text = memo((props: TextProps) => {
     className,
     children,
     size = TextSize.M,
-    theme = TextTheme.CLEAR,
+    theme = TextTheme.WHITE,
     weight = TextWeight.NORMAL,
     font = TextFont.ROBOTO,
     ...otherProps
