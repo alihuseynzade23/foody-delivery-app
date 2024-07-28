@@ -13,3 +13,6 @@ export * from './lib/shared/ui/Button';
 
 // Custom lib
 export * from './lib/shared/lib/classNames/classNames';
+
+// Utils
+export * from './lib/shared/lib/utils/isActivePath';
