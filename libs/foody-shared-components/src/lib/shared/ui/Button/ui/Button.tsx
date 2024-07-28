@@ -12,14 +12,6 @@ export enum ButtonTheme {
   BG_GREEN = 'bgGreen',
 }
 
-// export enum ButtonWeight {
-//   LIGHT = 'light',
-//   NORMAL = 'normal',
-//   MEDIUM = 'medium',
-//   BOLD = 'bold',
-//   EXTRABOLD = 'extraBold',
-// }
-
 export enum ButtonSize {
   S = 'size_s',
   M = 'size_m',
@@ -34,7 +26,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   disabled?: boolean;
   children?: ReactNode;
-  // weight?: ButtonWeight;
 }
 
 export const Button: React.FC<ButtonProps> = memo((props: ButtonProps) => {
@@ -44,7 +35,6 @@ export const Button: React.FC<ButtonProps> = memo((props: ButtonProps) => {
     theme = ButtonTheme.CLEAR,
     square,
     disabled,
-    // weight = ButtonWeight.NORMAL,
     size = ButtonSize.M,
     ...otherProps
   } = props;
@@ -53,7 +43,6 @@ export const Button: React.FC<ButtonProps> = memo((props: ButtonProps) => {
     [styles[theme]]: true,
     [styles.square]: square,
     [styles[size]]: true,
-    // [styles[weight]]: true,
     [styles.disabled]: disabled,
   };
 

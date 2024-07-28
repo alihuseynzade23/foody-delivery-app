@@ -13,7 +13,6 @@ interface SidebarItemProps {
 export const SidebarItem = memo(({ item, isActive }: SidebarItemProps) => {
   const { t } = useTranslation();
 
-
   return (
     <Link to={item.path} className={classNames(styles.item, { [styles.active]: isActive })}>
       <img height={24} width={24} src={item.Icon} alt={item.text} />
