@@ -2,15 +2,10 @@
   cursor: pointer;
 }
 
-.LangSwitcherContainer {
-  position: relative;
-  display: inline-block;
-}
-
 .Dropdown {
   position: absolute;
-  left: 83%;
-  top: 2.9rem;
+  right: 11%;
+  top: 3.9rem;
   z-index: 1;
   background-color: white;
 }
