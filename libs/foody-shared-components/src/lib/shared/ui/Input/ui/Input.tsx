@@ -10,13 +10,6 @@ export enum InputTheme {
   BG_CLIENT = 'bgClient',
 }
 
-export enum ButtonSize {
-  S = 'size_s',
-  M = 'size_m',
-  L = 'size_l',
-  XL = 'size_xl',
-}
-
 export interface InputProps extends HTMLInputProps {
   className?: string;
   value?: string;

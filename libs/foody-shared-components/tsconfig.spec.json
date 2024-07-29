@@ -5,7 +5,7 @@
     "module": "commonjs",
     "composite": true,
     "declaration": true,
-    "types": ["jest", "node"]
+    "types": ["jest", "node", "@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts"]
   },
   "include": [
     "jest.config.ts",
@@ -17,6 +17,8 @@
     "src/**/*.spec.js",
     "src/**/*.test.jsx",
     "src/**/*.spec.jsx",
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "src/lib/**/**/**/*.ts",
+    "src/lib/**/**/**/*.tsx"
   ]
 }

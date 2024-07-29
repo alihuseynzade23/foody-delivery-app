@@ -33,7 +33,6 @@ export const Button: React.FC<ButtonProps> = memo((props: ButtonProps) => {
     className,
     children,
     theme = ButtonTheme.CLEAR,
-    square,
     disabled,
     size = ButtonSize.M,
     ...otherProps
@@ -41,7 +40,6 @@ export const Button: React.FC<ButtonProps> = memo((props: ButtonProps) => {
 
   const mods: Mods = {
     [styles[theme]]: true,
-    [styles.square]: square,
     [styles[size]]: true,
     [styles.disabled]: disabled,
   };
