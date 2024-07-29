@@ -7,6 +7,12 @@
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 
+  .logoWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
   .infoWrapper {
     display: flex;
     align-items: center;
@@ -21,5 +27,26 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .addBtn {
+    display: none;
+  }
+  .addBtnResponse {
+    display: block;
+    border-radius: 2rem;
+    padding: 0 1.25rem;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .burgerMenu {
+    display: none;
+  }
+
+  .addBtnResponse {
+    display: none;
   }
 }
