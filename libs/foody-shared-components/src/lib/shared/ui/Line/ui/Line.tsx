@@ -9,7 +9,7 @@ export interface LineProps {
 export const Line = memo((props: LineProps) => {
   return (
     <div>
-      <div className={styles.line}></div>
+      <div data-testid="line-element" className={styles.line}></div>
     </div>
   );
 });

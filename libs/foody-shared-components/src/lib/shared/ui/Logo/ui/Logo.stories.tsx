@@ -7,7 +7,7 @@ export default {
   component: Logo,
 } as Meta;
 
-const Template: StoryFn<LogoProps> = (args) => <Logo {...args} />;
+const Template: StoryFn<LogoProps> = args => <Logo {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
