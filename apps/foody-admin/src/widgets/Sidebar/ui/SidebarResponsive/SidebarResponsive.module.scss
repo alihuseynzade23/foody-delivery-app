@@ -1,0 +1,48 @@
+.sideBarContainer {
+  width: 100%;
+  height: 100%;
+  background: #000000;
+
+  .Sidebar {
+    background: var(--secondary-violet);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 4.5rem 4rem 1.5rem;
+    gap: 1.5rem;
+    height: 100%;
+    width: 80%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    max-width: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 50;
+
+    &.open {
+      transform: translateX(0);
+    }
+
+    &.close {
+      transform: translateX(-100%);
+    }
+
+    .logoWrapper {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .logout {
+      display: flex;
+      gap: 1.25rem;
+      text-decoration: none;
+      margin-top: 2rem;
+      padding: 0.625rem 0.75rem;
+    }
+  }
+}
