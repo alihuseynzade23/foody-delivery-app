@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { classNames } from '@org/foody-shared-components';
+import { classNames, LangSwitcherTheme } from '@org/foody-shared-components';
 
 import styles from './Navbar.module.scss';
 
@@ -46,7 +46,7 @@ export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
             +
           </Text>
         </Button>
-        <LangSwitcher />
+        <LangSwitcher  className={styles.langSwitcher} theme={LangSwitcherTheme.BLACK}/>
         <div className={classNames(styles.userInfoWrapper)}>
           <img height={40} width={40} src={userIcon} alt="user" />
           <Text weight={TextWeight.MEDIUM}>Admin</Text>

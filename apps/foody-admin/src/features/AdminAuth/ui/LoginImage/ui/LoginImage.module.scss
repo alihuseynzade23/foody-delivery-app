@@ -1,15 +1,15 @@
 .LoginImage {
   background-color: var(--primary-white);
-  position: relative;
+  // position: relative;
 
   .langSwitcher {
-    position: absolute;
-    right: 5px;
+    position: relative;
+    left:43%;
     top: 0.3rem;
   }
 
   .adminLoginImage {
-    padding: 2.3rem 0;
+    padding:1rem 0;
   }
 }
 

@@ -39,7 +39,7 @@ export const LangSwitcher = memo((props: LangSwitcherProps) => {
 
   return (
     <div
-      className={classNames(styles.LangSwitcherContainer, mods, [className])}
+      className={classNames(styles.LangSwitcherContainer,{}, [className])}
       {...otherProps}
       tabIndex={0}
       onBlur={() => setIsOpen(false)}
@@ -53,22 +53,15 @@ export const LangSwitcher = memo((props: LangSwitcherProps) => {
         className={classNames(styles.LangSwitcher, {}, [className])}
       />
       {isOpen && (
-        <div  className={classNames(styles.Dropdown, mods)}>
-          <div
-            onClick={() => changeLanguage('en')}
-            className={styles.DropdownItem}
-          >
+        <ul className={classNames(styles.Dropdown, mods)}>
+          <li onClick={() => changeLanguage('en')} className={styles.DropdownItem}>
             <img src={enIcon} alt="English" />
-          </div>
-          <Line />
-          <div
-            onClick={() => changeLanguage('az')}
-            className={styles.DropdownItem}
-          >
+          </li>
+          {theme === LangSwitcherTheme.BLACK && <Line />}
+          <li onClick={() => changeLanguage('az')} className={styles.DropdownItem}>
             <img src={azIcon} alt="Azerbaijani" />
-          </div>
-       
-        </div>
+          </li>
+        </ul>
       )}
     </div>
   );
