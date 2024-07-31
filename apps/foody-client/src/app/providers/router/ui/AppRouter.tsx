@@ -1,13 +1,15 @@
 import { Suspense, FC, ReactNode } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { LoginPage } from '../../../../pages/LoginPage';
 import { NotFoundPage } from '@org/foody-shared-components';
 import { useTranslation } from 'react-i18next';
+import { BaseLayout } from '../../../layouts/BaseLayout/ui/BaseLayout';
+import { LoginPage } from '../../../../pages/LoginPage';
+import { HomePage } from '../../../../pages/HomePage';
 
-import { BaseLayout } from '../../../layouts/BaseLayout';
+// import { BaseLayout } from '../../../layouts/BaseLayout';
 
-import { DashboardPage } from '../../../../pages/DashboardPage';
+// import { DashboardPage } from '../../../../pages/DashboardPage';
 
 const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
   // const { isLoggedIn } = useAuth();
@@ -26,10 +28,10 @@ export const AppRouter: FC = () => {
       <Routes>
         <Route index element={<LoginPage />} />
         <Route
-          path="/dashboard"
+          path="/home"
           element={
             <ProtectedRoute>
-              <DashboardPage />
+              <HomePage />
             </ProtectedRoute>
           }
         />

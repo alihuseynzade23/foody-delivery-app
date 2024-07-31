@@ -1,0 +1,13 @@
+.item {
+  text-decoration: none;
+  padding: 0.625rem 0.75rem;
+  .link {
+    color: var(--primary-gray);
+    font-size: var(--font-size-l);
+    font-weight: 500;
+  }
+}
+
+.active {
+  color: var(--primary-red);
+}

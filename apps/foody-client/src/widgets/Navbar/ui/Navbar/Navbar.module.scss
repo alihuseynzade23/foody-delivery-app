@@ -1,0 +1,76 @@
+.Navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 3.75rem;
+  margin-top: 1.75rem;
+  background-color: var(--secondary-gray);
+  width: 100%;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .clientWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    .btn {
+      border-radius: 30px;
+      border: none;
+      padding: 0.6rem 0;
+      width: 115px;
+      font-weight: 500;
+    }
+
+    .input {
+      padding: 0.5rem 0;
+      padding-left: 0.8rem;
+      width: 100%;
+      border-radius: 10px;
+    }
+  }
+
+  .logoWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-right: 1.875rem;
+  }
+
+  .itemsWrapper {
+    display: flex;
+    margin-right: 2.5rem;
+    padding-top: 6px;
+  }
+
+  .inputWrapper {
+    width: 19rem;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .addBtn {
+    display: none;
+  }
+  .addBtnResponse {
+    display: block;
+    border-radius: 2rem;
+    padding: 0 1.25rem;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .burgerMenu {
+    display: none;
+  }
+
+  .addBtnResponse {
+    display: none;
+  }
+}
