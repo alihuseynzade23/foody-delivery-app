@@ -1,4 +1,4 @@
-import { AdminPage } from './AdminPage';
+import { AdminPage } from './LoginPage';
 
 describe('AdminPage', () => {
   it('should render successfully', () => {

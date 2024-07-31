@@ -1,11 +1,11 @@
 import { LoginImage } from '../../../features/AdminAuth/ui/LoginImage';
 import { LoginForm } from '../../../features/AdminAuth/ui/LoginForm';
 
-import styles from './AdminPage.module.scss';
+import styles from './LoginPage.module.scss';
 
 import { Logo, LogoTheme } from '@org/foody-shared-components';
 
-export const AdminPage = () => {
+export const LoginPage = () => {
   return (
     <div className={styles.admin}>
       <div className={styles.logoWrapper}>

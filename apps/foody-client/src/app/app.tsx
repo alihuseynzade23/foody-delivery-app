@@ -1,11 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import  './app.module.scss';
-
+import { AppRouter } from './providers/router';
 
 export function App() {
-  return <p>
-    Ali
-  </p>;
+  return <AppRouter />;
 }
 
 export default App;

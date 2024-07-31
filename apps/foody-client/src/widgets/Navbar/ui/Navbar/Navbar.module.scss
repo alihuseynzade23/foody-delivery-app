@@ -1,0 +1,54 @@
+.Navbar {
+  display: flex;
+  align-items: center;
+  // justify-content: space-between;
+  padding: 1.6rem 3.75rem;
+  margin-top: 1.75rem;
+  background-color: var(--secondary-gray);
+  border-radius: 4px;
+
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logoWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-right: 1.875rem;
+  }
+
+  .itemsWrapper {
+    display: flex;
+    width: 31rem;
+    margin-right: 2.5rem;
+  }
+
+  .inputWrapper {
+    width: 304px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .addBtn {
+    display: none;
+  }
+  .addBtnResponse {
+    display: block;
+    border-radius: 2rem;
+    padding: 0 1.25rem;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .burgerMenu {
+    display: none;
+  }
+
+  .addBtnResponse {
+    display: none;
+  }
+}
