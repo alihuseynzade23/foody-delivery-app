@@ -32,27 +32,27 @@ export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
 
   return (
     <div className={classNames(styles.Navbar, {}, [className])}>
-      <div className={styles.logoWrapper}>
-        <img
-          onClick={isOpen}
-          src={burgerMenuIcon}
-          height={26}
-          width={26}
-          alt="burger-menu"
-          style={{ cursor: 'pointer' }}
-          className={styles.burgerMenu}
-        />
-        <Logo theme={LogoTheme.SECONDARY} />
-      </div>
-      <div>
+      <div className={styles.nav}>
+        <div className={styles.logoWrapper}>
+          <img
+            onClick={isOpen}
+            src={burgerMenuIcon}
+            height={26}
+            width={26}
+            alt="burger-menu"
+            style={{ cursor: 'pointer' }}
+            className={styles.burgerMenu}
+          />
+          <Logo theme={LogoTheme.SECONDARY} />
+        </div>
         <div className={styles.itemsWrapper}>{itemsList}</div>
-        <Input inputWrapperClassName={styles.inputWrapper} />
-          <LangSwitcher />
-          <div className={classNames(styles.userInfoWrapper)}>
-            <Button theme={ButtonTheme.BG_RED} size={ButtonSize.M}>
-              Sign up
-            </Button>
-          </div>
+      </div>
+      <div className={styles.clientWrapper}>
+        <Input  className={styles.input} placeholder="Search" inputWrapperClassName={styles.inputWrapper} />
+        <LangSwitcher />
+        <Button theme={ButtonTheme.BG_RED} className={styles.btn} size={ButtonSize.M}>
+          Sign up
+        </Button>
       </div>
     </div>
   );
