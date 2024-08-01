@@ -1,0 +1,25 @@
+.simpleDonut {
+    position: relative;
+    background-color: var(--secondary-black);
+    border-radius: 15px;
+    width: 450px;
+    padding: 1rem;
+
+    @media (max-width:468px){
+        width: 100%;
+    }
+  }
+  
+  
+  .centerText {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    text-align: center;
+    padding: 0 4rem;
+    color:var(--primary-gray);
+  }
+  
+
