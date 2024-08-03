@@ -55,14 +55,23 @@
 }
 
 @media screen and (max-width: 650px) {
-  .addBtn {
+  .burgerMenu {
+    display: block;
+  }
+ .nav{
+  .itemsWrapper{
     display: none;
   }
-  .addBtnResponse {
-    display: block;
-    border-radius: 2rem;
-    padding: 0 1.25rem;
+ }
+
+  .inputWrapper{
+    display: none;
   }
+
+  .btn{
+    display: none;
+  }
+  
 }
 
 @media screen and (min-width: 650px) {
@@ -70,7 +79,5 @@
     display: none;
   }
 
-  .addBtnResponse {
-    display: none;
-  }
+
 }
