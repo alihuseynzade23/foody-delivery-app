@@ -1,6 +1,6 @@
-import { AdminPage } from './LoginPage';
+import { LoginPage } from './LoginPage';
 
-describe('AdminPage', () => {
+describe('LoginPage', () => {
   it('should render successfully', () => {
     // const { baseElement } = rende(<AdminPage />);
     // expect(baseElement).toBeTruthy();

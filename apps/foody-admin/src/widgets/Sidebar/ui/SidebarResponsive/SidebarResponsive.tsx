@@ -1,6 +1,12 @@
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { classNames, isActivePath, Logo, LogoTheme, Text } from '@org/foody-shared-components';
+import {
+  classNames,
+  isActivePath,
+  Logo,
+  LogoTheme,
+  Text,
+  useAuth,
+} from '@org/foody-shared-components';
 import styles from './SidebarResponsive.module.scss';
 import { useTranslation } from 'react-i18next';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
@@ -17,6 +23,8 @@ interface SidebarResponsiveProps {
 export const SidebarResponsive: FC<SidebarResponsiveProps> = ({ onClose, className }) => {
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
+
+  const { logout } = useAuth();
 
   const handleClose = () => {
     setIsVisible(false);
@@ -56,10 +64,10 @@ export const SidebarResponsive: FC<SidebarResponsiveProps> = ({ onClose, classNa
           <Logo theme={LogoTheme.PRIMARY} />
         </div>
         {itemsList}
-        <Link className={styles.logout} to={'/'}>
+        <div className={styles.logout} onClick={logout}>
           <img height={24} width={24} src={logoutIcon} alt="logout" />
           <Text>{t`Logout`}</Text>
-        </Link>
+        </div>
       </div>
     </div>
   );
