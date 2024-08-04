@@ -1,4 +1,4 @@
-import { classNames, isActivePath, Text } from '@org/foody-shared-components';
+import { classNames, isActivePath, Text, useAuth } from '@org/foody-shared-components';
 
 import styles from './Sidebar.module.scss';
 
@@ -6,7 +6,6 @@ import { FC, useMemo } from 'react';
 
 import { SidebarItemsList } from '../../model/items';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import logoutIcon from '../../../../shared/assets/logout.svg';
@@ -17,6 +16,8 @@ interface SidebarProps {
 
 export const Sidebar: FC<SidebarProps> = ({ className }) => {
   const { t } = useTranslation();
+
+  const { logout } = useAuth();
 
   const itemsList = useMemo(
     () =>
@@ -29,10 +30,10 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
   return (
     <div className={classNames(styles.Sidebar, {}, [className])}>
       {itemsList}
-      <Link className={styles.logout} to={'/'}>
+      <div className={styles.logout} onClick={logout}>
         <img height={24} width={24} src={logoutIcon} alt="logout" />
         <Text>{t`Logout`}</Text>
-      </Link>
+      </div>
     </div>
   );
 };

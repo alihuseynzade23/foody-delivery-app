@@ -2,6 +2,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import path from 'path';
+
+const rootDir = path.resolve(__dirname, '..', '..');
 
 export default defineConfig({
   root: __dirname,
@@ -10,6 +13,9 @@ export default defineConfig({
   server: {
     port: 4200,
     host: 'localhost',
+    fs: {
+      allow: [rootDir, path.join(rootDir, 'node_modules/@fontsource')],
+    },
   },
 
   preview: {

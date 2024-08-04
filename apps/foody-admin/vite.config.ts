@@ -2,14 +2,20 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import path from 'path';
+
+const rootDir = path.resolve(__dirname, '..', '..');
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/apps/foody-admin',
+  cacheDir: path.join(rootDir, 'node_modules/.vite/apps/foody-admin'),
 
   server: {
     port: 4201,
     host: 'localhost',
+    fs: {
+      allow: [rootDir, path.join(rootDir, 'node_modules/@fontsource')],
+    },
   },
 
   preview: {
@@ -25,7 +31,7 @@ export default defineConfig({
   // },
 
   build: {
-    outDir: '../../dist/apps/foody-admin',
+    outDir: path.join(rootDir, 'dist/apps/foody-admin'),
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {

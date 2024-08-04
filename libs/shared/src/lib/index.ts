@@ -1,1 +1,1 @@
-export * from './validations/admin-login';
+export * from './validations/admin-login/admin-login';

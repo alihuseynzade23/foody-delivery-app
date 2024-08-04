@@ -18,6 +18,7 @@ export interface InputProps extends HTMLInputProps {
   error?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   autofocus?: boolean;
+  disabled?: boolean;
   label?: string;
   theme?: InputTheme;
   type?: 'text' | 'password';
@@ -37,6 +38,7 @@ export const Input = memo((props: InputProps) => {
     theme = InputTheme.BG_WHITE,
     type = 'text',
     placeholder,
+    disabled,
     autofocus,
     ...otherProps
   } = props;
@@ -49,6 +51,7 @@ export const Input = memo((props: InputProps) => {
 
   const mods: Mods = {
     [styles[theme]]: true,
+    [styles.error]: !!error,
   };
 
   return (
@@ -56,6 +59,7 @@ export const Input = memo((props: InputProps) => {
       {label && <label className={styles.label}>{label}</label>}
       <input
         ref={ref}
+        disabled={disabled}
         placeholder={placeholder}
         type={type}
         value={value}

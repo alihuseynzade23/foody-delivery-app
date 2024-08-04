@@ -13,7 +13,7 @@ export interface SidebarItemType {
 
 export const SidebarItemsList: SidebarItemType[] = [
   {
-    path: '/dashboard',
+    path: '/',
     Icon: DashboardIcon,
     text: 'Dashboard',
   },
