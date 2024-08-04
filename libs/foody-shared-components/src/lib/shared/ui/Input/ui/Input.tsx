@@ -1,6 +1,8 @@
+import React, { InputHTMLAttributes, memo, useRef } from 'react';
 import { classNames, Mods } from '../../../lib/classNames/classNames';
-import React, { InputHTMLAttributes, memo, useEffect, useRef, useState } from 'react';
 import styles from './Input.module.scss';
+import { error } from 'console';
+import { FormFieldError } from '../../FormFieldError/ui/FormFieldError';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>;
 
@@ -13,7 +15,8 @@ export enum InputTheme {
 export interface InputProps extends HTMLInputProps {
   className?: string;
   value?: string;
-  onChange?: (value: string) => void;
+  error?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   autofocus?: boolean;
   label?: string;
   theme?: InputTheme;
@@ -28,6 +31,7 @@ export const Input = memo((props: InputProps) => {
     inputWrapperClassName,
     inputClassName,
     value,
+    error,
     onChange,
     label,
     theme = InputTheme.BG_WHITE,
@@ -36,44 +40,20 @@ export const Input = memo((props: InputProps) => {
     autofocus,
     ...otherProps
   } = props;
-  const ref = useRef<HTMLInputElement>(null);
-  // const [isFocused, setIsFocused] = useState(false);
-  // const [caretPosition, setCaretPosition] = useState(0);
 
-  // useEffect(() => {
-  //   if (autofocus) {
-  //     setIsFocused(true);
-  //     ref.current?.focus();
-  //   }
-  // }, [autofocus]);
+  const ref = useRef<HTMLInputElement>(null);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.value);
-    // setCaretPosition(e.target.value.length);
+    onChange?.(e);
   };
-
-  // const onBlur = () => {
-  //   setIsFocused(false);
-  // };
-
-  // const onFocus = () => {
-  //   setIsFocused(true);
-  // };
-
-  // const onSelect = (e: any) => {
-  //   setCaretPosition(e?.target?.selectionStart || 0);
-  // };
 
   const mods: Mods = {
     [styles[theme]]: true,
-    // [styles.square]: square,
-    // [styles[size]]: true,
-    // [styles.disabled]: disabled,
   };
 
   return (
     <div className={classNames(styles.InputWrapper, {}, [inputWrapperClassName])}>
-      {label && <label className={styles.label}>{`${label}>`}</label>}
+      {label && <label className={styles.label}>{label}</label>}
       <input
         ref={ref}
         placeholder={placeholder}
@@ -81,11 +61,9 @@ export const Input = memo((props: InputProps) => {
         value={value}
         onChange={onChangeHandler}
         className={classNames(styles.Input, mods, [inputClassName])}
-        // onFocus={onFocus}
-        // onBlur={onBlur}
-        // onSelect={onSelect}
         {...otherProps}
       />
+      {error && <FormFieldError error={error} />}
     </div>
   );
 });

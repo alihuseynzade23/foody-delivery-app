@@ -3,13 +3,12 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "declaration": true,
-    "types": ["node"],
+    "types": ["node", "vite/client"],
     "strict": true
   },
   "include": [
     "src/**/*.ts",
-    "../ddkr-shared-components/src/lib/utils/side-menu-utils.tsx",
-    "../ddkr-shared-components/src/lib/utils/side-menu-utils.tsx"
+    "vite-env.d.ts"
   ],
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
 }

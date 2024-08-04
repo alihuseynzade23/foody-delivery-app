@@ -19,7 +19,7 @@ describe('Input', () => {
 
   it('should render the input with the label', () => {
     render(<Input placeholder={testPlaceholder} label="test label" />);
-    expect(screen.getByText('test label>')).toBeInTheDocument();
+    expect(screen.getByText('test label')).toBeInTheDocument();
   });
 
   it('should render the input with admin theme', () => {
@@ -45,6 +45,11 @@ describe('Input', () => {
   it('should render with the input class name', () => {
     render(<Input placeholder={testPlaceholder} inputClassName="test-class-name" />);
     expect(screen.getByPlaceholderText(testPlaceholder)).toHaveClass('test-class-name');
+  });
+
+  it('should render with error', () => {
+    render(<Input placeholder={testPlaceholder} error="test error" />);
+    expect(screen.getByText('test error')).toBeInTheDocument();
   });
 
   // Onchange testing left out for now
