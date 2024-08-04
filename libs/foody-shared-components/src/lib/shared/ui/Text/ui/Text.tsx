@@ -10,6 +10,7 @@ export enum TextTheme {
   ORANGE = 'orange',
   RED = 'red',
   GREEN = 'green',
+  DARK_GRAY = 'darkGray',
 }
 
 export enum TextSize {

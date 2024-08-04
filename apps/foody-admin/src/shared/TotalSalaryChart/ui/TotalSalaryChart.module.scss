@@ -1,0 +1,13 @@
+.totalSalary {
+    position: relative;
+    background-color: var(--secondary-black);
+    border-radius: 15px;
+    width: 550px;
+    padding: 1rem;
+
+    @media (max-width:468px){
+        width: 100%;
+    }
+  }
+  
+
