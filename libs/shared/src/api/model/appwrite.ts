@@ -1,15 +1,14 @@
-// appwrite.ts
-
 import { Client, Databases, Account } from 'appwrite';
-// Import type models for Appwrite
-// import { type Models } from 'appwrite';
 
-const client: Client = new Client();
+const client = new Client();
 
-client.setEndpoint(`${process.env['PROJECT_DEPLOY']}`).setProject(`${process.env['PROJECT_ID']}`); // Replace with your project ID
+console.log(import.meta.env.VITE_PROJECT_ENDPOINT); // Should print your endpoint
+console.log(import.meta.env.VITE_PROJECT_ID); // Should print your project ID
 
-export const account: Account = new Account(client);
-export const database: Databases = new Databases(client);
+client.setEndpoint(import.meta.env.VITE_PROJECT_ENDPOINT).setProject(import.meta.env.VITE_PROJECT_ID);
+// client.setEndpoint('https://cloud.appwrite.io/v1').setProject('66ab66ab002e3208f3ff');
 
-// You then use the imported type definitions like this
-// const authUser: Models.Session = await account.createEmailPasswordSession(email, password);
+export const account = new Account(client);
+export const database = new Databases(client);
+
+export { ID } from 'appwrite';
