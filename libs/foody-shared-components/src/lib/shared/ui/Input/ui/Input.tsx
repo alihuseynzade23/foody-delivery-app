@@ -1,8 +1,10 @@
-import React, { InputHTMLAttributes, memo, useRef } from 'react';
+import React, { InputHTMLAttributes, memo, useRef, useState } from 'react';
 import { classNames, Mods } from '../../../lib/classNames/classNames';
 import styles from './Input.module.scss';
 import { error } from 'console';
 import { FormFieldError } from '../../FormFieldError/ui/FormFieldError';
+import eyeIcon from '../../../assets/eye-icon.svg'
+import eyeIconSlash from '../../../assets/eye-slash.svg'
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>;
 
@@ -25,6 +27,7 @@ export interface InputProps extends HTMLInputProps {
   placeholder?: string;
   inputWrapperClassName?: string;
   inputClassName?: string;
+  eye?: 'true' | 'false';
 }
 
 export const Input = memo((props: InputProps) => {
@@ -40,11 +43,16 @@ export const Input = memo((props: InputProps) => {
     placeholder,
     disabled,
     autofocus,
+    eye= false,
     ...otherProps
   } = props;
 
+  const [showPassword, setShowpassword] = useState(false)
   const ref = useRef<HTMLInputElement>(null);
 
+  const togglePasswordVisibility = () => {
+    setShowpassword(prevState => !prevState);
+  };
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e);
   };
@@ -53,7 +61,7 @@ export const Input = memo((props: InputProps) => {
     [styles[theme]]: true,
     [styles.error]: !!error,
   };
-
+  const isEyeVisible = eye === 'true'; 
   return (
     <div className={classNames(styles.InputWrapper, {}, [inputWrapperClassName])}>
       {label && <label className={styles.label}>{label}</label>}
@@ -61,12 +69,17 @@ export const Input = memo((props: InputProps) => {
         ref={ref}
         disabled={disabled}
         placeholder={placeholder}
-        type={type}
+        type={showPassword ? 'text' : type}
         value={value}
         onChange={onChangeHandler}
         className={classNames(styles.Input, mods, [inputClassName])}
         {...otherProps}
       />
+    {isEyeVisible && (
+          <span className={styles.eyeIcon} onClick={togglePasswordVisibility}>
+            <img src={showPassword ? eyeIconSlash : eyeIcon} alt="Toggle Password Visibility" width={20}/>
+          </span>
+        )}
       {error && <FormFieldError error={error} />}
     </div>
   );

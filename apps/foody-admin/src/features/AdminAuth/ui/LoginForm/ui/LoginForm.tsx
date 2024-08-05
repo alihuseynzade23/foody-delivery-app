@@ -70,6 +70,7 @@ export const LoginForm = () => {
           theme={InputTheme.BG_ADMIN}
           placeholder="Password"
           type="password"
+          eye="true"
         />
       </div>
       <Button
