@@ -48,10 +48,3 @@ AdminTheme.args = {
   placeholder: 'Admin input...',
   theme: InputTheme.BG_ADMIN,
 };
-
-export const ClientTheme = Template.bind({});
-ClientTheme.args = {
-  value: '',
-  placeholder: 'Client input...',
-  theme: InputTheme.BG_CLIENT,
-};
