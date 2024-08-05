@@ -1,13 +1,26 @@
 .item {
   text-decoration: none;
-  padding: 0.625rem 0.75rem;
   .link {
     color: var(--primary-gray);
     font-size: var(--font-size-l);
     font-weight: 500;
+    white-space: nowrap; 
+
+  
   }
 }
 
 .active {
   color: var(--primary-red);
+}
+
+
+@media screen and (max-width: 768px) {
+  .item{
+    .link {
+      font-size: var(--font-size-m);
+    
+    }
+  }
+ 
 }

@@ -1,5 +1,11 @@
 .BaseLayout {
-    background-color: #fff;
-    margin-top: 1.9rem;
-    margin: 0 2rem;
+  background-color: #fff;
+  margin-top: 1.9rem;
+  margin: 0 2rem;
+}
+
+@media screen and (max-width: 650px) {
+  .BaseLayout {
+    margin: 0;
+  }
 }
