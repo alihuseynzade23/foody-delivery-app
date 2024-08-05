@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  .label {
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--primary-dark-gray);
+  }
+
+  .input {
+    background-color: var(--secondary-red);
+    border: none;
+    border-radius: 5px;
+    padding: 1.4rem;
+  }
+
+  .btn {
+    padding: 1rem 0;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    margin-top: 3rem;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .container {
+    .btn {
+      margin-bottom: 6rem;
+      margin-top: 1rem;
+    }
+  }
+}

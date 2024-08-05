@@ -1,17 +1,20 @@
 import * as yup from 'yup';
-import { AdminLoginSchema } from './admin-login';
+import { registerSchema } from './register';
 
-describe('AdminLoginSchema', () => {
+describe('Register schema', () => {
   let schema: yup.AnyObjectSchema;
+  const lang = 'en';
 
   beforeAll(() => {
-    schema = AdminLoginSchema();
+    schema = registerSchema(lang);
   });
 
-  test('validates a correct email and password', async () => {
+  test('validates a correct email, password, username and fullname', async () => {
     const validData = {
       email: 'test@example.com',
       password: 'Password1',
+      userName: 'aliHuseyn',
+      fullName: 'John Doe',
     };
 
     await expect(schema.validate(validData)).resolves.toBe(validData);
@@ -21,6 +24,8 @@ describe('AdminLoginSchema', () => {
     const invalidData = {
       email: '',
       password: 'Password1',
+      userName: 'aliHuseyn',
+      fullName: 'John Doe',
     };
 
     await expect(schema.validate(invalidData)).rejects.toThrow('Email address is required');
@@ -30,6 +35,8 @@ describe('AdminLoginSchema', () => {
     const invalidData = {
       email: 'invalid-email',
       password: 'Password1',
+      userName: 'aliHuseyn',
+      fullName: 'John Doe',
     };
 
     await expect(schema.validate(invalidData)).rejects.toThrow('Enter a valid email address');
@@ -37,17 +44,21 @@ describe('AdminLoginSchema', () => {
 
   test('fails validation if password is missing', async () => {
     const invalidData = {
-      email: 'test@example.com',
+      email: 'invalid-email',
       password: '',
+      userName: 'aliHuseyn',
+      fullName: 'John Doe',
     };
 
-    await expect(schema.validate(invalidData)).rejects.toThrow('Password must be at least 5 characters');
+    await expect(schema.validate(invalidData)).rejects.toThrow('Password is required');
   });
 
   test('fails validation if password is too short', async () => {
     const invalidData = {
       email: 'test@example.com',
       password: 'P1',
+      userName: 'aliHuseyn',
+      fullName: 'John Doe',
     };
 
     await expect(schema.validate(invalidData)).rejects.toThrow(
@@ -59,6 +70,8 @@ describe('AdminLoginSchema', () => {
     const invalidData = {
       email: 'test@example.com',
       password: 'password1',
+      userName: 'aliHuseyn',
+      fullName: 'John Doe',
     };
 
     await expect(schema.validate(invalidData)).rejects.toThrow(
@@ -70,8 +83,9 @@ describe('AdminLoginSchema', () => {
     const invalidData = {
       email: 'test@example.com',
       password: 'PASSWORD1',
+      userName: 'aliHuseyn',
+      fullName: 'John Doe',
     };
-
     await expect(schema.validate(invalidData)).rejects.toThrow(
       'Password must contain at least one lowercase letter',
     );
@@ -81,10 +95,43 @@ describe('AdminLoginSchema', () => {
     const invalidData = {
       email: 'test@example.com',
       password: 'Password',
+      userName: 'aliHuseyn',
+      fullName: 'John Doe',
     };
-
     await expect(schema.validate(invalidData)).rejects.toThrow(
       'Password must contain at least one number',
     );
+  });
+
+  test('fails validation if username is missing', async () => {
+    const invalidData = {
+      email: 'test@example.com',
+      password: 'Password1',
+      userName: '',
+      fullName: 'John Doe',
+    };
+    await expect(schema.validate(invalidData)).rejects.toThrow('User name is required');
+  });
+
+  test('fails validation if username is too short', async () => {
+    const invalidData = {
+      email: 'test@example.com',
+      password: 'Password1',
+      userName: 'al',
+      fullName: 'John Doe',
+    };
+    await expect(schema.validate(invalidData)).rejects.toThrow(
+      'User name must be at least 5 characters',
+    );
+  });
+
+  test('fails validation if fullname is missing', async () => {
+    const invalidData = {
+      email: 'test@example.com',
+      password: 'Password1',
+      userName: 'aliHuseyn',
+      fullName: '',
+    };
+    await expect(schema.validate(invalidData)).rejects.toThrow('Full name is required');
   });
 });
