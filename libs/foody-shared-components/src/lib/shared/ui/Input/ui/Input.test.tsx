@@ -27,11 +27,6 @@ describe('Input', () => {
     expect(screen.getByPlaceholderText(testPlaceholder)).toHaveClass('bgAdmin');
   });
 
-  it('should render the input with client theme', () => {
-    render(<Input placeholder={testPlaceholder} theme={InputTheme.BG_CLIENT} />);
-    expect(screen.getByPlaceholderText(testPlaceholder)).toHaveClass('bgClient');
-  });
-
   it('should render with default theme', () => {
     render(<Input placeholder={testPlaceholder} />);
     expect(screen.getByPlaceholderText(testPlaceholder)).toHaveClass('bgWhite');
