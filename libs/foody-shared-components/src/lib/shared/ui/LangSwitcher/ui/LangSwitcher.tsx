@@ -15,7 +15,7 @@ export enum LangSwitcherTheme {
 
 export interface LangSwitcherProps {
   className?: string;
-  theme?: LangSwitcherTheme;
+  theme: LangSwitcherTheme;
 }
 
 export const LangSwitcher = memo((props: LangSwitcherProps) => {

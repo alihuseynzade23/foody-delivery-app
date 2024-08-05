@@ -16,12 +16,13 @@ import {
 import styles from './LoginForm.module.scss';
 import { useTranslation } from 'react-i18next';
 
-import { AdminLoginSchema } from '@org/shared';
+import { loginSchema } from '@org/shared';
 
 import { useFormik } from 'formik';
 
 export const LoginForm = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
 
   const { login, isLoading } = useAuth();
 
@@ -30,7 +31,7 @@ export const LoginForm = () => {
       email: '',
       password: '',
     },
-    validationSchema: AdminLoginSchema(),
+    validationSchema: loginSchema(lang),
     onSubmit: () => handleLogin(),
   });
 

@@ -9,13 +9,16 @@ import { BaseLayout } from '../../../layouts/BaseLayout';
 
 import { DashboardPage } from '../../../../pages/DashboardPage';
 import { ProductsPage } from '../../../../pages/ProductsPage';
+import { account } from '@org/shared';
 
 const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
   const { isLoggedIn } = useAuth();
   if (!isLoggedIn) {
+    console.log(isLoggedIn);
     return <LoginPage />;
   }
-
+  console.log(isLoggedIn);
+  console.log(account.getSession('current'));
   return <BaseLayout>{children}</BaseLayout>;
 };
 

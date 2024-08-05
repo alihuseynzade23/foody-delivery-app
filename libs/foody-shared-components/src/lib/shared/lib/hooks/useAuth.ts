@@ -5,7 +5,7 @@ import { account, ID } from '@org/shared';
 import toast from 'react-hot-toast';
 
 export const useAuth = () => {
-  const { isLoading, isLoggedIn, setIsLoading, setUser, user } = useAuthStore();
+  const { isLoading, isLoggedIn, setIsLoggedIn, setIsLoading, setUser, user } = useAuthStore();
 
   const navigate = (url: string) => (window.location.href = url);
 
@@ -22,11 +22,13 @@ export const useAuth = () => {
       });
   };
 
-  const register = (email: string, password: string) => {
+  const register = (email: string, password: string, cb: () => void) => {
     setIsLoading(true);
     account
       .create(ID.unique(), email, password)
       .then(res => {
+        cb();
+        setIsLoading(false);
         // setUser(res);
         // setIsLoading(false);
       })
@@ -41,6 +43,21 @@ export const useAuth = () => {
     setIsLoading(false);
     setUser(null);
     navigate('/');
+  };
+
+  const initialCheck = async () => {
+    setIsLoading(true);
+
+    account
+      .getSession('current')
+      .then(res => {
+        setUser(res);
+        setIsLoggedIn(true);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   };
 
   const handleError = (err: Error) => {
@@ -58,8 +75,8 @@ export const useAuth = () => {
     logout,
     isLoggedIn,
     isLoading,
+    initialCheck,
     // isChecked,
-    // initialCheck,
     user,
     // getMe,
     // getNewTokens,

@@ -1,1 +1,2 @@
-export * from './validations/admin-login/admin-login';
+export * from './validations/login/login';
+export * from './validations/register/register';

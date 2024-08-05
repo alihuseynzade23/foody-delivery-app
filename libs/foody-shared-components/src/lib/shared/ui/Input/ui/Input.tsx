@@ -25,6 +25,7 @@ export interface InputProps extends HTMLInputProps {
   placeholder?: string;
   inputWrapperClassName?: string;
   inputClassName?: string;
+  labelClassName?: string;
 }
 
 export const Input = memo((props: InputProps) => {
@@ -35,6 +36,7 @@ export const Input = memo((props: InputProps) => {
     error,
     onChange,
     label,
+    labelClassName,
     theme = InputTheme.BG_WHITE,
     type = 'text',
     placeholder,
@@ -56,7 +58,7 @@ export const Input = memo((props: InputProps) => {
 
   return (
     <div className={classNames(styles.InputWrapper, {}, [inputWrapperClassName])}>
-      {label && <label className={styles.label}>{label}</label>}
+      {label && <label className={classNames(styles.label, {}, [labelClassName])}>{label}</label>}
       <input
         ref={ref}
         disabled={disabled}

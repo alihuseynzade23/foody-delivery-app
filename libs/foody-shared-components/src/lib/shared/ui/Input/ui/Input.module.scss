@@ -1,5 +1,9 @@
 .InputWrapper {
   width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .Input {
@@ -9,6 +13,9 @@
   &::placeholder {
     font-family: var(--font-family-roboto);
   }
+}
+
+.label {
 }
 
 .bgWhite {
