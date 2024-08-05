@@ -10,13 +10,16 @@ interface SidebarItemProps {
 }
 
 export const SidebarItem = memo(({ item, isActive }: SidebarItemProps) => {
-
-
   return (
     <Link to={item.path} className={classNames(styles.item)}>
-    <Text className={classNames(styles.link, { [styles.activeText]: isActive })} size={TextSize.XL} weight={TextWeight.NORMAL} theme={TextTheme.CLEAR} >
-      {item.text}
-    </Text>
-  </Link>
+      <Text
+        className={classNames(styles.link, { [styles.activeText]: isActive })}
+        size={TextSize.XL}
+        weight={TextWeight.NORMAL}
+        theme={TextTheme.CLEAR}
+      >
+        {item.text}
+      </Text>
+    </Link>
   );
 });

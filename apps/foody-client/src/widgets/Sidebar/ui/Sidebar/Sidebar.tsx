@@ -10,19 +10,19 @@ import {
   Text,
   TextTheme,
 } from '@org/foody-shared-components';
-import styles from './SidebarReponsive.module.scss';
+import styles from './Sidebar.module.scss';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
 import { SidebarItemType, registeredUserItems, SidebarItemsList } from '../../model/items';
 import closeIconBlack from '../../../../shared/assets/close-icon-black.svg';
 import userIcon from '../../../../shared/assets/user.svg';
 import { Link } from 'react-router-dom';
 
-interface SidebarResponsiveProps {
+interface SidebarProps {
   onClose: () => void;
   className?: string;
 }
 
-export const SidebarResponsive: FC<SidebarResponsiveProps> = ({ onClose, className }) => {
+export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [userName, setUserName] = useState('');

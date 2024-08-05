@@ -2,8 +2,7 @@ import { FC, useState } from 'react';
 import { Navbar } from '../../../../widgets/Navbar/ui/Navbar/Navbar';
 import styles from './BaseLayout.module.scss';
 import { classNames } from '@org/foody-shared-components';
-import { SidebarResponsive } from '../../../../../../foody-client/src/widgets/Sidebar';
-
+import { Sidebar } from '../../../../widgets/Sidebar';
 
 interface BaseLayoutProps {
   children: React.ReactNode;
@@ -23,11 +22,9 @@ export const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
     <div className={styles.BaseLayout}>
       <Navbar isOpen={openSidebar} />
       <div className={classNames(styles.contentWrapper)}>
-        {isSidebarOpen ? <SidebarResponsive onClose={closeSidebar} /> : null}
+        {isSidebarOpen ? <Sidebar onClose={closeSidebar} /> : null}
         {children}
       </div>
     </div>
-
-    
   );
 };

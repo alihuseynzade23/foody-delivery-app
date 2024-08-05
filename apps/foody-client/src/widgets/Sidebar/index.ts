@@ -1,1 +1,1 @@
-export { SidebarResponsive } from './ui/SidebarResponsive/SidebarResponsive';
+export { Sidebar } from './ui/Sidebar/Sidebar';

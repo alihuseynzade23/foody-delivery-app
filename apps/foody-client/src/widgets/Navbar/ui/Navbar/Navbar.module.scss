@@ -24,7 +24,6 @@
     flex: 1;
     justify-content: flex-end;
     flex-wrap: nowrap;
- 
 
     .btn {
       border-radius: 30px;
@@ -32,7 +31,6 @@
       padding: 0.6rem 0;
       width: 115px;
       font-weight: 500;
-
     }
 
     .input {
@@ -57,14 +55,11 @@
     display: flex;
     margin-right: 2rem;
     padding-top: 6px;
-    gap:1.5rem ;
-    
-    
+    gap: 1.5rem;
   }
 
   .inputWrapper {
     width: 50%;
-
   }
 }
 
