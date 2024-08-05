@@ -16,7 +16,7 @@ export const registerSchema = (lang: string) => {
       .matches(/[A-Z]/, t('password.uppercase'))
       .matches(/[a-z]/, t('password.lowercase'))
       .matches(/[0-9]/, t('password.number')),
-    userName: yup.string().required(t('userName.required')).min(3, t('userName.min')),
+    username: yup.string().required(t('userName.required')).min(5, t('userName.min')),
     fullName: yup.string().required(t('fullName.required')),
   });
 };

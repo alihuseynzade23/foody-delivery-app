@@ -44,7 +44,7 @@ export const AuthPage = () => {
               Register
             </Button>
           </div>
-          {authPage === 'login' ? <LoginForm /> : <RegisterForm />}
+          {authPage === 'login' ? <LoginForm /> : <RegisterForm setAuthPage={setAuthPage} />}
         </div>
       </div>
     </div>
