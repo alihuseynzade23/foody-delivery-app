@@ -1,0 +1,64 @@
+.loadingContainer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-white);
+
+  > div {
+    width: 100%;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-family: var(--font-family-roboto);
+    position: relative;
+
+    img {
+      width: 240px;
+      height: 240px;
+      position: fixed;
+      left: calc(50% - 120px);
+
+      @media (orientation: landscape) and (min-width: 768px) {
+        width: 180px;
+        height: 180px;
+        left: calc(50% - 90px);
+      }
+
+      animation: bounce 1s infinite;
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(-25%);
+          animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+        }
+        50% {
+          transform: translateY(0);
+          animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        }
+      }
+      top: 25%;
+
+      @media (min-width: 768px) {
+        top: 33.33%;
+      }
+
+      @media (orientation: landscape) and (min-width: 768px) {
+        top: 5%;
+      }
+
+      @media (orientation: landscape) and (min-width: 1024px) {
+        top: 33.33%;
+      }
+    }
+  }
+}

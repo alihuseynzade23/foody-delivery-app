@@ -1,7 +1,7 @@
 import { Suspense, FC, ReactNode } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { NotFoundPage, useAuth } from '@org/foody-shared-components';
+import { FullScreenLoading, NotFoundPage, useAuth } from '@org/foody-shared-components';
 import { useTranslation } from 'react-i18next';
 
 import { BaseLayout } from '../../../layouts/BaseLayout/ui/BaseLayout';
@@ -16,6 +16,8 @@ import { RestaurantsPage } from '../../../../pages/RestaurantsPage';
 
 const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
   const { isLoggedIn } = useAuth();
+  const { t } = useTranslation();
+
   if (!isLoggedIn) {
     return <AuthPage />;
   }
@@ -27,7 +29,7 @@ export const AppRouter: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<FullScreenLoading text={t`Loading`} />}>
       <Routes>
         <Route
           index

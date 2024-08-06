@@ -11,6 +11,7 @@ export * from './lib/shared/ui/Input';
 export * from './lib/shared/ui/Text';
 export * from './lib/shared/ui/Button';
 export * from './lib/shared/ui/Spinner';
+export * from './lib/shared/ui/FullScreenLoading';
 
 // Custom lib
 export * from './lib/shared/lib/classNames/classNames';

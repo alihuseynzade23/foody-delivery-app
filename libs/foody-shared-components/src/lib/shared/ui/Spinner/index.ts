@@ -1,1 +1,1 @@
-export { Spinner, SpinnerColor, SpinnerSize, SpinnerTheme } from './ui/Spinner';
+export { Spinner } from './ui/Spinner';
