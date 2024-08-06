@@ -79,7 +79,6 @@ export const useAuth = () => {
       .catch(error => {
         console.error(error);
         setIsLoggedIn(false);
-        localStorage.clear();
       })
       .finally(() => setIsLoading(false));
   };
