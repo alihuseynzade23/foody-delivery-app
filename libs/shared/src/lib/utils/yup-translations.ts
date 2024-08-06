@@ -1,5 +1,5 @@
 export type Translations = {
-  en: {
+  'en-GB': {
     password: {
       required: string;
       min: string;
@@ -42,7 +42,7 @@ export type Translations = {
 };
 
 export const yupTranslations: Translations = {
-  en: {
+  'en-GB': {
     password: {
       required: 'Password is required',
       min: 'Password must be at least 5 characters',

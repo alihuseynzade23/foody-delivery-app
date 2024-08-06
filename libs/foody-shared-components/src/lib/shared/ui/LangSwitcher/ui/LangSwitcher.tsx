@@ -46,7 +46,7 @@ export const LangSwitcher = memo((props: LangSwitcherProps) => {
     >
       <img
         onClick={toggleDropdown}
-        src={i18n.language === 'en' ? enIcon : azIcon}
+        src={i18n.language === 'en-GB' ? enIcon : azIcon}
         alt="lang"
         height={41}
         width={41}
@@ -54,7 +54,7 @@ export const LangSwitcher = memo((props: LangSwitcherProps) => {
       />
       {isOpen && (
         <ul className={classNames(styles.Dropdown, mods)}>
-          <li onClick={() => changeLanguage('en')} className={styles.DropdownItem}>
+          <li onClick={() => changeLanguage('en-GB')} className={styles.DropdownItem}>
             <img src={enIcon} alt="English" />
           </li>
           {theme === LangSwitcherTheme.BLACK && <Line />}
