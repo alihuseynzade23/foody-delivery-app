@@ -10,7 +10,7 @@ export * from './lib/shared/ui/Logo';
 export * from './lib/shared/ui/Input';
 export * from './lib/shared/ui/Text';
 export * from './lib/shared/ui/Button';
-export * from './lib/shared/ui/Loader';
+export * from './lib/shared/ui/Spinner';
 
 // Custom lib
 export * from './lib/shared/lib/classNames/classNames';
@@ -20,3 +20,6 @@ export * from './lib/shared/lib/utils/isActivePath';
 
 // Hooks
 export * from './lib/shared/lib/hooks/useAuth';
+
+// Tests
+export * from './lib/shared/tests/componentRender/componentRender';

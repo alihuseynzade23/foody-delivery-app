@@ -30,6 +30,7 @@ export const LoginForm = () => {
         labelClassName={styles.label}
         label="Email"
         value={values.email}
+        disabled={isLoading}
         onChange={handleChange}
         name="email"
         type="text"
@@ -41,6 +42,7 @@ export const LoginForm = () => {
         labelClassName={styles.label}
         value={values.password}
         onChange={handleChange}
+        disabled={isLoading}
         name="password"
         label="Password"
         type="password"

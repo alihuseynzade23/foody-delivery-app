@@ -14,11 +14,8 @@ import { account } from '@org/shared';
 const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
   const { isLoggedIn } = useAuth();
   if (!isLoggedIn) {
-    console.log(isLoggedIn);
     return <LoginPage />;
   }
-  console.log(isLoggedIn);
-  console.log(account.getSession('current'));
   return <BaseLayout>{children}</BaseLayout>;
 };
 

@@ -5,7 +5,7 @@ export interface SidebarItemType {
 
 export const SidebarItemsList: SidebarItemType[] = [
   {
-    path: '/home',
+    path: '/',
     text: 'Home',
   },
   {

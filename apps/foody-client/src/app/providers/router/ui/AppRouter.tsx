@@ -3,9 +3,12 @@ import { Route, Routes } from 'react-router-dom';
 
 import { NotFoundPage, useAuth } from '@org/foody-shared-components';
 import { useTranslation } from 'react-i18next';
+
 import { BaseLayout } from '../../../layouts/BaseLayout/ui/BaseLayout';
+
 import { AuthPage } from '../../../../pages/AuthPage';
 import { HomePage } from '../../../../pages/HomePage';
+import { RestaurantsPage } from '../../../../pages/RestaurantsPage';
 
 // import { BaseLayout } from '../../../layouts/BaseLayout';
 
@@ -29,8 +32,16 @@ export const AppRouter: FC = () => {
         <Route
           index
           element={
-            <ProtectedRoute>
+            <BaseLayout>
               <HomePage />
+            </BaseLayout>
+          }
+        />
+        <Route
+          path="/restaurants"
+          element={
+            <ProtectedRoute>
+              <RestaurantsPage />
             </ProtectedRoute>
           }
         />
