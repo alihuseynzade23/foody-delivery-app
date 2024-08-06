@@ -4,10 +4,10 @@ import { useEffect } from 'react';
 import { useAuth } from '@org/foody-shared-components';
 
 export function App() {
-  const { initialCheck, isLoading } = useAuth();
+  const { adminInitialCheck, isLoading } = useAuth();
 
   useEffect(() => {
-    initialCheck();
+    adminInitialCheck();
   }, []);
 
   if (isLoading) {

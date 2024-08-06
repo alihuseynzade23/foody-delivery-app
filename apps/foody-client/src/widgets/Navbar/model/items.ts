@@ -5,7 +5,7 @@ export interface NavbarItemType {
 
 export const NavbarItemList: NavbarItemType[] = [
   {
-    path: '/home',
+    path: '/',
     text: 'Home',
   },
   {

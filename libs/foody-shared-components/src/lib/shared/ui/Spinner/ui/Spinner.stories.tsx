@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { Loader } from './Loader';
+import { Loader } from './Spinner';
 
 export default {
   title: 'shared/Loader',

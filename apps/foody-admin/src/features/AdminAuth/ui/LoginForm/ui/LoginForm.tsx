@@ -10,7 +10,6 @@ import {
   TextFont,
   TextWeight,
   useAuth,
-  Loader,
 } from '@org/foody-shared-components';
 
 import styles from './LoginForm.module.scss';
@@ -20,11 +19,14 @@ import { loginSchema } from '@org/shared';
 
 import { useFormik } from 'formik';
 
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
+
 export const LoginForm = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
-  const { login, isLoading } = useAuth();
+  const { adminLogin, isLoading } = useAuth();
 
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -36,7 +38,7 @@ export const LoginForm = () => {
   });
 
   const handleLogin = () => {
-    login(values.email, values.password);
+    adminLogin(values.email, values.password);
   };
 
   return (
@@ -80,7 +82,11 @@ export const LoginForm = () => {
         className={styles.loginBtn}
       >
         {/* {t('Sign in')} */}
-        {isLoading ? <Loader /> : t('Sign in')}
+        {isLoading ? (
+          <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
+        ) : (
+          t('Sign in')
+        )}
       </Button>
     </form>
   );

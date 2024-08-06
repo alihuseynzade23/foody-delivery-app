@@ -13,7 +13,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
   const { t, i18n } = useTranslation();
 
   const lang = i18n.language;
-  const { register } = useAuth();
+  const { register, isLoading } = useAuth();
 
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -39,6 +39,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         labelClassName={styles.label}
         label="Full Name"
         value={values.fullName}
+        disabled={isLoading}
         name="fullName"
         onChange={handleChange}
         type="text"
@@ -49,6 +50,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         inputClassName={styles.input}
         labelClassName={styles.label}
         value={values.username}
+        disabled={isLoading}
         name="username"
         onChange={handleChange}
         label="Username"
@@ -60,6 +62,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         inputClassName={styles.input}
         labelClassName={styles.label}
         value={values.email}
+        disabled={isLoading}
         name="email"
         onChange={handleChange}
         label="Email"
@@ -71,6 +74,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         inputClassName={styles.input}
         labelClassName={styles.label}
         value={values.password}
+        disabled={isLoading}
         name="password"
         onChange={handleChange}
         label="Password"

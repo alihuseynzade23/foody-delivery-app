@@ -14,50 +14,89 @@ export const useAuth = () => {
     account
       .createEmailPasswordSession(email, password)
       .then(res => {
+        setIsLoggedIn(true);
+        localStorage.setItem('user', JSON.stringify(res));
         setUser(res);
-        setIsLoading(false);
       })
-      .catch(error => {
-        handleError(error);
-      });
+      .catch(handleError)
+      .finally(() => setIsLoading(false));
   };
 
+  const adminLogin = (email: string, password: string) => {
+    setIsLoading(true);
+    account
+      .createEmailPasswordSession(email, password)
+      .then(res => {
+        if (res.userId == (import.meta as any).env.VITE_ADMIN_USER_ID) {
+          setIsLoggedIn(true);
+          localStorage.setItem('user', JSON.stringify(res));
+          setUser(res);
+        } else {
+          handleError(new Error('Unauthorized'));
+        }
+      })
+      .catch(handleError)
+      .finally(() => setIsLoading(false));
+  };
   const register = (email: string, password: string, cb: () => void) => {
     setIsLoading(true);
     account
       .create(ID.unique(), email, password)
       .then(res => {
         cb();
-        setIsLoading(false);
-        // setUser(res);
-        // setIsLoading(false);
       })
-      .catch(error => {
-        handleError(error);
-      });
+      .catch(handleError)
+      .finally(() => setIsLoading(false));
   };
 
   const logout = async () => {
-    await account.deleteSessions();
-    localStorage.clear();
-    setIsLoading(false);
-    setUser(null);
-    navigate('/');
+    setIsLoading(true);
+    try {
+      await account.deleteSessions();
+      localStorage.clear();
+      setUser(null);
+      navigate('/');
+    } catch (error: any) {
+      handleError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const adminInitialCheck = async () => {
+    setIsLoading(true);
+    account
+      .getSession('current')
+      .then(res => {
+        if (res.userId === (import.meta as any).env.VITE_ADMIN_USER_ID) {
+          setUser(res);
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+          localStorage.clear();
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        setIsLoggedIn(false);
+        localStorage.clear();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const initialCheck = async () => {
     setIsLoading(true);
-
     account
       .getSession('current')
       .then(res => {
         setUser(res);
         setIsLoggedIn(true);
-        setIsLoading(false);
       })
       .catch(error => {
         console.error(error);
-      });
+        setIsLoggedIn(false);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleError = (err: Error) => {
@@ -71,6 +110,8 @@ export const useAuth = () => {
   return {
     // handleCode,
     login,
+    adminInitialCheck,
+    adminLogin,
     register,
     logout,
     isLoggedIn,
