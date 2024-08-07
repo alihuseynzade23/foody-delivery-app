@@ -1,6 +1,10 @@
 .BaseLayout {
-  background-color: #fff;
-  margin-top: 1.9rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contentWrapper {
   margin: 0 2rem;
 }
 
