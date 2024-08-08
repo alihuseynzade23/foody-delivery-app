@@ -9,14 +9,10 @@ import { BaseLayout } from '../../../layouts/BaseLayout/ui/BaseLayout';
 import { AuthPage } from '../../../../pages/AuthPage';
 import { HomePage } from '../../../../pages/HomePage';
 import { RestaurantsPage } from '../../../../pages/RestaurantsPage';
-
-// import { BaseLayout } from '../../../layouts/BaseLayout';
-
-// import { DashboardPage } from '../../../../pages/DashboardPage';
+import { ProfilePage } from '../../../../pages/ProfilePage';
 
 const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
   const { isLoggedIn } = useAuth();
-  const { t } = useTranslation();
 
   if (!isLoggedIn) {
     return <AuthPage />;
@@ -47,6 +43,15 @@ export const AppRouter: FC = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<NotFoundPage title={t`Page not found`} />} />
       </Routes>
     </Suspense>

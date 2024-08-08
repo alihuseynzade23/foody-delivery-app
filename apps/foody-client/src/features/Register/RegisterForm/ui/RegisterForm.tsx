@@ -37,13 +37,13 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
       <Input
         inputClassName={styles.input}
         labelClassName={styles.label}
-        label="Full Name"
+        label={t`Full name`}
         value={values.fullName}
         disabled={isLoading}
         name="fullName"
         onChange={handleChange}
         type="text"
-        placeholder="Full Name"
+        placeholder="Tehran Hamidli"
         error={errors.fullName && touched.fullName ? errors.fullName : undefined}
       />
       <Input
@@ -55,7 +55,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         onChange={handleChange}
         label="Username"
         type="text"
-        placeholder="Username"
+        placeholder="Push it to the github"
         error={errors.username && touched.username ? errors.username : undefined}
       />
       <Input
@@ -77,9 +77,9 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         disabled={isLoading}
         name="password"
         onChange={handleChange}
-        label="Password"
+        label={t`Password`}
         type="password"
-        placeholder="Password"
+        placeholder={t`Password`}
         error={errors.password && touched.password ? errors.password : undefined}
       />
       <Button type="submit" size={ButtonSize.L} className={styles.btn} theme={ButtonTheme.BG_RED}>

@@ -1,3 +1,18 @@
 {
-  "Loading": "Loading, please wait..."
+  "Loading": "Loading, please wait...",
+  "Home": "Home",
+  "Login": "Login",
+  "Restaurants": "Restaurants",
+  "About Us": "About Us",
+  "How it works?": "How it works",
+  "FAQs": "FAQs",
+  "Search": "Search",
+  "Sign Up": "Sign Up",
+  "Password": "Password",
+  "Full name": "Full name",
+  "Profile": "Profile",
+  "Your Basket": "Your Basket",
+  "Your Orders": "Your Orders",
+  "Checkout": "Checkout",
+  "Logout": "Logout"
 }

@@ -2,5 +2,7 @@
   "Welcome Admin": "Welcome Admin",
   "Sign in": "Sign in",
   "Page not found": "Page not found",
-  "Loading": "Loading, please wait..."
+  "Loading": "Loading, please wait...",
+  "Dashboard page": "Dashboard",
+  "Logout": "Logout"
 }
