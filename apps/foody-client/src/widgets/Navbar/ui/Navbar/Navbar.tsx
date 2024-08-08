@@ -1,12 +1,23 @@
 import { FC, useMemo } from 'react';
-import { ButtonSize, classNames, Input, isActivePath } from '@org/foody-shared-components';
+import {
+  ButtonSize,
+  classNames,
+  Input,
+  isActivePath,
+  LangSwitcherTheme,
+  useAuth,
+} from '@org/foody-shared-components';
+
 import styles from './Navbar.module.scss';
+
 import { Logo, LogoTheme } from '@org/foody-shared-components';
 import { Button, ButtonTheme } from '@org/foody-shared-components';
 import { LangSwitcher } from '@org/foody-shared-components';
-import burgerIconBlack from '../../../../shared/assets/burger-icon-black.svg';
 import { NavbarItemList } from '../../model/items';
 import { NavbarItem } from '../NavbarItem/NavbarItem';
+import { useTranslation } from 'react-i18next';
+
+import burgerIconBlack from '../../../../shared/assets/burger-icon-black.svg';
 
 interface NavbarProps {
   className?: string;
@@ -14,6 +25,9 @@ interface NavbarProps {
 }
 
 export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
+  const { t } = useTranslation();
+
+  const { isLoggedIn } = useAuth();
 
   const itemsList = useMemo(
     () =>
@@ -41,11 +55,22 @@ export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
         <div className={styles.itemsWrapper}>{itemsList}</div>
       </div>
       <div className={styles.clientWrapper}>
-        <Input  className={styles.input} placeholder="Search" inputWrapperClassName={styles.inputWrapper} />
-        <LangSwitcher />
-        <Button theme={ButtonTheme.BG_RED} className={styles.btn} size={ButtonSize.M}>
-          Sign up
-        </Button>
+        <Input
+          className={styles.input}
+          placeholder={t`Search`}
+          inputWrapperClassName={styles.inputWrapper}
+        />
+        <LangSwitcher theme={LangSwitcherTheme.CLEAR} />
+        {isLoggedIn ? (
+          <>
+            <p>basket icon</p>
+            <p>profile icon</p>
+          </>
+        ) : (
+          <Button theme={ButtonTheme.BG_RED} className={styles.btn} size={ButtonSize.M}>
+            {t`Sign Up`}
+          </Button>
+        )}
       </div>
     </div>
   );

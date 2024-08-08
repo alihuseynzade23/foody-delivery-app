@@ -13,11 +13,20 @@ import {
 
 import { RegisterForm, RegisterImage } from '../../../features/Register';
 import { LoginForm, LoginImage } from '../../../features/Login';
+import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 
 export const AuthPage = () => {
   const [authPage, setAuthPage] = useState('login');
+
+  const { t } = useTranslation();
+
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>{t`Login`}</title>
+        <meta name="description" content="Authorization page for user" />
+      </Helmet>
       <nav>
         <Logo theme={LogoTheme.PRIMARY} />
         <LangSwitcher theme={LangSwitcherTheme.CLEAR} />
@@ -34,14 +43,14 @@ export const AuthPage = () => {
               size={ButtonSize.XL}
               onClick={() => setAuthPage('login')}
             >
-              Login
+              {t`Login`}
             </Button>
             <Button
               size={ButtonSize.XL}
               className={styles.btn}
               onClick={() => setAuthPage('register')}
             >
-              Register
+              {t`Sign Up`}
             </Button>
           </div>
           {authPage === 'login' ? <LoginForm /> : <RegisterForm setAuthPage={setAuthPage} />}

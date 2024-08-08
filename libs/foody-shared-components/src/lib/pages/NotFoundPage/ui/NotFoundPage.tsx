@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from './NotFoundPage.module.scss';
-import { useTranslation } from 'react-i18next';
-import { LangSwitcher } from '../../../shared/ui/LangSwitcher';
 
 interface NotFoundPageProps {
   title: string;

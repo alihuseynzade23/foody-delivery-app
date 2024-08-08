@@ -27,26 +27,17 @@
       position: fixed;
       left: calc(50% - 120px);
 
+      animation: bounce 1s infinite;
+
       @media (orientation: landscape) and (min-width: 768px) {
         width: 180px;
         height: 180px;
         left: calc(50% - 90px);
       }
 
-      animation: bounce 1s infinite;
-
-      @keyframes bounce {
-        0%,
-        100% {
-          transform: translateY(-25%);
-          animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-        }
-        50% {
-          transform: translateY(0);
-          animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-        }
+      & {
+        top: 25%;
       }
-      top: 25%;
 
       @media (min-width: 768px) {
         top: 33.33%;
@@ -60,5 +51,17 @@
         top: 33.33%;
       }
     }
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }

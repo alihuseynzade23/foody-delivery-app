@@ -3,6 +3,7 @@ import { classNames, Text, TextSize, TextTheme, TextWeight } from '@org/foody-sh
 import styles from './SidebarItem.module.scss';
 import { Link } from 'react-router-dom';
 import { SidebarItemType } from '../../model/items';
+import { useTranslation } from 'react-i18next';
 
 interface SidebarItemProps {
   item: SidebarItemType;
@@ -10,6 +11,8 @@ interface SidebarItemProps {
 }
 
 export const SidebarItem = memo(({ item, isActive }: SidebarItemProps) => {
+  const { t } = useTranslation();
+
   return (
     <Link to={item.path} className={classNames(styles.item)}>
       <Text
@@ -18,7 +21,7 @@ export const SidebarItem = memo(({ item, isActive }: SidebarItemProps) => {
         weight={TextWeight.NORMAL}
         theme={TextTheme.CLEAR}
       >
-        {item.text}
+        {t(item.text)}
       </Text>
     </Link>
   );

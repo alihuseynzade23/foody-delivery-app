@@ -1,3 +1,18 @@
 {
-  "Loading": "Yüklənir, lütfən gözləyin..."
+  "Loading": "Yüklənir, lütfən gözləyin...",
+  "Home": "Ana səhifə",
+  "Login": "Daxil ol",
+  "Restaurants": "Restoranlar",
+  "About Us": "Haqqımızda",
+  "How it works?": "Necə işləyir?",
+  "FAQs": "FAQlar",
+  "Search": "Axtar",
+  "Sign Up": "Qeydiyyat",
+  "Password": "Şifrə",
+  "Full name": "Ad və soyad",
+  "Profile": "Profil",
+  "Your Basket": "Səbətin",
+  "Your Orders": "Sifarişlərin",
+  "Checkout": "Ödəmə",
+  "Logout": "Çıxış"
 }

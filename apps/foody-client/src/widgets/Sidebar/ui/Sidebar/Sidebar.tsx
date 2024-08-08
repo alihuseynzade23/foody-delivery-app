@@ -9,6 +9,7 @@ import {
   TextWeight,
   Text,
   TextTheme,
+  useAuth,
 } from '@org/foody-shared-components';
 import styles from './Sidebar.module.scss';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
@@ -16,6 +17,7 @@ import { SidebarItemType, registeredUserItems, SidebarItemsList } from '../../mo
 import closeIconBlack from '../../../../shared/assets/close-icon-black.svg';
 import userIcon from '../../../../shared/assets/user.svg';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface SidebarProps {
   onClose: () => void;
@@ -24,8 +26,10 @@ interface SidebarProps {
 
 export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [userName, setUserName] = useState('');
+
+  const { isLoggedIn, logout, login } = useAuth();
+
+  const { t } = useTranslation();
 
   const handleClose = () => {
     setIsVisible(false);
@@ -34,17 +38,14 @@ export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
 
   useEffect(() => {
     setIsVisible(true);
-
-    setIsRegistered(true);
-    setUserName('Name Surname');
   }, []);
 
   const itemsList = useMemo(() => {
-    const baseItems: SidebarItemType[] = isRegistered ? registeredUserItems : SidebarItemsList;
+    const baseItems: SidebarItemType[] = isLoggedIn ? registeredUserItems : SidebarItemsList;
     return baseItems.map(item => (
       <SidebarItem isActive={isActivePath(item.path)} item={item} key={item.path} />
     ));
-  }, [isRegistered]);
+  }, [isLoggedIn]);
 
   return (
     <div className={styles.sideBarContainer}>
@@ -64,7 +65,7 @@ export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
           onClick={handleClose}
         />
 
-        {isRegistered ? (
+        {isLoggedIn ? (
           <div className={styles.userInfo}>
             <img
               src={userIcon}
@@ -74,22 +75,24 @@ export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
               style={{ cursor: 'pointer', marginRight: '8px' }}
             />
             <Text size={TextSize.XL} weight={TextWeight.MEDIUM} theme={TextTheme.BLACK}>
-              {userName}
+              User
             </Text>
           </div>
         ) : (
-          <Button theme={ButtonTheme.BG_RED} className={styles.btn} size={ButtonSize.M}>
-            Sign up
-          </Button>
+          <Link to="/profile">
+            <Button theme={ButtonTheme.BG_RED} className={styles.btn} size={ButtonSize.M}>
+              Sign up
+            </Button>
+          </Link>
         )}
 
         <div className={styles.itemList}>{itemsList}</div>
-        {isRegistered && (
-          <Link className={styles.logout} to={'/'}>
+        {isLoggedIn && (
+          <Button onClick={logout} className={styles.logout}>
             <Text size={TextSize.XL} weight={TextWeight.MEDIUM} theme={TextTheme.CLEAR}>
-              {'Logout'}
+              {t`Logout`}
             </Text>
-          </Link>
+          </Button>
         )}
       </div>
     </div>

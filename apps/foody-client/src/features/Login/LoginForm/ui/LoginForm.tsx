@@ -44,13 +44,13 @@ export const LoginForm = () => {
         onChange={handleChange}
         disabled={isLoading}
         name="password"
-        label="Password"
+        label={t`Password`}
         type="password"
-        placeholder="Password"
+        placeholder={t`Password`}
         error={errors.password && touched.password ? errors.password : undefined}
       />
       <Button type="submit" size={ButtonSize.L} className={styles.btn} theme={ButtonTheme.BG_RED}>
-        Login
+        {t`Login`}
       </Button>
     </form>
   );
