@@ -1,4 +1,11 @@
-import { Button, ButtonSize, ButtonTheme, Input, useAuth } from '@org/foody-shared-components';
+import {
+  Button,
+  ButtonSize,
+  ButtonTheme,
+  Input,
+  Spinner,
+  useAuth,
+} from '@org/foody-shared-components';
 import styles from './LoginForm.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
@@ -50,7 +57,8 @@ export const LoginForm = () => {
         error={errors.password && touched.password ? errors.password : undefined}
       />
       <Button type="submit" size={ButtonSize.L} className={styles.btn} theme={ButtonTheme.BG_RED}>
-        {t`Login`}
+        {/* {t`Login`} */}
+        {isLoading ? <Spinner /> : t`Login`}
       </Button>
     </form>
   );

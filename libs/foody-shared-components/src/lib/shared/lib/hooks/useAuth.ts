@@ -1,7 +1,5 @@
 import useAuthStore from '../store/auth';
-
 import { account, ID } from '@org/shared';
-
 import toast from 'react-hot-toast';
 
 export const useAuth = () => {
@@ -15,7 +13,7 @@ export const useAuth = () => {
       .createEmailPasswordSession(email, password)
       .then(res => {
         setIsLoggedIn(true);
-        localStorage.setItem('user', JSON.stringify(res));
+        localStorage.setItem('foody_user', JSON.stringify(res));
         setUser(res);
       })
       .catch(handleError)
@@ -29,7 +27,7 @@ export const useAuth = () => {
       .then(res => {
         if (res.userId == (import.meta as any).env.VITE_ADMIN_USER_ID) {
           setIsLoggedIn(true);
-          localStorage.setItem('user', JSON.stringify(res));
+          localStorage.setItem('foody_user', JSON.stringify(res));
           setUser(res);
         } else {
           handleError(new Error('Unauthorized'));
@@ -38,6 +36,7 @@ export const useAuth = () => {
       .catch(handleError)
       .finally(() => setIsLoading(false));
   };
+
   const register = (email: string, password: string, cb: () => void) => {
     setIsLoading(true);
     account
@@ -69,6 +68,7 @@ export const useAuth = () => {
       .getSession('current')
       .then(res => {
         if (res.userId === (import.meta as any).env.VITE_ADMIN_USER_ID) {
+          localStorage.setItem('foody_user', JSON.stringify(res));
           setUser(res);
           setIsLoggedIn(true);
         } else {
@@ -88,6 +88,7 @@ export const useAuth = () => {
     account
       .getSession('current')
       .then(res => {
+        localStorage.setItem('foody_user', JSON.stringify(res));
         setUser(res);
         setIsLoggedIn(true);
       })
@@ -99,15 +100,13 @@ export const useAuth = () => {
   };
 
   const handleError = (err: Error) => {
-    toast.error(err.message);
     console.error(err);
-    localStorage.clear();
+    toast.error(err.message);
     setUser(null);
     setIsLoading(false);
   };
 
   return {
-    // handleCode,
     login,
     adminInitialCheck,
     adminLogin,
@@ -116,10 +115,6 @@ export const useAuth = () => {
     isLoggedIn,
     isLoading,
     initialCheck,
-    // isChecked,
     user,
-    // getMe,
-    // getNewTokens,
-    // redirectToPwChange,
   };
 };

@@ -9,16 +9,17 @@ import { BaseLayout } from '../../../layouts/BaseLayout';
 
 import { DashboardPage } from '../../../../pages/DashboardPage';
 import { ProductsPage } from '../../../../pages/ProductsPage';
-import { account } from '@org/shared';
 
 const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
   const { isLoggedIn } = useAuth();
-  const { t } = useTranslation();
+
   if (!isLoggedIn) {
     return <LoginPage />;
   }
   return <BaseLayout>{children}</BaseLayout>;
 };
+
+
 
 export const AppRouter: FC = () => {
   const { t } = useTranslation();

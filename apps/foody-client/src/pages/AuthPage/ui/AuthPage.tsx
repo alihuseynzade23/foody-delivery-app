@@ -5,6 +5,7 @@ import {
   Button,
   ButtonSize,
   ButtonTheme,
+  classNames,
   LangSwitcher,
   LangSwitcherTheme,
   Logo,
@@ -38,7 +39,7 @@ export const AuthPage = () => {
         <div className={styles.formWrapper}>
           <div className={styles.btnWrapper}>
             <Button
-              className={styles.btn}
+              className={classNames(styles.btn, { [styles.active]: authPage === 'login' })}
               theme={ButtonTheme.CLEAR}
               size={ButtonSize.XL}
               onClick={() => setAuthPage('login')}
@@ -47,7 +48,7 @@ export const AuthPage = () => {
             </Button>
             <Button
               size={ButtonSize.XL}
-              className={styles.btn}
+              className={classNames(styles.btn, { [styles.active]: authPage === 'register' })}
               onClick={() => setAuthPage('register')}
             >
               {t`Sign Up`}
