@@ -6,14 +6,15 @@ import { useTranslation } from 'react-i18next';
 
 export function App() {
   const { initialCheck, isLoading } = useAuth();
+
   const { t } = useTranslation();
 
   useEffect(() => {
     initialCheck();
   }, []);
 
-  if (isLoading) {
-    return <FullScreenLoading text={t`Loading`} />;
+  if (isLoading && localStorage.getItem('user')) {
+    return <FullScreenLoading text={t('Loading')} />;
   }
 
   return (

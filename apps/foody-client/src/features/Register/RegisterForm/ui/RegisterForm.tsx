@@ -1,4 +1,4 @@
-import { Button, ButtonSize, ButtonTheme, Input, useAuth } from '@org/foody-shared-components';
+import { Button, ButtonSize, ButtonTheme, Input, Spinner, useAuth } from '@org/foody-shared-components';
 import styles from './RegisterForm.module.scss';
 import { useFormik } from 'formik';
 import { registerSchema } from '@org/shared';
@@ -83,7 +83,8 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         error={errors.password && touched.password ? errors.password : undefined}
       />
       <Button type="submit" size={ButtonSize.L} className={styles.btn} theme={ButtonTheme.BG_RED}>
-        {t('Register')}
+        {/* {t('Register')} */}
+        {isLoading ? <Spinner /> : t('Register')}
       </Button>
     </form>
   );

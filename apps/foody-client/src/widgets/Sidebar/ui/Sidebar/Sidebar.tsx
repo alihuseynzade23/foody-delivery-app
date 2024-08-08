@@ -41,7 +41,7 @@ export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
 
   const itemsList = useMemo(() => {
     const baseItems: SidebarItemType[] = isLoggedIn ? registeredUserItems : SidebarItemsList;
-    return baseItems.map(item => <SidebarItem item={item} key={item.path} />);
+    return baseItems.map(item => <SidebarItem onClose={onClose} item={item} key={item.path} />);
   }, [isLoggedIn]);
 
   return (
