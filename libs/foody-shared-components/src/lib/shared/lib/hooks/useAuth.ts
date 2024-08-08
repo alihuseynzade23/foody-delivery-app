@@ -13,7 +13,7 @@ export const useAuth = () => {
       .createEmailPasswordSession(email, password)
       .then(res => {
         setIsLoggedIn(true);
-        localStorage.setItem('user', JSON.stringify(res));
+        localStorage.setItem('foody_user', JSON.stringify(res));
         setUser(res);
       })
       .catch(handleError)
@@ -27,7 +27,7 @@ export const useAuth = () => {
       .then(res => {
         if (res.userId == (import.meta as any).env.VITE_ADMIN_USER_ID) {
           setIsLoggedIn(true);
-          localStorage.setItem('user', JSON.stringify(res));
+          localStorage.setItem('foody_user', JSON.stringify(res));
           setUser(res);
         } else {
           handleError(new Error('Unauthorized'));
@@ -68,7 +68,7 @@ export const useAuth = () => {
       .getSession('current')
       .then(res => {
         if (res.userId === (import.meta as any).env.VITE_ADMIN_USER_ID) {
-          localStorage.setItem('user', JSON.stringify(res));
+          localStorage.setItem('foody_user', JSON.stringify(res));
           setUser(res);
           setIsLoggedIn(true);
         } else {
@@ -88,7 +88,7 @@ export const useAuth = () => {
     account
       .getSession('current')
       .then(res => {
-        localStorage.setItem('user', JSON.stringify(res));
+        localStorage.setItem('foody_user', JSON.stringify(res));
         setUser(res);
         setIsLoggedIn(true);
       })

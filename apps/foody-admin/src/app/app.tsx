@@ -12,7 +12,7 @@ export function App() {
     adminInitialCheck();
   }, []);
 
-  if (isLoading && localStorage.getItem('user')) {
+  if (isLoading && localStorage.getItem('foody_user')) {
     return <FullScreenLoading text={t('Loading')} />;
   }
 

@@ -13,7 +13,7 @@ export function App() {
     initialCheck();
   }, []);
 
-  if (isLoading && localStorage.getItem('user')) {
+  if (isLoading && localStorage.getItem('foody_user')) {
     return <FullScreenLoading text={t('Loading')} />;
   }
 
