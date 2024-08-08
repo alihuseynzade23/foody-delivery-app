@@ -3,7 +3,6 @@ import {
   ButtonSize,
   classNames,
   Input,
-  isActivePath,
   LangSwitcherTheme,
   useAuth,
 } from '@org/foody-shared-components';
@@ -30,10 +29,7 @@ export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
   const { isLoggedIn } = useAuth();
 
   const itemsList = useMemo(
-    () =>
-      NavbarItemList.map(item => (
-        <NavbarItem isActive={isActivePath(item.path)} item={item} key={item.path} />
-      )),
+    () => NavbarItemList.map(item => <NavbarItem item={item} key={item.path} />),
     [],
   );
 

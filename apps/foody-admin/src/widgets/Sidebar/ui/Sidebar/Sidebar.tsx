@@ -1,4 +1,4 @@
-import { classNames, isActivePath, Text, useAuth } from '@org/foody-shared-components';
+import { classNames, Text, useAuth } from '@org/foody-shared-components';
 
 import styles from './Sidebar.module.scss';
 
@@ -20,10 +20,7 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
   const { logout } = useAuth();
 
   const itemsList = useMemo(
-    () =>
-      SidebarItemsList.map(item => (
-        <SidebarItem isActive={isActivePath(item.path)} item={item} key={item.path} />
-      )),
+    () => SidebarItemsList.map(item => <SidebarItem item={item} key={item.path} />),
     [],
   );
 

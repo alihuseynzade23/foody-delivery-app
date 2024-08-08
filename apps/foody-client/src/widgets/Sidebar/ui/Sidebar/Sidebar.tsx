@@ -4,7 +4,6 @@ import {
   ButtonSize,
   ButtonTheme,
   classNames,
-  isActivePath,
   TextSize,
   TextWeight,
   Text,
@@ -27,7 +26,7 @@ interface SidebarProps {
 export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const { isLoggedIn, logout, login } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
 
   const { t } = useTranslation();
 
@@ -42,9 +41,7 @@ export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
 
   const itemsList = useMemo(() => {
     const baseItems: SidebarItemType[] = isLoggedIn ? registeredUserItems : SidebarItemsList;
-    return baseItems.map(item => (
-      <SidebarItem isActive={isActivePath(item.path)} item={item} key={item.path} />
-    ));
+    return baseItems.map(item => <SidebarItem item={item} key={item.path} />);
   }, [isLoggedIn]);
 
   return (
