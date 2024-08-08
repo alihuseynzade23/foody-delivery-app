@@ -61,28 +61,30 @@ export const Input = memo((props: InputProps) => {
     [styles[theme]]: true,
     [styles.error]: !!error,
   };
+  
   return (
     <div className={classNames(styles.InputWrapper, {}, [inputWrapperClassName])}>
       {label && <label className={classNames(styles.label, {}, [labelClassName])}>{label}</label>}
-      <input
-        ref={ref}
-        disabled={disabled}
-        placeholder={placeholder}
-        type={showPassword ? 'text' : type}
-        value={value}
-        onChange={onChangeHandler}
-        className={classNames(styles.Input, mods, [inputClassName])}
-        {...otherProps}
-      />
-      {type === 'password' && (
-        <span className={classNames(styles.eyeIcon)} onClick={togglePasswordVisibility}>
-          <img
-            src={showPassword ? eyeIconSlash : eyeIcon}
-            alt="Toggle Password Visibility"
-            width={20}
-          />
-        </span>
-      )}
+      <div className={styles.InputContainer}>
+        <input
+          ref={ref}
+          disabled={disabled}
+          placeholder={placeholder}
+          type={showPassword ? 'text' : type}
+          value={value}
+          onChange={onChangeHandler}
+          className={classNames(styles.Input, mods, [inputClassName])}
+          {...otherProps}
+        />
+        {type === 'password' && (
+          <span className={styles.eyeIcon} onClick={togglePasswordVisibility}>
+            <img
+              src={showPassword ? eyeIconSlash : eyeIcon}
+              alt="Toggle Password Visibility"
+            />
+          </span>
+        )}
+      </div>
       {error && <FormFieldError error={error} />}
     </div>
   );

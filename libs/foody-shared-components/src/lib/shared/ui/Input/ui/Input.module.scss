@@ -4,12 +4,16 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  position: relative;
+}
+
+.InputContainer {
+  position: relative; 
 }
 
 .Input {
   width: 100%;
   border: none;
+
 
   &::placeholder {
     font-family: var(--font-family-roboto);
@@ -55,8 +59,10 @@
 
 .eyeIcon {
   position: absolute;
-  right: 0.75rem; 
-  top: 50%; 
-  transform: translateY(-50%); 
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
+  width: 20px; 
+  height: 20px; 
 }
