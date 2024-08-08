@@ -1,12 +1,5 @@
 import { FC, useEffect, useMemo, useState } from 'react';
-import {
-  classNames,
-  isActivePath,
-  Logo,
-  LogoTheme,
-  Text,
-  useAuth,
-} from '@org/foody-shared-components';
+import { classNames, Logo, LogoTheme, Text, useAuth } from '@org/foody-shared-components';
 import styles from './SidebarResponsive.module.scss';
 import { useTranslation } from 'react-i18next';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
@@ -34,7 +27,7 @@ export const SidebarResponsive: FC<SidebarResponsiveProps> = ({ onClose, classNa
   const itemsList = useMemo(
     () =>
       SidebarItemsList.map(item => (
-        <SidebarItem isActive={isActivePath(item.path)} item={item} key={item.path} />
+        <SidebarItem onClose={handleClose} item={item} key={item.path} />
       )),
     [],
   );

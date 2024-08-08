@@ -1,26 +1,24 @@
 .item {
   text-decoration: none;
+
   .link {
     color: var(--primary-gray);
     font-size: var(--font-size-l);
     font-weight: 500;
-    white-space: nowrap; 
-
-  
+    white-space: nowrap;
   }
-}
 
-.active {
-  color: var(--primary-red);
-}
-
-
-@media screen and (max-width: 768px) {
-  .item{
+  &.active {
     .link {
-      font-size: var(--font-size-m);
-    
+      color: var(--primary-red);
     }
   }
- 
+}
+
+@media screen and (max-width: 768px) {
+  .item {
+    .link {
+      font-size: var(--font-size-m);
+    }
+  }
 }

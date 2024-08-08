@@ -16,9 +16,6 @@ export * from './lib/shared/ui/FullScreenLoading';
 // Custom lib
 export * from './lib/shared/lib/classNames/classNames';
 
-// Utils
-export * from './lib/shared/lib/utils/isActivePath';
-
 // Hooks
 export * from './lib/shared/lib/hooks/useAuth';
 
