@@ -6,9 +6,14 @@
   gap: 0.5rem;
 }
 
+.InputContainer {
+  position: relative; 
+}
+
 .Input {
   width: 100%;
   border: none;
+
 
   &::placeholder {
     font-family: var(--font-family-roboto);
@@ -53,9 +58,11 @@
 }
 
 .eyeIcon {
-  position: relative;
-  left: 90%;
-  bottom: 50%;
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
-  color: gray;
+  width: 20px; 
+  height: 20px; 
 }
