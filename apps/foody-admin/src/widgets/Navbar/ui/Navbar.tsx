@@ -12,20 +12,28 @@ import userIcon from '../../../shared/assets/user.svg';
 import { useTranslation } from 'react-i18next';
 
 import burgerMenuIcon from '../../../shared/assets/burger-menu.svg';
+import { addStore } from '../../../entities/Add';
 
 interface NavbarProps {
   className?: string;
-  isOpen?: () => void;
+  openSidebar?: () => void;
 }
 
-export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
+export const Navbar: FC<NavbarProps> = ({ className, openSidebar }) => {
   const { t } = useTranslation('dashboard');
+
+  const { setType, setIsOpen } = addStore();
+
+  const handleAddProduct = () => {
+    setType('product');
+    setIsOpen(true);
+  };
 
   return (
     <div className={classNames(styles.Navbar, {}, [className])}>
       <div className={styles.logoWrapper}>
         <img
-          onClick={isOpen}
+          onClick={openSidebar}
           src={burgerMenuIcon}
           height={26}
           width={26}
@@ -36,17 +44,21 @@ export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
         <Logo theme={LogoTheme.PRIMARY} />
       </div>
       <div className={classNames(styles.infoWrapper)}>
-        <Button theme={ButtonTheme.BG_VIOLET} className={styles.addBtn}>
-          <Text weight={TextWeight.EXTRABOLD} size={TextSize.S}>
-            {'+ ' + t`ADD PRODUCT`}
+        <Button onClick={handleAddProduct} add className={styles.addBtn}>
+          <Text weight={TextWeight.BOLD} size={TextSize.S}>
+            {t`ADD PRODUCT`}
           </Text>
         </Button>
-        <Button theme={ButtonTheme.BG_VIOLET} className={styles.addBtnResponse}>
+        <Button
+          onClick={handleAddProduct}
+          theme={ButtonTheme.BG_VIOLET}
+          className={styles.addBtnResponse}
+        >
           <Text weight={TextWeight.EXTRABOLD} size={TextSize.XL}>
             +
           </Text>
         </Button>
-        <LangSwitcher  className={styles.langSwitcher} theme={LangSwitcherTheme.BLACK}/>
+        <LangSwitcher className={styles.langSwitcher} theme={LangSwitcherTheme.BLACK} />
         <div className={classNames(styles.userInfoWrapper)}>
           <img height={40} width={40} src={userIcon} alt="user" />
           <Text weight={TextWeight.MEDIUM}>Admin</Text>
