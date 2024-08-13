@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  .contentWrapper {
+    gap: 3rem;
+    display: flex;
+    flex-direction: column;
+
+    .formContainer {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+      .formWrapper {
+        padding: 1.5rem;
+        background-color: var(--tertiary-dark-gray);
+        width: 50%;
+        border-radius: 14px;
+      }
+    }
+  }
+}

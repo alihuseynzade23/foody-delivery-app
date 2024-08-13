@@ -7,13 +7,12 @@
 }
 
 .InputContainer {
-  position: relative; 
+  position: relative;
 }
 
 .Input {
   width: 100%;
   border: none;
-
 
   &::placeholder {
     font-family: var(--font-family-roboto);
@@ -31,6 +30,10 @@
 .bgAdmin {
   background-color: var(--primary-dark-gray);
   border: 1px solid var(--primary-dark-gray);
+
+  &::placeholder {
+    color: var(--primary-white);
+  }
 }
 
 .size_s {
@@ -63,6 +66,6 @@
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  width: 20px; 
-  height: 20px; 
+  width: 20px;
+  height: 20px;
 }

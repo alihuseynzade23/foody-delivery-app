@@ -1,9 +1,10 @@
 import styles from './CategoriesPage.module.scss';
 
-import { Button, ButtonTheme, Text, TextSize, TextWeight } from '@org/foody-shared-components';
+import { Button, Text, TextSize, TextWeight } from '@org/foody-shared-components';
 import { HeaderBar } from '../../../widgets/HeaderBar';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
+import { addCb } from '../../../entities/Add';
 
 export const CategoriesPage = () => {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ export const CategoriesPage = () => {
         <meta name="description" content="Categories page" />
       </Helmet>
       <HeaderBar title="Category">
-        <Button add>
+        <Button onClick={addCb('category')} add>
           <Text weight={TextWeight.BOLD} size={TextSize.M}>{t`ADD CATEGORY`}</Text>
         </Button>
       </HeaderBar>

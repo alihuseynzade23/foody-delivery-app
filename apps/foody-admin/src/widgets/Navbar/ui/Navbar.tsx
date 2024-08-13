@@ -12,7 +12,7 @@ import userIcon from '../../../shared/assets/user.svg';
 import { useTranslation } from 'react-i18next';
 
 import burgerMenuIcon from '../../../shared/assets/burger-menu.svg';
-import { addStore } from '../../../entities/Add';
+import { addCb } from '../../../entities/Add';
 
 interface NavbarProps {
   className?: string;
@@ -21,13 +21,6 @@ interface NavbarProps {
 
 export const Navbar: FC<NavbarProps> = ({ className, openSidebar }) => {
   const { t } = useTranslation('dashboard');
-
-  const { setType, setIsOpen } = addStore();
-
-  const handleAddProduct = () => {
-    setType('product');
-    setIsOpen(true);
-  };
 
   return (
     <div className={classNames(styles.Navbar, {}, [className])}>
@@ -44,13 +37,13 @@ export const Navbar: FC<NavbarProps> = ({ className, openSidebar }) => {
         <Logo theme={LogoTheme.PRIMARY} />
       </div>
       <div className={classNames(styles.infoWrapper)}>
-        <Button onClick={handleAddProduct} add className={styles.addBtn}>
+        <Button onClick={addCb('product')} add className={styles.addBtn}>
           <Text weight={TextWeight.BOLD} size={TextSize.S}>
             {t`ADD PRODUCT`}
           </Text>
         </Button>
         <Button
-          onClick={handleAddProduct}
+          onClick={addCb('category')}
           theme={ButtonTheme.BG_VIOLET}
           className={styles.addBtnResponse}
         >

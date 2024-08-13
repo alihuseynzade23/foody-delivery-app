@@ -1,0 +1,11 @@
+.container {
+
+    .input {
+        border-radius: 14px;
+        padding: 0.25rem 0.5rem;
+
+        &::placeholder {
+            color: var(--primary-white);
+        }
+    }
+}
