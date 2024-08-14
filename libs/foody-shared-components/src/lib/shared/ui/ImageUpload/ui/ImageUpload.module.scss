@@ -1,0 +1,76 @@
+// .file-upload {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.5rem; // 2 tailwind units (gap-2)
+//     margin-bottom: 2rem; // 8 tailwind units (mb-8)
+  
+//     .upload-container {
+//       width: 100%;
+  
+//       .label {
+//         color: #B1B5C3;
+//         font-size: 0.75rem; // text-[0.75rem]
+//         font-family: 'Poppins', sans-serif;
+//         line-height: 1.25rem; // leading-5
+//         font-weight: 600; // font-semibold
+//         text-transform: uppercase;
+//         width: 100%;
+//       }
+  
+//       .upload-box {
+//         background-color: #CBD5E1; // bg-slate-300
+//         width: 100%;
+//         max-width: 640px; // max-w-sm (640px)
+//         height: 100px;
+//         padding: 1.5rem; // p-6
+//         opacity: 0.5;
+//         margin-top: 0.5rem; // mt-2
+//         position: relative;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         border-radius: 0.75rem; // rounded-xl
+//       }
+  
+//       .file-input {
+//         position: absolute;
+//         inset: 0;
+//         width: 100%;
+//         height: 100%;
+//         opacity: 0;
+//         cursor: pointer;
+//       }
+  
+//       .icon-text-container {
+//         display: flex;
+//         flex-direction: column;
+//         gap: 0.5rem; // gap-2
+//         align-items: center;
+  
+//         .icon {
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           width: 40px;
+//         }
+  
+//         .text {
+//           font-size: 0.7rem; // sm:text-[0.7rem]
+//           text-align: center;
+//         }
+//       }
+//     }
+  
+//     .preview-container {
+//       height: 200px;
+//       img {
+//         width: auto;
+//         height: 100%;
+//       }
+  
+//       embed {
+//         width: 100%;
+//       }
+//     }
+//   }
+  

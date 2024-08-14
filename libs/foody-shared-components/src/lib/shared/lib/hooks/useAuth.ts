@@ -1,9 +1,9 @@
-import useAuthStore from '../store/auth';
+import authStore from '../store/auth';
 import { account, ID } from '@org/shared';
 import toast from 'react-hot-toast';
 
 export const useAuth = () => {
-  const { isLoading, isLoggedIn, setIsLoggedIn, setIsLoading, setUser, user } = useAuthStore();
+  const { isLoading, isLoggedIn, setIsLoggedIn, setIsLoading, setUser, user } = authStore();
 
   const navigate = (url: string) => (window.location.href = url);
 

@@ -28,7 +28,7 @@ export const SidebarItemsList: SidebarItemType[] = [
     text: 'Restaurants',
   },
   {
-    path: '/category',
+    path: '/categories',
     Icon: CategoryIcon,
     text: 'Category',
   },
