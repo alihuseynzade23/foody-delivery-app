@@ -19,21 +19,16 @@
   }
 }
 
-.label {
-}
-
 .bgWhite {
   background-color: var(--primary-white);
+  color: var(--primary-dark-gray);
   border: 1px solid var(--primary-dark-gray);
 }
 
 .bgAdmin {
   background-color: var(--primary-dark-gray);
+  color: var(--primary-white);
   border: 1px solid var(--primary-dark-gray);
-
-  &::placeholder {
-    color: var(--primary-white);
-  }
 }
 
 .size_s {

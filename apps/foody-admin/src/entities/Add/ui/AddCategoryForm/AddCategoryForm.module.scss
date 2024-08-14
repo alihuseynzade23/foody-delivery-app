@@ -1,11 +1,14 @@
 .container {
+  .input {
+    border-radius: 14px;
+    padding: 0.25rem 0.5rem;
 
-    .input {
-        border-radius: 14px;
-        padding: 0.25rem 0.5rem;
-
-        &::placeholder {
-            color: var(--primary-white);
-        }
+    &::placeholder {
+      color: var(--primary-white);
     }
+  }
+  .label {
+    font-weight: 500;
+    color: var(--secondary-dark-gray);
+  }
 }

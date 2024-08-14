@@ -18,6 +18,10 @@
     border-radius: 50%;
   }
 
+  .closeIconResponsive {
+    display: none;
+  }
+
   .wrapper {
     background: var(--admin-panel-black);
     color: white;
@@ -39,6 +43,21 @@
 
     &.close {
       transform: translateX(100%);
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .container {
+    .closeIcon {
+      display: none;
+    }
+    .closeIconResponsive {
+      display: block;
+    }
+
+    .wrapper {
+      width: 100%;
     }
   }
 }

@@ -6,6 +6,7 @@ import styles from './Button.module.scss';
 export enum ButtonTheme {
   CLEAR = 'clear',
   BG_VIOLET = 'bgViolet',
+  BG_DARK_GRAY = 'bgDarkGray',
   BG_GRAY = 'bgGray',
   BG_RED = 'bgRed',
   BG_ORANGE = 'bgOrange',

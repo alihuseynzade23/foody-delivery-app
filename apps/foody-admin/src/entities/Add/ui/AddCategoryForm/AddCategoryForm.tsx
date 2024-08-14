@@ -2,17 +2,25 @@ import { Input, InputTheme } from '@org/foody-shared-components';
 import styles from './AddCategoryForm.module.scss';
 
 import { AddFormLayout } from '../AddFormLayout/AddFormLayout';
+import { useTranslation } from 'react-i18next';
 
 export const AddCategoryForm = () => {
+  const { t } = useTranslation();
+
   return (
     <AddFormLayout
-      title="Add Category"
-      subtitle="
-Add your Category information"
+      title={t`Add Category`}
+      subtitle={t`Add category information`}
+      buttonText={t`Create Category`}
     >
-      <form className={styles.container}>
-        <Input theme={InputTheme.BG_ADMIN} inputClassName={styles.input} label='Name'  />
-      </form>
+      <div className={styles.container}>
+        <Input
+          theme={InputTheme.BG_ADMIN}
+          inputClassName={styles.input}
+          labelClassName={styles.label}
+          label="Name"
+        />
+      </div>
     </AddFormLayout>
   );
 };
