@@ -12,6 +12,7 @@ interface AddFormLayoutProps {
   subtitle: string;
   buttonText: string;
   children: React.ReactNode;
+  onSubmit: () => void;
 }
 
 export const AddFormLayout: FC<AddFormLayoutProps> = ({
@@ -19,6 +20,7 @@ export const AddFormLayout: FC<AddFormLayoutProps> = ({
   title,
   subtitle,
   buttonText,
+  onSubmit,
 }) => {
   const { setClose } = addStore();
 
@@ -42,7 +44,7 @@ export const AddFormLayout: FC<AddFormLayoutProps> = ({
         </div>
       </div>
 
-      <AddButtons buttonText={buttonText} />
+      <AddButtons onSubmit={onSubmit} buttonText={buttonText} />
     </div>
   );
 };
