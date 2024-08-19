@@ -11,6 +11,8 @@ export enum TextTheme {
   RED = 'red',
   GREEN = 'green',
   DARK_GRAY = 'darkGray',
+  DARK_BlACK ='darkBlack',
+  STRONG_GRAY ='strongGray'
 }
 
 export enum TextSize {
@@ -18,6 +20,7 @@ export enum TextSize {
   M = 'size_m',
   L = 'size_l',
   XL = 'size_xl',
+  XXL = 'size_xxl'
 }
 
 export enum TextWeight {
@@ -26,6 +29,7 @@ export enum TextWeight {
   MEDIUM = 'medium',
   BOLD = 'bold',
   EXTRABOLD = 'extraBold',
+  M = "M",
 }
 
 export enum TextFont {

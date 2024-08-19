@@ -22,8 +22,9 @@ export const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
   return (
     <>
       <div className={styles.BaseLayout}>
-        <Navbar isOpen={openSidebar} />
+    
         <div className={classNames(styles.contentWrapper)}>
+        <Navbar isOpen={openSidebar} />
           {isSidebarOpen ? <Sidebar onClose={closeSidebar} /> : null}
           {children}
         </div>

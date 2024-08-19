@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   z-index: 10;
-
+  
   .Sidebar {
     background: #fff;
     color: white;
@@ -27,6 +27,9 @@
     transition: transform 0.3s ease-in-out;
     z-index: 50;
 
+    .signUpBtn{
+      margin: 0 auto;
+    }
     &.open {
       transform: translateX(0);
     }
