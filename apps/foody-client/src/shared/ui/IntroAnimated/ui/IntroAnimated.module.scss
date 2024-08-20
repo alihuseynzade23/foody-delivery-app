@@ -1,0 +1,44 @@
+.introAnimatedContainer {
+    max-width: 350px;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    background-color: white;
+    padding: 1rem ;
+    border-radius: 10px;
+    animation: moveUpDown 2s ease-in-out infinite;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  
+    img {
+      width: 40px;
+    }
+  
+    &.introBottomRight {
+      right: 10%;
+      bottom: 10%;
+    }
+  
+    &.introBottomLeft {
+      left: 10%;
+      bottom: 10%;
+    }
+  
+    &.introCenter {
+      left: 50%;
+      bottom: 5%;
+      transform: translateX(-50%);
+    }
+  }
+  
+
+  @keyframes moveUpDown {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }

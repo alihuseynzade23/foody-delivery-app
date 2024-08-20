@@ -64,6 +64,9 @@
 }
 
 @media screen and (max-width: 650px) {
+  .Navbar{
+    margin-top:0;
+  }
   .burgerMenu {
     display: block;
   }

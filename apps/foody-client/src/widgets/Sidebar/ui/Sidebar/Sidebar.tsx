@@ -76,7 +76,7 @@ export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
             </Text>
           </div>
         ) : (
-          <Link to="/profile">
+          <Link to="/profile" className={styles.signUpBtn}>
             <Button theme={ButtonTheme.BG_RED} className={styles.btn} size={ButtonSize.M}>
               Sign up
             </Button>

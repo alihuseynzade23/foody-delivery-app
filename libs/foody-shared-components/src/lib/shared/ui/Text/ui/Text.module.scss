@@ -29,6 +29,12 @@
 .darkGray {
   color: var( --secondary-dark-gray);
 }
+.darkBlack {
+  color: var( --dark-black);
+}
+.strongGray {
+  color: var( --dark-gray);
+}
 
 
 .size_s {
@@ -45,6 +51,9 @@
 
 .size_xl {
   font-size: 1.5rem;
+}
+.size_xxl {
+  font-size: 2.8rem;
 }
 
 .light {
