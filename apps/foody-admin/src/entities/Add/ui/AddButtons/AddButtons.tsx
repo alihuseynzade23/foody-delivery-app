@@ -7,9 +7,10 @@ import { addStore } from '../../model/store/add-store';
 
 type AddButtonsProps = {
   buttonText: string;
+  onSubmit: () => void;
 };
 
-export const AddButtons: FC<AddButtonsProps> = ({ buttonText }) => {
+export const AddButtons: FC<AddButtonsProps> = ({ buttonText, onSubmit }) => {
   const { t } = useTranslation();
 
   const { setClose } = addStore();
@@ -22,7 +23,11 @@ export const AddButtons: FC<AddButtonsProps> = ({ buttonText }) => {
           className={`${styles.btn} ${styles.cancel}`}
           theme={ButtonTheme.BG_GRAY}
         >{t`Cancel`}</Button>
-        <Button theme={ButtonTheme.BG_VIOLET} className={`${styles.btn} ${styles.add}`}>
+        <Button
+          onClick={onSubmit}
+          theme={ButtonTheme.BG_VIOLET}
+          className={`${styles.btn} ${styles.add}`}
+        >
           {buttonText}
         </Button>
       </div>

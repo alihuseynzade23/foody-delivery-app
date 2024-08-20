@@ -4,7 +4,7 @@ import styles from './AddEntity.module.scss';
 
 import closeSvg from '../../../../shared/assets/close.svg';
 
-import { AddCategoryForm } from '../AddCategoryForm/AddCategoryForm';
+import { CategoryForm } from '../../../Category';
 
 export const AddEntity = () => {
   const { type, isOpen, setClose } = addStore();
@@ -24,7 +24,7 @@ export const AddEntity = () => {
           )}
         >
           {type === 'product' && <div>Add products</div>}
-          {type === 'category' && <AddCategoryForm />}
+          {type === 'category' && <CategoryForm />}
           {type === 'restaurant' && <div>Restaurants</div>}
           {type === 'order' && <div>Orders</div>}
         </div>

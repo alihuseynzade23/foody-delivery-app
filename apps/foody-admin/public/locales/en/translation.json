@@ -4,9 +4,10 @@
   "Page not found": "Page not found",
   "Loading": "Loading, please wait...",
 
-
   "Dashboard page": "Dashboard",
   "Categories page": "Categories",
-  
-  "Logout": "Logout"
+
+  "Logout": "Logout",
+
+  "Cancel": "Cancel"
 }
