@@ -1,0 +1,15 @@
+.container {
+  background-color: var(--secondary-black);
+  border-radius: 14px;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+
+    .title {
+      color: var(--secondary-white);
+    }
+  }
+}

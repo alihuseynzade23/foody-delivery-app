@@ -5,10 +5,12 @@ import styles from './BaseLayout.module.scss';
 
 import { Navbar } from '../../../../widgets/Navbar';
 import { Sidebar, SidebarResponsive } from '../../../../widgets/Sidebar';
+import { AddEntity } from '../../../../entities/Add/';
 
 interface BaseLayoutProps {
   className?: string;
   children?: React.ReactNode;
+  header?: boolean;
 }
 
 export const BaseLayout: FC<BaseLayoutProps> = ({ className, children }) => {
@@ -24,10 +26,11 @@ export const BaseLayout: FC<BaseLayoutProps> = ({ className, children }) => {
 
   return (
     <div className={classNames(styles.AdminLayout, {}, [className])}>
-      <Navbar isOpen={openSidebar} />
+      <Navbar openSidebar={openSidebar} />
       <div className={classNames(styles.contentWrapper)}>
         {isSidebarOpen ? <SidebarResponsive onClose={closeSidebar} /> : <Sidebar />}
-        {children}
+        <div style={{ width: '100%' }}>{children}</div>
+        <AddEntity />
       </div>
     </div>
   );

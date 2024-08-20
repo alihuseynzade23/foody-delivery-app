@@ -41,8 +41,6 @@ export const LoginForm = () => {
     adminLogin(values.email, values.password);
   };
 
-  
-
   return (
     <form autoComplete="off" onSubmit={handleSubmit} className={styles.LoginForm}>
       <Text
@@ -83,7 +81,6 @@ export const LoginForm = () => {
         size={ButtonSize.XL}
         className={styles.loginBtn}
       >
-        {/* {t('Sign in')} */}
         {isLoading ? (
           <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
         ) : (

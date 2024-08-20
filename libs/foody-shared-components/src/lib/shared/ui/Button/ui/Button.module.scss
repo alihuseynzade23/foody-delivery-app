@@ -1,8 +1,6 @@
 .Button {
   cursor: pointer;
-  color: var(--primary-color);
   padding: 6px 15px;
-  font-family: var(--font-family-roboto);
 }
 
 .clear {
@@ -19,6 +17,11 @@
 }
 
 .bgGray {
+  background-color: var(--tertiary-dark-gray);
+  color: var(--primary-white);
+}
+
+.bgDarkGray {
   background-color: var(--secondary-black);
   color: var(--primary-white);
 }
@@ -37,6 +40,15 @@
 
 .bgGreen {
   background-color: var(--primary-green);
+  color: var(--primary-white);
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 14px;
+  background-color: var(--primary-violet);
   color: var(--primary-white);
 }
 

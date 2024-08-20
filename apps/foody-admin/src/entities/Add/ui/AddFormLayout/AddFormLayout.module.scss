@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.contentWrapper {
+  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.closeIcon {
+  display: none;
+  cursor: pointer;
+  z-index: 99999;
+  background-color: var(--primary-violet);
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.formContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.formWrapper {
+  padding: 1.5rem;
+  background-color: var(--tertiary-dark-gray);
+  width: 50%;
+  border-radius: 14px;
+}
+
+@media screen and (max-width: 650px) {
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .formWrapper {
+    width: 100%;
+  }
+
+  .closeIcon {
+    display: block;
+  }
+}
