@@ -11,10 +11,14 @@ import { categoryStore } from '../model/store/categoryStore';
 import { Spinner } from '@org/foody-shared-components';
 import { CategoryItem } from '../../../entities/Category';
 
+import { categoryColumns } from '../../../entities/Category/model/utils/categoryItemColumns';
+import { Table } from 'antd';
+
 export const CategoriesPage = () => {
   const { t } = useTranslation('category');
   const { setCategories, categories, setIsLoading, isLoading } = categoryStore();
 
+  console.log('categories', categories);
   useEffect(() => {
     const fetchCategories = async () => {
       setIsLoading(true);
@@ -50,9 +54,11 @@ export const CategoriesPage = () => {
         <Spinner />
       ) : (
         <div className={styles.categoriesList}>
-          {categories.map(category => (
-            <CategoryItem key={category.$id} {...category} />
-          ))}
+          <Table dataSource={categories} columns={categoryColumns}>
+            {/* {categories.map(category => (
+              <CategoryItem key={category.$id} {...categories} />
+            ))} */}
+          </Table>
         </div>
       )}
     </div>

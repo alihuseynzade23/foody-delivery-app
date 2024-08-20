@@ -1,4 +1,4 @@
-import type { TableProps } from 'antd';
+import type { TableColumnsType } from 'antd';
 
 type DataType = {
   key: string;
@@ -6,20 +6,25 @@ type DataType = {
   dataIndex: string;
 };
 
-export const categoryColumns: TableProps<DataType>['columns'] = [
+export const categoryColumns: TableColumnsType<DataType> = [
   {
     title: 'ID',
-    dataIndex: 'ID',
-    key: 'ID',
+    dataIndex: '$id',
+    key: '$id',
   },
   {
     title: 'Image',
-    dataIndex: 'Image',
-    key: 'Image',
+    dataIndex: 'image',
+    key: 'image',
   },
   {
     title: 'Name',
-    dataIndex: 'Name',
-    key: 'Name',
+    dataIndex: 'name',
+    key: 'name',
   },
+  // {
+  //   title: '',
+  //   dataIndex: '',
+  //   key: 'action',
+  //   render: () => <Button type="link">Delete</Button>,
 ];

@@ -5,15 +5,20 @@ import { Table } from 'antd';
 
 import { categoryColumns } from '../../model/utils/categoryItemColumns';
 
+const { Column, ColumnGroup } = Table;
+
 type CategoryItemProps = {
-  name: string;
+  data: any;
 };
 
-export const CategoryItem: FC<CategoryItemProps> = ({  }) => {
+export const CategoryItem: FC<CategoryItemProps> = ({ data }) => {
+  console.log('data', data);
   return (
     <div>
-      <Table columns={categoryColumns} />
-      <p className={styles.text}>{name}</p>
+      <ColumnGroup title="name">
+        <Column dataIndex="name" key="name" />
+      </ColumnGroup>
+      {/* <p className={styles.text}>{data.name}</p> */}
     </div>
   );
 };
