@@ -3,6 +3,11 @@
   "Sign in": "Sign in",
   "Page not found": "Page not found",
   "Loading": "Loading, please wait...",
+
   "Dashboard page": "Dashboard",
-  "Logout": "Logout"
+  "Categories page": "Categories",
+
+  "Logout": "Logout",
+
+  "Cancel": "Cancel"
 }

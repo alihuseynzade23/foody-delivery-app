@@ -9,8 +9,9 @@ import { BaseLayout } from '../../../layouts/BaseLayout';
 
 import { DashboardPage } from '../../../../pages/DashboardPage';
 import { ProductsPage } from '../../../../pages/ProductsPage';
+import { CategoriesPage } from '../../../../pages/CategoriesPage';
 
-const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
+const ProtectedRoute: FC<{ children: ReactNode; header?: boolean }> = ({ children }) => {
   const { isLoggedIn } = useAuth();
 
   if (!isLoggedIn) {
@@ -18,8 +19,6 @@ const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
   }
   return <BaseLayout>{children}</BaseLayout>;
 };
-
-
 
 export const AppRouter: FC = () => {
   const { t } = useTranslation();
@@ -40,6 +39,14 @@ export const AppRouter: FC = () => {
           element={
             <ProtectedRoute>
               <ProductsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="categories"
+          element={
+            <ProtectedRoute>
+              <CategoriesPage />
             </ProtectedRoute>
           }
         />

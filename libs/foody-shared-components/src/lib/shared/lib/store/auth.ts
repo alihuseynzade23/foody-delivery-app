@@ -11,7 +11,7 @@ type AuthStore = {
   setUser: (user: UserSession | null) => void;
 };
 
-const useAuthStore = create<AuthStore>(set => ({
+const authStore = create<AuthStore>(set => ({
   user: null,
   isLoading: false,
   isLoggedIn: false,
@@ -21,4 +21,4 @@ const useAuthStore = create<AuthStore>(set => ({
   setIsLoggedIn: value => set({ isLoggedIn: value }),
 }));
 
-export default useAuthStore;
+export default authStore;
