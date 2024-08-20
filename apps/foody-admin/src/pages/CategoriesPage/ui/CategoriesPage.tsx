@@ -9,6 +9,7 @@ import { getCategories } from '../model/services/getCategories/getCategories';
 import { categoryStore } from '../model/store/categoryStore';
 
 import { Spinner } from '@org/foody-shared-components';
+import { CategoryItem } from '../../../entities/Category';
 
 export const CategoriesPage = () => {
   const { t } = useTranslation('category');
@@ -50,9 +51,7 @@ export const CategoriesPage = () => {
       ) : (
         <div className={styles.categoriesList}>
           {categories.map(category => (
-            <div key={category.$id} className={styles.categoryItem}>
-              <Text>{category.name}</Text>
-            </div>
+            <CategoryItem key={category.$id} {...category} />
           ))}
         </div>
       )}
