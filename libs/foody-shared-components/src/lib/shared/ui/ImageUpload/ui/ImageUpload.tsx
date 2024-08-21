@@ -1,75 +1,58 @@
-import { useState } from 'react';
-import styles from './FileUpload.module.scss';
-import { Text } from '../../Text';
+import { useState, ChangeEvent } from 'react';
+import styles from './ImageUpload.module.scss';
+import uploadAdmin from '../../../../../../../../apps/foody-admin/src/shared/assets/upload.svg';
+import uploadClient from '../../../../../../../../apps/foody-client/src/shared/assets/upload.svg';
+import { Text, TextTheme } from '../../Text';
 
-export function ImageUpload() {
-  //   const [selectedFiles, setSelectedFiles] = useState([]);
-  //   const [previewUrls, setPreviewUrls] = useState([]);
-  //   const handleFileChange = event => {
-  //     const files = event.target.files;
-  //     const newSelectedFiles = Array.from(files);
-  //     const isMultiple = typeof multiple === 'undefined' ? false : multiple;
-  //     if (isMultiple) {
-  //       const validFiles = newSelectedFiles.filter(file =>
-  //         fileType === 'image' ? file.type.startsWith('image/') : file.type === 'application/pdf',
-  //       );
-  //       setSelectedFiles([...selectedFiles, ...validFiles]);
-  //       const fileReaders = validFiles.map(file => {
-  //         const fileReader = new FileReader();
-  //         fileReader.readAsDataURL(file);
-  //         return fileReader;
-  //       });
-  //       Promise.all(
-  //         fileReaders.map(
-  //           fileReader =>
-  //             new Promise(resolve => {
-  //               fileReader.onload = () => {
-  //                 resolve(fileReader.result);
-  //               };
-  //             }),
-  //         ),
-  //       ).then(results => {
-  //         setPreviewUrls([...previewUrls, ...results]);
-  //       });
-  //     } else {
-  //       const firstValidFile = newSelectedFiles.slice(0, 1);
-  //       setSelectedFiles([...firstValidFile]);
-  //       const fileReader = new FileReader();
-  //       fileReader.readAsDataURL(firstValidFile[0]);
-  //       fileReader.onload = () => {
-  //         setPreviewUrls([fileReader.result]);
-  //       };
-  //     }
-  //   };
-  //   return (
-  //     <div className={`file-upload ${className}`}>
-  //       <div className="upload-container">
-  //         <label className="label">{labelName}</label>
-  //         <div className="upload-box">
-  //           <input
-  //             type="file"
-  //             accept={fileType === 'image' ? 'image/*' : '.pdf'}
-  //             className="file-input"
-  //             onChange={handleFileChange}
-  //             multiple={typeof multiple === 'undefined' ? false : multiple}
-  //           />
-  //           <div className="icon-text-container">
-  //             <img src="/images/img_iconsfileuploadline.svg" className="icon" />
-  //             <Text className="text" size="txtPoppinsRegular12">
-  //               PNG, GIF, WEBP, MP4. Max 500Mb.
-  //             </Text>
-  //           </div>
-  //         </div>
-  //       </div>
-  //       {previewUrls.map((previewUrl, index) => (
-  //         <div key={index} className="preview-container">
-  //           {fileType === 'image' ? (
-  //             <img src={previewUrl} alt="Preview" />
-  //           ) : (
-  //             <embed key={index} src={previewUrl} type="application/pdf" />
-  //           )}
-  //         </div>
-  //       ))}
-  //     </div>
-  //   );
+interface ImageUploadProps {
+  labelName?: string;
+  className?: string;
+  theme?: 'admin' | 'client';
+}
+
+export function ImageUpload({ labelName, className = '', theme = 'admin' }: ImageUploadProps) {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file && file.type.startsWith('image/')) {
+      setSelectedFile(file);
+
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        if (fileReader.result) {
+          setPreviewUrl(fileReader.result.toString());
+        }
+      };
+    }
+  };
+
+  const themeClass = theme === 'client' ? styles.clientTheme : styles.adminTheme;
+
+  return (
+    <div className={`${styles.fileUpload} ${themeClass} ${className}`}>
+      {previewUrl && (
+        <div className={styles.previewContainer}>
+          <img src={previewUrl} alt="Preview" />
+        </div>
+      )}
+      <div className={styles.uploadContainer}>
+        <label className={styles.label}>{labelName}</label>
+        <div className={styles.uploadBox}>
+          <input
+            type="file"
+            accept="image/*"
+            className={styles.fileInput}
+            onChange={handleFileChange}
+          />
+          <div className={styles.iconTextContainer}>
+            <img src={theme === 'client' ? uploadClient : uploadAdmin } className={styles.icon} alt="Upload Icon" />
+            <Text children="upload" theme={TextTheme.WHITE} className={styles.text} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
