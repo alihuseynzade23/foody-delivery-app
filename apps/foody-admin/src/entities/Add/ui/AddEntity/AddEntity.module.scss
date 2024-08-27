@@ -6,10 +6,20 @@
   top: 0;
   left: 0;
   z-index: 10;
+  transform: translateX(100%);
+  transition: transform 0.6s ease-in-out;
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  &.close {
+    transform: translateX(100%);
+  }
 
   .closeIcon {
     position: fixed;
-    left: 38%;
+    left: 37.5%;
     cursor: pointer;
     top: 12px;
     z-index: 99999;
@@ -33,17 +43,7 @@
     right: 0;
     position: fixed;
     max-width: 100%;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
     z-index: 50;
-
-    &.open {
-      transform: translateX(0);
-    }
-
-    &.close {
-      transform: translateX(100%);
-    }
   }
 }
 
