@@ -1,11 +1,17 @@
 import type { TableColumnsType } from 'antd';
+import {
+  HandleButtons,
+  HandleButtonsDisplay,
+} from '../../../../features/handleProduct/ui/HandleButtons';
+
+import { deleteCategory } from '../services/deleteCategory/deleteCategory';
 
 type DataType = {
   key: string;
   name: string;
+
   dataIndex: string;
 };
-
 export const categoryColumns: TableColumnsType<DataType> = [
   {
     title: 'ID',
@@ -22,9 +28,10 @@ export const categoryColumns: TableColumnsType<DataType> = [
     dataIndex: 'name',
     key: 'name',
   },
-  // {
-  //   title: '',
-  //   dataIndex: '',
-  //   key: 'action',
-  //   render: () => <Button type="link">Delete</Button>,
+  {
+    title: '',
+    dataIndex: '',
+    key: 'action',
+    render: () => <HandleButtons onClick={deleteCategory} />,
+  },
 ];

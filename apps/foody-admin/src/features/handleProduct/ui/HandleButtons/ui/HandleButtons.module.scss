@@ -1,0 +1,16 @@
+.handleButtons {
+  display: flex;
+  gap: 0.5rem;
+
+  img {
+    cursor: pointer;
+  }
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+}

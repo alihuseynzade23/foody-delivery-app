@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { UserSession } from '../types/user';
-import { account } from '@org/shared';
 
 type AuthStore = {
   user: UserSession | null;
