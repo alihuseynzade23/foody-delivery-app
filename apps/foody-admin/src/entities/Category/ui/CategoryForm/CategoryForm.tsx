@@ -16,11 +16,15 @@ import { createCategory } from '../../model/services/createCategory/createCatego
 
 import { AddFormLayout } from '../../../Add';
 
+import { imageStore } from '@org/foody-shared-components';
+import { uploadImage } from '../../../../shared/utils/upload-image';
+
 export const CategoryForm = () => {
   const { t } = useTranslation('category');
   const { setClose } = addStore();
 
   const { addCategory } = categoryStore();
+  const { image } = imageStore();
 
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -33,6 +37,7 @@ export const CategoryForm = () => {
   const handleCreateCategory = async () => {
     try {
       const data = await createCategory(values.name);
+      uploadImage(image as File);
       setClose();
       // @ts-expect-error-next-line
       addCategory(data);

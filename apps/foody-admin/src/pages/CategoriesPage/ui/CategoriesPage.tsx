@@ -11,8 +11,7 @@ import { categoryStore } from '../model/store/categoryStore';
 import { Spinner } from '@org/foody-shared-components';
 
 import { Table } from 'antd';
-
-const { Column, ColumnGroup } = Table;
+import { getCategoryImages } from '../model/services/getCategoryImages/getCategoryImages';
 
 export const CategoriesPage = () => {
   const { t } = useTranslation('category');
@@ -23,6 +22,8 @@ export const CategoriesPage = () => {
       setIsLoading(true);
       try {
         const data = await getCategories();
+        const images = await getCategoryImages();
+        console.log(images, 'images');
         // @ts-expect-error-next-line
         setCategories(data);
       } catch (err) {
@@ -53,14 +54,9 @@ export const CategoriesPage = () => {
         <Spinner />
       ) : (
         <div className={styles.categoriesList}>
-          <Table dataSource={categories}>
-            {categories.map(category => (
-              // <CategoryItem key={category.$id} />
-              <>
-                <Column title="ID" />
-                <Column title="Name" />
-              </>
-            ))}
+          <Table dataSource={categories} rowKey={record => record.$id}>
+            <Table.Column title="ID" dataIndex="$id" key="$id" />
+            <Table.Column title="Name" dataIndex="name" key="name" />
           </Table>
         </div>
       )}

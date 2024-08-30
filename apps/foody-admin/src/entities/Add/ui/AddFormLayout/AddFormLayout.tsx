@@ -1,4 +1,4 @@
-import { Text, TextSize, TextTheme, TextWeight } from '@org/foody-shared-components';
+import { ImageUpload, Text, TextSize, TextTheme, TextWeight } from '@org/foody-shared-components';
 import { FC } from 'react';
 import { AddButtons } from '../AddButtons/AddButtons';
 
@@ -34,8 +34,7 @@ export const AddFormLayout: FC<AddFormLayoutProps> = ({
           <img onClick={setClose} src={closeSvg} alt="close" className={styles.closeIcon} />
         </div>
 
-        {/* <ImageUpload /> */}
-        <p>Our custom image upload component</p>
+        <ImageUpload theme="admin" />
         <div className={styles.formContainer}>
           <Text theme={TextTheme.DARK_GRAY} size={TextSize.L} weight={TextWeight.MEDIUM}>
             {subtitle}

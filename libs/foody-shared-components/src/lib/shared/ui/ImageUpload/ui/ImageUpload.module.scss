@@ -6,6 +6,14 @@
 
 .uploadContainer {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 .label {
@@ -19,9 +27,7 @@
 }
 
 .uploadBox {
-  width: 100%;
-  max-width: 640px;
-  height: 100px;
+  width: 50%;
   padding: 1.5rem;
   margin-top: 0.5rem;
   position: relative;
@@ -29,7 +35,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.75rem;
-  background-color: var(--tertiary-dark-gray); // Default for admin
+  background-color: var(--tertiary-dark-gray);
   opacity: 0.5;
 }
 
@@ -65,14 +71,12 @@
 }
 
 .adminTheme {
-
   .uploadBox {
     background-color: var(--tertiary-dark-gray);
   }
 }
 
 .clientTheme {
-
   .uploadBox {
     width: 130px;
     height: 130px;
@@ -83,10 +87,19 @@
   }
 
   .label {
-    color: #333; 
+    color: #333;
   }
 
-  .text{
+  .text {
     color: #696666;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .uploadContainer {
+    display: block;
+  }
+  .uploadBox {
+    width: 100%;
   }
 }

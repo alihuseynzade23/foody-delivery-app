@@ -24,3 +24,6 @@ export * from './lib/shared/lib/hooks/useModal';
 
 // Tests
 export * from './lib/shared/tests/componentRender/componentRender';
+
+// Global states
+export * from './lib/shared/lib/store/image';

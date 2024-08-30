@@ -1,4 +1,4 @@
-import { classNames, ImageUpload } from '@org/foody-shared-components';
+import { classNames } from '@org/foody-shared-components';
 import { addStore } from '../../model/store/add-store';
 import styles from './AddEntity.module.scss';
 import closeSvg from '../../../../shared/assets/close.svg';
@@ -24,7 +24,6 @@ export const AddEntity = () => {
         {type === 'category' && <CategoryForm />}
         {type === 'restaurant' && <div>Restaurants</div>}
         {type === 'order' && <div>Orders</div>}
-        <ImageUpload theme="client" />
       </div>
     </div>
   );

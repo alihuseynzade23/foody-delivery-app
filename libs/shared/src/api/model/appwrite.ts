@@ -1,4 +1,4 @@
-import { Client, Databases, Account, ID } from 'appwrite';
+import { Client, Databases, Account, ID, Storage } from 'appwrite';
 
 const client = new Client();
 
@@ -8,6 +8,7 @@ client
 
 export const account = new Account(client);
 export const database = new Databases(client);
+export const storage = new Storage(client);
 
 // const promise = database.createDocument(
 //   '66b9b3f2003b336eb466',
