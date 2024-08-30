@@ -13,12 +13,14 @@ export * from './lib/shared/ui/Button';
 export * from './lib/shared/ui/Spinner';
 export * from './lib/shared/ui/FullScreenLoading';
 export * from './lib/shared/ui/ImageUpload';
+export * from './lib/shared/ui/Modal';
 
 // Custom lib
 export * from './lib/shared/lib/classNames/classNames';
 
 // Hooks
 export * from './lib/shared/lib/hooks/useAuth';
+export * from './lib/shared/lib/hooks/useModal';
 
 // Tests
 export * from './lib/shared/tests/componentRender/componentRender';
