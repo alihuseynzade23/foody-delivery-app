@@ -1,8 +1,9 @@
 import { useState, ChangeEvent } from 'react';
 import styles from './ImageUpload.module.scss';
-import uploadAdmin from '../../../../../../../../apps/foody-admin/src/shared/assets/upload.svg';
-import uploadClient from '../../../../../../../../apps/foody-client/src/shared/assets/upload.svg';
+import uploadAdmin from '../../../assets/upload-admin.svg';
+import uploadClient from '../../../assets/upload-client.svg';
 import { Text, TextTheme } from '../../Text';
+import { imageStore } from '../../../lib/store/image';
 
 interface ImageUploadProps {
   labelName?: string;
@@ -10,20 +11,29 @@ interface ImageUploadProps {
   theme?: 'admin' | 'client';
 }
 
-export function ImageUpload({ labelName, className = '', theme = 'admin' }: ImageUploadProps) {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+export const ImageUpload = ({
+  labelName = 'Upload image',
+  className = '',
+  theme = 'admin',
+}: ImageUploadProps) => {
+  const { setImage } = imageStore();
+
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && file.type.startsWith('image/')) {
-      setSelectedFile(file);
+      setImage(file);
 
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
       fileReader.onload = () => {
         if (fileReader.result) {
-          setPreviewUrl(fileReader.result.toString());
+          const resultUrl = fileReader.result.toString();
+          setPreviewUrl(resultUrl);
+
+          // Store the image as a base64 string in localStorage
+          localStorage.setItem('foody-uploaded-image', resultUrl);
         }
       };
     }
@@ -33,13 +43,15 @@ export function ImageUpload({ labelName, className = '', theme = 'admin' }: Imag
 
   return (
     <div className={`${styles.fileUpload} ${themeClass} ${className}`}>
-      {previewUrl && (
-        <div className={styles.previewContainer}>
-          <img src={previewUrl} alt="Preview" />
-        </div>
-      )}
       <div className={styles.uploadContainer}>
-        <label className={styles.label}>{labelName}</label>
+        <div className={styles.imageContainer}>
+          <label className={styles.label}>{labelName}</label>
+          {previewUrl && (
+            <div className={styles.previewContainer}>
+              <img src={previewUrl} alt="Preview" />
+            </div>
+          )}
+        </div>
         <div className={styles.uploadBox}>
           <input
             type="file"
@@ -48,11 +60,15 @@ export function ImageUpload({ labelName, className = '', theme = 'admin' }: Imag
             onChange={handleFileChange}
           />
           <div className={styles.iconTextContainer}>
-            <img src={theme === 'client' ? uploadClient : uploadAdmin } className={styles.icon} alt="Upload Icon" />
+            <img
+              src={theme === 'client' ? uploadClient : uploadAdmin}
+              className={styles.icon}
+              alt="Upload Icon"
+            />
             <Text children="upload" theme={TextTheme.WHITE} className={styles.text} />
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
