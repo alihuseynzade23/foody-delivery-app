@@ -23,7 +23,6 @@ export const CategoriesPage = () => {
       try {
         const data = await getCategories();
         const images = await getCategoryImages();
-        console.log(images, 'images');
         // @ts-expect-error-next-line
         setCategories(data);
       } catch (err) {

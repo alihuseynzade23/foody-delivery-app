@@ -13,3 +13,13 @@
     }
   }
 }
+
+.childrenWrapper {
+  flex-direction: row-reverse;
+}
+
+@media screen and (max-width: 650px) {
+  .childrenWrapper {
+    flex-direction: column;
+  }
+}
