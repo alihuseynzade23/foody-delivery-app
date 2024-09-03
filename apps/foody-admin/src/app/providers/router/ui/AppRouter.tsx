@@ -10,6 +10,7 @@ import { BaseLayout } from '../../../layouts/BaseLayout';
 import { DashboardPage } from '../../../../pages/DashboardPage';
 import { ProductsPage } from '../../../../pages/ProductsPage';
 import { CategoriesPage } from '../../../../pages/CategoriesPage';
+import { RestaurantsPage } from '../../../../pages/RestaurantsPage';
 
 const ProtectedRoute: FC<{ children: ReactNode; header?: boolean }> = ({ children }) => {
   const { isLoggedIn } = useAuth();
@@ -42,6 +43,15 @@ export const AppRouter: FC = () => {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="restaurants"
+          element={
+            <ProtectedRoute>
+              <RestaurantsPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="categories"
           element={
@@ -50,6 +60,7 @@ export const AppRouter: FC = () => {
             </ProtectedRoute>
           }
         />
+
         <Route path="*" element={<NotFoundPage title={t`Page not found`} />} />
       </Routes>
     </Suspense>
