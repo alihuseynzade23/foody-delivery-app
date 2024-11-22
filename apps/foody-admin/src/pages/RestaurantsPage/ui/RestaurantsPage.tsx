@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { addCb } from '../../../entities/Add';
 
-import { getCategories } from '../../CategoriesPage';
+// import { getCategories } from '../../CategoriesPage';
 import { useEffect, useState } from 'react';
 
 export const RestaurantsPage = () => {
@@ -16,7 +16,7 @@ export const RestaurantsPage = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const data = await getCategories();
+        // const data = await getCategories();
         // @ts-expect-error-next-line
         setState(data);
       } catch (err) {

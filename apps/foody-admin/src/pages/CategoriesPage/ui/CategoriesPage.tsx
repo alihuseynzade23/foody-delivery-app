@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { addCb } from '../../../entities/Add';
 import { useEffect } from 'react';
-import { getCategories } from '../model/services/getCategories/getCategories';
+// import { getCategories } from '../model/services/getCategories/getCategories';
 import { categoryStore } from '../model/store/categoryStore';
 
 import { Spinner } from '@org/foody-shared-components';
@@ -21,7 +21,7 @@ export const CategoriesPage = () => {
     const fetchCategories = async () => {
       setIsLoading(true);
       try {
-        const data = await getCategories();
+        // const data = await getCategories();
         const images = await getCategoryImages();
         // @ts-expect-error-next-line
         setCategories(data);
