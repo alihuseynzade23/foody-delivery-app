@@ -19,7 +19,7 @@ export * from './lib/shared/ui/Modal';
 export * from './lib/shared/lib/classNames/classNames';
 
 // Hooks
-export * from './lib/shared/lib/hooks/useAuth';
+// export * from './lib/shared/lib/hooks/useAuth';
 export * from './lib/shared/lib/hooks/useModal';
 
 // Tests

@@ -1,10 +1,15 @@
-// import authStore from '../store/auth';
+import authStore from '../store/auth';
 // import toast from 'react-hot-toast';
 
-// export const useAuth = () => {
-//   const { isLoading, isLoggedIn, setIsLoggedIn, setIsLoading, setUser, user } = authStore();
+export const useAuth = () => {
+
+  const { isLoading, isLoggedIn, setIsLoggedIn, setIsLoading, setUser, user } = authStore();
 
 //   const navigate = (url: string) => (window.location.href = url);
+
+conts register = (email: string, password: string, cb: () => void) => {
+    
+}
 
 //   const login = (email: string, password: string) => {
 //     setIsLoading(true);
@@ -116,4 +121,4 @@
 //     initialCheck,
 //     user,
 //   };
-// };
+};

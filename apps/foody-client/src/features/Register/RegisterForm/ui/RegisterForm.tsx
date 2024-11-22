@@ -1,4 +1,6 @@
-import { Button, ButtonSize, ButtonTheme, Input, Spinner, useAuth } from '@org/foody-shared-components';
+import { Button, ButtonSize, ButtonTheme, Input, Spinner, 
+  // useAuth 
+} from '@org/foody-shared-components';
 import styles from './RegisterForm.module.scss';
 import { useFormik } from 'formik';
 import { registerSchema } from '@org/shared';
@@ -13,7 +15,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
   const { t, i18n } = useTranslation();
 
   const lang = i18n.language;
-  const { register, isLoading } = useAuth();
+  // const { register, isLoading } = useAuth();
 
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -29,7 +31,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
   const cb = () => setAuthPage('login');
 
   const handleRegister = () => {
-    register(values.email, values.password, cb);
+    // register(values.email, values.password, cb);
   };
 
   return (
@@ -39,7 +41,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         labelClassName={styles.label}
         label={t`Full name`}
         value={values.fullName}
-        disabled={isLoading}
+        // disabled={isLoading}
         name="fullName"
         onChange={handleChange}
         type="text"
@@ -50,7 +52,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         inputClassName={styles.input}
         labelClassName={styles.label}
         value={values.username}
-        disabled={isLoading}
+        // disabled={isLoading}
         name="username"
         onChange={handleChange}
         label="Username"
@@ -62,7 +64,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         inputClassName={styles.input}
         labelClassName={styles.label}
         value={values.email}
-        disabled={isLoading}
+        // disabled={isLoading}
         name="email"
         onChange={handleChange}
         label="Email"
@@ -74,7 +76,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         inputClassName={styles.input}
         labelClassName={styles.label}
         value={values.password}
-        disabled={isLoading}
+        // disabled={isLoading}
         name="password"
         onChange={handleChange}
         label={t`Password`}
@@ -84,7 +86,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
       />
       <Button type="submit" size={ButtonSize.L} className={styles.btn} theme={ButtonTheme.BG_RED}>
         {/* {t('Register')} */}
-        {isLoading ? <Spinner /> : t('Register')}
+        {/* {isLoading ? <Spinner /> : t('Register')} */}
       </Button>
     </form>
   );
