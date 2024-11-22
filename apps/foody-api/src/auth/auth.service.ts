@@ -5,7 +5,11 @@ import { Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDto } from './dto/auth.dto';
 import { compare, genSalt, hash } from 'bcryptjs';
-import { USER_NOT_FOUND_ERROR, WRONG_PASSWORD_ERROR } from './auth.constants';
+import {
+  INVALID_REFRESH_TOKEN_ERROR,
+  USER_NOT_FOUND_ERROR,
+  WRONG_PASSWORD_ERROR,
+} from './auth.constants';
 
 @Injectable()
 export class AuthService {
@@ -40,7 +44,6 @@ export class AuthService {
     }
     return { email: user.email, role: user.role };
   }
-  
 
   async login(email: string) {
     const user = await this.findUser(email);
@@ -48,9 +51,33 @@ export class AuthService {
       throw new UnauthorizedException(USER_NOT_FOUND_ERROR);
     }
     const payload = { email: user.email, role: user.role };
+    const access_token = await this.jwtService.signAsync(payload, { expiresIn: '15m' });
+    const refresh_token = await this.jwtService.signAsync(payload, { expiresIn: '7d' });
+
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token,
+      refresh_token,
     };
   }
 
+  async validateRefreshToken(refreshToken: string): Promise<{ email: string; role: string }> {
+    try {
+      return this.jwtService.verify(refreshToken);
+    } catch (error) {
+      throw new UnauthorizedException(INVALID_REFRESH_TOKEN_ERROR);
+    }
+  }
+
+  async generateNewAccessToken(refreshToken: string) {
+    const decoded = await this.validateRefreshToken(refreshToken);
+
+    const newAccessToken = await this.jwtService.signAsync(
+      { email: decoded.email, role: decoded.role },
+      { expiresIn: '15m' },
+    );
+
+    return {
+      access_token: newAccessToken,
+    };
+  }
 }
