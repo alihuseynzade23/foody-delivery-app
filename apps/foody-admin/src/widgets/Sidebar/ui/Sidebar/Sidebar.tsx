@@ -1,4 +1,6 @@
-import { classNames, Text, useAuth } from '@org/foody-shared-components';
+import { classNames, Text, 
+  // useAuth 
+} from '@org/foody-shared-components';
 
 import styles from './Sidebar.module.scss';
 
@@ -17,7 +19,7 @@ interface SidebarProps {
 export const Sidebar: FC<SidebarProps> = ({ className }) => {
   const { t } = useTranslation();
 
-  const { logout } = useAuth();
+  // const { logout } = useAuth();
 
   const itemsList = useMemo(
     () => SidebarItemsList.map(item => <SidebarItem item={item} key={item.path} />),
@@ -27,7 +29,8 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
   return (
     <div className={classNames(styles.Sidebar, {}, [className])}>
       {itemsList}
-      <div className={styles.logout} onClick={logout}>
+      {/* <div className={styles.logout} onClick={logout}> */}
+      <div className={styles.logout}>
         <img height={24} width={24} src={logoutIcon} alt="logout" />
         <Text>{t`Logout`}</Text>
       </div>

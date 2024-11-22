@@ -1,5 +1,7 @@
 import { FC, useEffect, useMemo, useState } from 'react';
-import { classNames, Logo, LogoTheme, Text, useAuth } from '@org/foody-shared-components';
+import { classNames, Logo, LogoTheme, Text, 
+  // useAuth 
+} from '@org/foody-shared-components';
 import styles from './SidebarResponsive.module.scss';
 import { useTranslation } from 'react-i18next';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
@@ -17,7 +19,7 @@ export const SidebarResponsive: FC<SidebarResponsiveProps> = ({ onClose, classNa
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
-  const { logout } = useAuth();
+  // const { logout } = useAuth();
 
   const handleClose = () => {
     setIsVisible(false);
@@ -57,7 +59,8 @@ export const SidebarResponsive: FC<SidebarResponsiveProps> = ({ onClose, classNa
           <Logo theme={LogoTheme.PRIMARY} />
         </div>
         {itemsList}
-        <div className={styles.logout} onClick={logout}>
+        {/* <div className={styles.logout} onClick={logout}> */}
+        <div className={styles.logout}>
           <img height={24} width={24} src={logoutIcon} alt="logout" />
           <Text>{t`Logout`}</Text>
         </div>

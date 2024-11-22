@@ -9,7 +9,7 @@ import {
   TextTheme,
   TextFont,
   TextWeight,
-  useAuth,
+  // useAuth,
 } from '@org/foody-shared-components';
 
 import styles from './LoginForm.module.scss';
@@ -26,7 +26,7 @@ export const LoginForm = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
-  const { adminLogin, isLoading } = useAuth();
+  // const { adminLogin, isLoading } = useAuth();
 
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -38,7 +38,7 @@ export const LoginForm = () => {
   });
 
   const handleLogin = () => {
-    adminLogin(values.email, values.password);
+    // adminLogin(values.email, values.password);
   };
 
   return (
@@ -56,7 +56,7 @@ export const LoginForm = () => {
         <Input
           error={errors.email && touched.email ? errors.email : undefined}
           name="email"
-          disabled={isLoading}
+          // disabled={isLoading}
           onChange={handleChange}
           inputClassName={styles.input}
           value={values.email}
@@ -67,7 +67,7 @@ export const LoginForm = () => {
           error={errors.password && touched.password ? errors.password : undefined}
           name="password"
           onChange={handleChange}
-          disabled={isLoading}
+          // disabled={isLoading}
           inputClassName={styles.input}
           value={values.password}
           theme={InputTheme.BG_ADMIN}
@@ -81,11 +81,11 @@ export const LoginForm = () => {
         size={ButtonSize.XL}
         className={styles.loginBtn}
       >
-        {isLoading ? (
+        {/* {isLoading ? (
           <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
         ) : (
           t('Sign in')
-        )}
+        )} */}
       </Button>
     </form>
   );
