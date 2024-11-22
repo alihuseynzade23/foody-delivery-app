@@ -4,7 +4,7 @@ import {
   classNames,
   Input,
   LangSwitcherTheme,
-  useAuth,
+  // useAuth,
 } from '@org/foody-shared-components';
 
 import styles from './Navbar.module.scss';
@@ -26,7 +26,7 @@ interface NavbarProps {
 export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
   const { t } = useTranslation();
 
-  const { isLoggedIn } = useAuth();
+  // const { isLoggedIn } = useAuth();
 
   const itemsList = useMemo(
     () => NavbarItemList.map(item => <NavbarItem item={item} key={item.path} />),
@@ -57,7 +57,7 @@ export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
           inputWrapperClassName={styles.inputWrapper}
         />
         <LangSwitcher theme={LangSwitcherTheme.CLEAR} />
-        {isLoggedIn ? (
+        {/* {isLoggedIn ? (
           <>
             <p>basket icon</p>
             <p>profile icon</p>
@@ -66,7 +66,7 @@ export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
           <Button theme={ButtonTheme.BG_RED} className={styles.btn} size={ButtonSize.M}>
             {t`Sign Up`}
           </Button>
-        )}
+        )} */}
       </div>
     </div>
   );

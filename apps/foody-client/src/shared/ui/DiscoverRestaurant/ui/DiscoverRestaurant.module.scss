@@ -10,39 +10,36 @@
   img {
     width: 15%;
   }
+}
 
-  .discoveryContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.discoveryContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    div {
-      text-align: center;
-      width: 30%;
-    }
-    .exploreBtn {
-      border-radius: 20px;
-      border: none;
-      padding: 0.6rem 0;
-      width: 150px;
-      font-weight: normal;
-      margin-top: 2rem;
-    }
+  div {
+    text-align: center;
+    width: 30%;
+  }
+  .exploreBtn {
+    border-radius: 20px;
+    border: none;
+    padding: 0.6rem 0;
+    width: 150px;
+    font-weight: normal;
+    margin-top: 2rem;
   }
 }
 
 @media (max-width: 650px) {
-
   .discoverRestaurants {
     width: 90%;
     .discoveryContent {
       img {
         display: none;
       }
-      justify-content: center;
-     
-      div{
-        width:100%;
+      div {
+        width: 100%;
       }
     }
   }

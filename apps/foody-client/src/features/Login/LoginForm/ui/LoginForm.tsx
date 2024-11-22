@@ -4,7 +4,7 @@ import {
   ButtonTheme,
   Input,
   Spinner,
-  useAuth,
+  // useAuth,
 } from '@org/foody-shared-components';
 import styles from './LoginForm.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +15,7 @@ export const LoginForm = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
-  const { login, isLoading } = useAuth();
+  // const { login, isLoading } = useAuth();
 
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -27,7 +27,7 @@ export const LoginForm = () => {
   });
 
   const handleLogin = () => {
-    login(values.email, values.password);
+    // login(values.email, values.password);
   };
 
   return (
@@ -37,7 +37,7 @@ export const LoginForm = () => {
         labelClassName={styles.label}
         label="Email"
         value={values.email}
-        disabled={isLoading}
+        // disabled={isLoading}
         onChange={handleChange}
         name="email"
         type="text"
@@ -49,7 +49,7 @@ export const LoginForm = () => {
         labelClassName={styles.label}
         value={values.password}
         onChange={handleChange}
-        disabled={isLoading}
+        // disabled={isLoading}
         name="password"
         label={t`Password`}
         type="password"
@@ -58,7 +58,7 @@ export const LoginForm = () => {
       />
       <Button type="submit" size={ButtonSize.L} className={styles.btn} theme={ButtonTheme.BG_RED}>
         {/* {t`Login`} */}
-        {isLoading ? <Spinner /> : t`Login`}
+        {/* {isLoading ? <Spinner /> : t`Login`} */}
       </Button>
     </form>
   );
