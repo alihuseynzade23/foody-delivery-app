@@ -9,7 +9,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto/auth.dto';
+import { AuthDto } from './dto/user.dto';
 import {
   ALREADY_REGISTERED_ERROR,
   NOT_ADMIN_ERROR,

@@ -2,8 +2,11 @@ import { Suspense, FC, ReactNode } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { LoginPage } from '../../../../pages/LoginPage';
-import { FullScreenLoading, NotFoundPage, 
-  // useAuth 
+import {
+  FullScreenLoading,
+  NotFoundPage,
+  // useAuth
+  authStore,
 } from '@org/foody-shared-components';
 import { useTranslation } from 'react-i18next';
 
@@ -15,11 +18,11 @@ import { CategoriesPage } from '../../../../pages/CategoriesPage';
 import { RestaurantsPage } from '../../../../pages/RestaurantsPage';
 
 const ProtectedRoute: FC<{ children: ReactNode; header?: boolean }> = ({ children }) => {
-  // const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = authStore();
 
-  // if (!isLoggedIn) {
-  //   return <LoginPage />;
-  // }
+  if (!isLoggedIn) {
+    return <LoginPage />;
+  }
   return <BaseLayout>{children}</BaseLayout>;
 };
 

@@ -3,13 +3,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './user.model';
 import { Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
-import { AuthDto } from './dto/auth.dto';
 import { compare, genSalt, hash } from 'bcryptjs';
 import {
   INVALID_REFRESH_TOKEN_ERROR,
   USER_NOT_FOUND_ERROR,
   WRONG_PASSWORD_ERROR,
 } from './auth.constants';
+import { AuthDto } from './dto/user.dto';
 
 @Injectable()
 export class AuthService {

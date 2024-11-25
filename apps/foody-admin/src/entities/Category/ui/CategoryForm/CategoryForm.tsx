@@ -7,7 +7,6 @@ import { useFormik } from 'formik';
 
 import { addStore } from '../../../Add';
 
-import toast from 'react-hot-toast';
 
 import { createCategorySchema } from '../../model/validations/createCategory';
 import { categoryStore } from '../../../../pages/CategoriesPage';
@@ -31,21 +30,22 @@ export const CategoryForm = () => {
       name: '',
     },
     validationSchema: createCategorySchema(t`Name is required`),
-    onSubmit: () => handleCreateCategory(),
+    // onSubmit: () => handleCreateCategory(),
+    onSubmit: () => console.log('log'),
   });
 
-  const handleCreateCategory = async () => {
-    try {
-      const data = await createCategory(values.name);
-      uploadImage(image as File);
-      setClose();
-      // @ts-expect-error-next-line
-      addCategory(data);
-      toast.success('Category created successfully');
-    } catch (err: any) {
-      toast.error(err.message);
-    }
-  };
+  // const handleCreateCategory = async () => {
+  //   try {
+  //     const data = await createCategory(values.name);
+  //     uploadImage(image as File);
+  //     setClose();
+  //     // @ts-expect-error-next-line
+  //     addCategory(data);
+  //     toast.success('Category created successfully');
+  //   } catch (err: any) {
+  //     toast.error(err.message);
+  //   }
+  // };
 
   return (
     <AddFormLayout

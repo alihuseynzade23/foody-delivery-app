@@ -5,17 +5,23 @@ import {
   Input,
   Spinner,
   // useAuth,
+  loginSchema,
+  useLogin,
+  authStore,
 } from '@org/foody-shared-components';
 import styles from './LoginForm.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { loginSchema } from '@org/shared';
+import { notification } from 'antd';
 
 export const LoginForm = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
-
-  // const { login, isLoading } = useAuth();
+  const loginMutation = useLogin();
+  const { setIsLoggedIn } = authStore();
+  // const {
+  // login,
+  // isLoading } = useAuth();
 
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -26,8 +32,18 @@ export const LoginForm = () => {
     onSubmit: () => handleLogin(),
   });
 
-  const handleLogin = () => {
-    // login(values.email, values.password);
+  const handleLogin = async () => {
+    try {
+      await loginMutation.mutateAsync({
+        login: values.email,
+        password: values.password,
+      });
+      setIsLoggedIn(true);
+    } catch (error: any) {
+      notification.error({
+        message: error?.response.data.message || 'An error occurred during registration',
+      });
+    }
   };
 
   return (
@@ -37,7 +53,7 @@ export const LoginForm = () => {
         labelClassName={styles.label}
         label="Email"
         value={values.email}
-        // disabled={isLoading}
+        disabled={loginMutation.isPending}
         onChange={handleChange}
         name="email"
         type="text"
@@ -49,7 +65,7 @@ export const LoginForm = () => {
         labelClassName={styles.label}
         value={values.password}
         onChange={handleChange}
-        // disabled={isLoading}
+        disabled={loginMutation.isPending}
         name="password"
         label={t`Password`}
         type="password"
@@ -57,8 +73,7 @@ export const LoginForm = () => {
         error={errors.password && touched.password ? errors.password : undefined}
       />
       <Button type="submit" size={ButtonSize.L} className={styles.btn} theme={ButtonTheme.BG_RED}>
-        {/* {t`Login`} */}
-        {/* {isLoading ? <Spinner /> : t`Login`} */}
+        {loginMutation.isPending ? <Spinner /> : t`Login`}
       </Button>
     </form>
   );

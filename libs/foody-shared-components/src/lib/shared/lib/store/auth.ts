@@ -20,4 +20,4 @@ const authStore = create<AuthStore>(set => ({
   setIsLoggedIn: value => set({ isLoggedIn: value }),
 }));
 
-export default authStore;
+export { authStore };

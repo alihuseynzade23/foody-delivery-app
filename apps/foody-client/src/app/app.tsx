@@ -1,7 +1,7 @@
-import { Toaster } from 'react-hot-toast';
 import { AppRouter } from './providers/router';
-import { FullScreenLoading, 
-  // useAuth 
+import {
+  FullScreenLoading,
+  // useAuth
 } from '@org/foody-shared-components';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -19,12 +19,7 @@ export function App() {
   //   return <FullScreenLoading text={t('Loading')} />;
   // }
 
-  return (
-    <>
-      <AppRouter />
-      <Toaster />
-    </>
-  );
+  return <AppRouter />;
 }
 
 export default App;

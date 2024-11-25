@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { FullScreenLoading, NotFoundPage, 
   // useAuth 
+  authStore
 } from '@org/foody-shared-components';
 import { useTranslation } from 'react-i18next';
 
@@ -14,11 +15,11 @@ import { RestaurantsPage } from '../../../../pages/RestaurantsPage';
 import { ProfilePage } from '../../../../pages/ProfilePage';
 
 const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
-  // const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = authStore();
 
-  // if (!isLoggedIn) {
-  //   return <AuthPage />;
-  // }
+  if (!isLoggedIn) {
+    return <AuthPage />;
+  }
 
   return <BaseLayout>{children}</BaseLayout>;
 };
@@ -37,6 +38,7 @@ export const AppRouter: FC = () => {
             </BaseLayout>
           }
         />
+        <Route path="/auth" element={<AuthPage />} />
         <Route
           path="/restaurants"
           element={

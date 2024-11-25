@@ -19,7 +19,9 @@ export * from './lib/shared/ui/Modal';
 export * from './lib/shared/lib/classNames/classNames';
 
 // Hooks
-// export * from './lib/shared/lib/hooks/useAuth';
+export * from './lib/shared/lib/hooks/useAuth';
+export * from './lib/shared/lib/hooks/useRegister';
+export * from './lib/shared/lib/hooks/useLogin';
 export * from './lib/shared/lib/hooks/useModal';
 
 // Tests
@@ -27,3 +29,11 @@ export * from './lib/shared/tests/componentRender/componentRender';
 
 // Global states
 export * from './lib/shared/lib/store/image';
+export * from './lib/shared/lib/store/auth'
+
+// Validation
+export * from './lib/shared/lib/validations/register';
+export * from './lib/shared/lib/validations/login';
+
+// DTOs
+// export * from '../../../apps/foody-api/src/auth/dto/user.dto';
