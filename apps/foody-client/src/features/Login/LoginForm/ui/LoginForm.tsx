@@ -6,19 +6,18 @@ import {
   Spinner,
   // useAuth,
   loginSchema,
-  useLogin,
-  authStore,
 } from '@org/foody-shared-components';
 import styles from './LoginForm.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { notification } from 'antd';
 
+import { useLogin } from '../model/hooks/useLogin';
+
 export const LoginForm = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
   const loginMutation = useLogin();
-  const { setIsLoggedIn } = authStore();
   // const {
   // login,
   // isLoading } = useAuth();
@@ -34,14 +33,21 @@ export const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
+      // const response = await loginMutation.mutateAsync({
+      //   login: values.email,
+      //   password: values.password,
+      // });
       await loginMutation.mutateAsync({
         login: values.email,
         password: values.password,
       });
-      setIsLoggedIn(true);
+
+      // if (response) {
+      //   localStorage.setItem('@foody_user', JSON.stringify(response.data.user));
+      // }
     } catch (error: any) {
       notification.error({
-        message: error?.response.data.message || 'An error occurred during registration',
+        message: error?.response?.data?.message || 'An error occurred during registration',
       });
     }
   };
@@ -72,7 +78,13 @@ export const LoginForm = () => {
         placeholder={t`Password`}
         error={errors.password && touched.password ? errors.password : undefined}
       />
-      <Button type="submit" size={ButtonSize.L} className={styles.btn} theme={ButtonTheme.BG_RED}>
+      <Button
+        type="submit"
+        size={ButtonSize.L}
+        className={styles.btn}
+        disabled={loginMutation.isPending}
+        theme={ButtonTheme.BG_RED}
+      >
         {loginMutation.isPending ? <Spinner /> : t`Login`}
       </Button>
     </form>

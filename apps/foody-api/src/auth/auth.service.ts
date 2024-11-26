@@ -5,7 +5,9 @@ import { Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
 import { compare, genSalt, hash } from 'bcryptjs';
 import {
+  INVALID_ACCESS_TOKEN_ERROR,
   INVALID_REFRESH_TOKEN_ERROR,
+  // TOKEN_EXPIRED_ERROR,
   USER_NOT_FOUND_ERROR,
   WRONG_PASSWORD_ERROR,
 } from './auth.constants';
@@ -25,6 +27,8 @@ export class AuthService {
       email: dto.login,
       passwordHash: await hash(dto.password, salt),
       role: dto.role || 'user',
+      username: dto.username,
+      fullName: dto.fullName,
     });
     return newUser.save();
   }
@@ -57,6 +61,7 @@ export class AuthService {
     return {
       access_token,
       refresh_token,
+      user,
     };
   }
 
@@ -79,5 +84,25 @@ export class AuthService {
     return {
       access_token: newAccessToken,
     };
+  }
+
+  async getUserFromToken(accessToken: string) {
+    try {
+      const { email } = await this.jwtService.verifyAsync(accessToken);
+
+      if (!email) {
+        throw new UnauthorizedException(INVALID_ACCESS_TOKEN_ERROR);
+      }
+
+      const user = await this.findUser(email);
+
+      if (!user) {
+        throw new UnauthorizedException(USER_NOT_FOUND_ERROR);
+      }
+
+      return user;
+    } catch (error: unknown) {
+      throw new UnauthorizedException(INVALID_ACCESS_TOKEN_ERROR);
+    }
   }
 }

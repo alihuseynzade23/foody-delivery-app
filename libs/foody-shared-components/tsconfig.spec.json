@@ -21,5 +21,5 @@
     "../../libs/shared/src/**/*.ts",
     "src/lib/**/**/**/*.ts",
     "src/lib/**/**/**/*.tsx"
-  ]
+, "../../apps/foody-client/src/features/Login/LoginForm/model/api/user-login.tsx", "../../apps/foody-client/src/features/Register/RegisterForm/model/hooks/useRegister.ts", "../../apps/foody-client/src/features/Login/LoginForm/model/hooks/useLogin.ts"  ]
 }

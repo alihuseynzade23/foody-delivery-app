@@ -4,8 +4,6 @@ import {
   ButtonTheme,
   Input,
   Spinner,
-  useAuth,
-  useRegister,
   registerSchema,
 } from '@org/foody-shared-components';
 import styles from './RegisterForm.module.scss';
@@ -14,6 +12,8 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { FC } from 'react';
 import { notification } from 'antd';
+
+import { useRegister } from '../model/hooks/useRegister';
 
 interface RegisterFormProps {
   setAuthPage: (page: string) => void;
@@ -42,6 +42,8 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
       await registerMutation.mutateAsync({
         login: values.email,
         password: values.password,
+        username: values.username,
+        fullName: values.fullName,
       });
       setAuthPage('login');
       notification.success({
@@ -104,7 +106,13 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         placeholder={t`Password`}
         error={errors.password && touched.password ? errors.password : undefined}
       />
-      <Button type="submit" size={ButtonSize.L} className={styles.btn} theme={ButtonTheme.BG_RED}>
+      <Button
+        type="submit"
+        size={ButtonSize.L}
+        className={styles.btn}
+        disabled={registerMutation.isPending}
+        theme={ButtonTheme.BG_RED}
+      >
         {registerMutation.isPending ? <Spinner /> : t('Register')}
       </Button>
     </form>

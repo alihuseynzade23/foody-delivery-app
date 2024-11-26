@@ -8,7 +8,7 @@ import {
   TextWeight,
   Text,
   TextTheme,
-  // useAuth,
+  useAuth,
 } from '@org/foody-shared-components';
 import styles from './Sidebar.module.scss';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
@@ -26,7 +26,7 @@ interface SidebarProps {
 export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, user } = useAuth();
 
   const { t } = useTranslation();
 
@@ -39,10 +39,10 @@ export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
     setIsVisible(true);
   }, []);
 
-  // const itemsList = useMemo(() => {
-  //   const baseItems: SidebarItemType[] = isLoggedIn ? registeredUserItems : SidebarItemsList;
-  //   return baseItems.map(item => <SidebarItem onClose={onClose} item={item} key={item.path} />);
-  // }, [isLoggedIn]);
+  const itemsList = useMemo(() => {
+    const baseItems: SidebarItemType[] = isLoggedIn ? registeredUserItems : SidebarItemsList;
+    return baseItems.map(item => <SidebarItem onClose={onClose} item={item} key={item.path} />);
+  }, [isLoggedIn]);
 
   return (
     <div className={styles.sideBarContainer}>
@@ -62,7 +62,7 @@ export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
           onClick={handleClose}
         />
 
-        {/* {isLoggedIn ? (
+        {isLoggedIn ? (
           <div className={styles.userInfo}>
             <img
               src={userIcon}
@@ -72,7 +72,7 @@ export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
               style={{ cursor: 'pointer', marginRight: '8px' }}
             />
             <Text size={TextSize.XL} weight={TextWeight.MEDIUM} theme={TextTheme.BLACK}>
-              User
+              {user?.fullName}
             </Text>
           </div>
         ) : (
@@ -81,16 +81,16 @@ export const Sidebar: FC<SidebarProps> = ({ onClose, className }) => {
               Sign up
             </Button>
           </Link>
-        )} */}
+        )}
 
-        {/* <div className={styles.itemList}>{itemsList}</div>
+        <div className={styles.itemList}>{itemsList}</div>
         {isLoggedIn && (
           <Button onClick={logout} className={styles.logout}>
             <Text size={TextSize.XL} weight={TextWeight.MEDIUM} theme={TextTheme.CLEAR}>
               {t`Logout`}
             </Text>
           </Button>
-        )} */}
+        )}
       </div>
     </div>
   );

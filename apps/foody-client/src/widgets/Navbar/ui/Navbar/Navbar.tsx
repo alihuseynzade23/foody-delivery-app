@@ -4,7 +4,7 @@ import {
   classNames,
   Input,
   LangSwitcherTheme,
-  // useAuth,
+  useAuth,
 } from '@org/foody-shared-components';
 
 import styles from './Navbar.module.scss';
@@ -17,6 +17,10 @@ import { NavbarItem } from '../NavbarItem/NavbarItem';
 import { useTranslation } from 'react-i18next';
 
 import burgerIconBlack from '../../../../shared/assets/burger-icon-black.svg';
+import basketIcon from '../../../../shared/assets/basket.svg';
+import userIcon from '../../../../shared/assets/user.svg';
+
+import { useNavigate } from 'react-router-dom';
 
 interface NavbarProps {
   className?: string;
@@ -26,7 +30,9 @@ interface NavbarProps {
 export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
   const { t } = useTranslation();
 
-  // const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth();
+
+  const navigate = useNavigate();
 
   const itemsList = useMemo(
     () => NavbarItemList.map(item => <NavbarItem item={item} key={item.path} />),
@@ -57,16 +63,21 @@ export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
           inputWrapperClassName={styles.inputWrapper}
         />
         <LangSwitcher theme={LangSwitcherTheme.CLEAR} />
-        {/* {isLoggedIn ? (
+        {isLoggedIn ? (
           <>
-            <p>basket icon</p>
-            <p>profile icon</p>
+            <img src={basketIcon} alt="basket" className={styles.basketIcon} />
+            <img src={userIcon} alt="basket" className={styles.userIcon} />
           </>
         ) : (
-          <Button theme={ButtonTheme.BG_RED} className={styles.btn} size={ButtonSize.M}>
+          <Button
+            onClick={() => navigate('/profile')}
+            theme={ButtonTheme.BG_RED}
+            className={styles.btn}
+            size={ButtonSize.M}
+          >
             {t`Sign Up`}
           </Button>
-        )} */}
+        )}
       </div>
     </div>
   );

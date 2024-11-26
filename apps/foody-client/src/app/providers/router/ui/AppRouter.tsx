@@ -1,9 +1,11 @@
 import { Suspense, FC, ReactNode } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { FullScreenLoading, NotFoundPage, 
-  // useAuth 
-  authStore
+import {
+  FullScreenLoading,
+  NotFoundPage,
+  useAuth,
+  // authStore
 } from '@org/foody-shared-components';
 import { useTranslation } from 'react-i18next';
 
@@ -15,7 +17,7 @@ import { RestaurantsPage } from '../../../../pages/RestaurantsPage';
 import { ProfilePage } from '../../../../pages/ProfilePage';
 
 const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
-  const { isLoggedIn } = authStore();
+  const { isLoggedIn } = useAuth();
 
   if (!isLoggedIn) {
     return <AuthPage />;
@@ -26,7 +28,7 @@ const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
 
 export const AppRouter: FC = () => {
   const { t } = useTranslation();
-
+ 
   return (
     <Suspense fallback={<FullScreenLoading text={t`Loading`} />}>
       <Routes>
@@ -38,7 +40,6 @@ export const AppRouter: FC = () => {
             </BaseLayout>
           }
         />
-        <Route path="/auth" element={<AuthPage />} />
         <Route
           path="/restaurants"
           element={
@@ -55,6 +56,13 @@ export const AppRouter: FC = () => {
             </ProtectedRoute>
           }
         />
+        {/* <Route
+          path='/user'
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          } */}
 
         <Route path="*" element={<NotFoundPage title={t`Page not found`} />} />
       </Routes>
