@@ -1,13 +1,13 @@
 import { create } from 'zustand';
-import { UserSession } from '../types/user';
+import { User } from '../types/user';
 
 type AuthStore = {
-  user: UserSession | null;
+  user: User | null;
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
   isLoggedIn: boolean;
   setIsLoggedIn: (value: boolean) => void;
-  setUser: (user: UserSession | null) => void;
+  setUser: (user: User | null) => void;
 };
 
 const authStore = create<AuthStore>(set => ({
@@ -20,4 +20,4 @@ const authStore = create<AuthStore>(set => ({
   setIsLoggedIn: value => set({ isLoggedIn: value }),
 }));
 
-export default authStore;
+export { authStore };

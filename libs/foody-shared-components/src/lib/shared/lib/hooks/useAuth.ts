@@ -1,124 +1,111 @@
-import authStore from '../store/auth';
-// import toast from 'react-hot-toast';
+import { apiClient } from '../../../api/api-client';
+import { authStore } from '../store/auth';
+import axios from 'axios';
 
 export const useAuth = () => {
-
   const { isLoading, isLoggedIn, setIsLoggedIn, setIsLoading, setUser, user } = authStore();
 
-//   const navigate = (url: string) => (window.location.href = url);
+  const handleTokens = (accessToken: string, refreshToken: string) => {
+    localStorage.setItem('access_token', accessToken);
+    localStorage.setItem('refresh_token', refreshToken);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+  };
 
-conts register = (email: string, password: string, cb: () => void) => {
-    
-}
+  const logout = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+    setUser(null);
+    setIsLoading(false);
+  };
 
-//   const login = (email: string, password: string) => {
-//     setIsLoading(true);
-//     account
-//       .createEmailPasswordSession(email, password)
-//       .then(res => {
-//         setIsLoggedIn(true);
-//         localStorage.setItem('foody_user', JSON.stringify(res));
-//         setUser(res);
-//       })
-//       .catch(handleError)
-//       .finally(() => setIsLoading(false));
-//   };
+  const refreshAccessToken = async () => {
+    try {
+      const refreshToken = localStorage.getItem('refresh_token');
+      if (!refreshToken) {
+        logout();
+        return;
+      }
 
-//   const adminLogin = (email: string, password: string) => {
-//     setIsLoading(true);
-//     account
-//       .createEmailPasswordSession(email, password)
-//       .then(res => {
-//         if (res.userId == (import.meta as any).env.VITE_ADMIN_USER_ID) {
-//           setIsLoggedIn(true);
-//           localStorage.setItem('foody_user', JSON.stringify(res));
-//           setUser(res);
-//         } else {
-//           handleError(new Error('Unauthorized'));
-//         }
-//       })
-//       .catch(handleError)
-//       .finally(() => setIsLoading(false));
-//   };
+      const response = await apiClient.post('/auth/refresh', {
+        refreshToken,
+      });
 
-//   const register = (email: string, password: string, cb: () => void) => {
-//     setIsLoading(true);
-//     account
-//       .create(ID.unique(), email, password)
-//       .then(res => {
-//         cb();
-//       })
-//       .catch(handleError)
-//       .finally(() => setIsLoading(false));
-//   };
+      const { accessToken, refreshToken: newRefreshToken } = response.data;
+      handleTokens(accessToken, newRefreshToken);
+    } catch (error) {
+      console.error('Error refreshing access token:', error);
+      logout();
+    }
+  };
 
-//   const logout = async () => {
-//     setIsLoading(true);
-//     try {
-//       await account.deleteSessions();
-//       localStorage.clear();
-//       setUser(null);
-//       navigate('/');
-//     } catch (error: any) {
-//       handleError(error);
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
+  const setupInterceptors = () => {
+    axios.interceptors.request.use(
+      config => {
+        const accessToken = localStorage.getItem('access_token');
+        if (accessToken) {
+          config.headers['Authorization'] = `Bearer ${accessToken}`;
+        }
+        return config;
+      },
+      error => {
+        return Promise.reject(error);
+      },
+    );
 
-//   const adminInitialCheck = async () => {
-//     setIsLoading(true);
-//     account
-//       .getSession('current')
-//       .then(res => {
-//         if (res.userId === (import.meta as any).env.VITE_ADMIN_USER_ID) {
-//           localStorage.setItem('foody_user', JSON.stringify(res));
-//           setUser(res);
-//           setIsLoggedIn(true);
-//         } else {
-//           setIsLoggedIn(false);
-//           localStorage.clear();
-//         }
-//       })
-//       .catch(error => {
-//         console.error(error);
-//         setIsLoggedIn(false);
-//       })
-//       .finally(() => setIsLoading(false));
-//   };
+    axios.interceptors.response.use(
+      response => response,
+      async error => {
+        const originalRequest = error.config;
 
-//   const initialCheck = async () => {
-//     setIsLoading(true);
-//     account
-//       .getSession('current')
-//       .then(res => {
-//         localStorage.setItem('foody_user', JSON.stringify(res));
-//         setUser(res);
-//         setIsLoggedIn(true);
-//       })
-//       .catch(error => {
-//         console.error(error);
-//         setIsLoggedIn(false);
-//       })
-//       .finally(() => setIsLoading(false));
-//   };
+        if (error.response?.status === 401 && !originalRequest._retry) {
+          originalRequest._retry = true;
+          await refreshAccessToken();
+          return axios(originalRequest);
+        }
 
-//   const handleError = (err: Error) => {
-//     console.error(err);
-//     toast.error(err.message);
-//     setUser(null);
-//     setIsLoading(false);
-//   };
+        return Promise.reject(error);
+      },
+    );
+  };
 
-//   return {
-//     login,
-//     adminInitialCheck,
-//     adminLogin,
-//     register,
-//     logout,
-//     isLoggedIn,
-//     isLoading,
-//     initialCheck,
-//     user,
-//   };
+  const initialCheck = async () => {
+    setIsLoggedIn(true);
+    const accessToken = localStorage.getItem('access_token');
+    const refreshToken = localStorage.getItem('refresh_token');
+    if (!accessToken) {
+      logout();
+      setIsLoggedIn(false);
+      return;
+    }
+
+    if (!user) {
+      setIsLoading(true);
+      try {
+        const accessToken = localStorage.getItem('access_token');
+        const response = await apiClient.get('/auth/me', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        setUser(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        setIsLoading(false);
+      }
+    }
+  };
+
+  return {
+    handleTokens,
+    logout,
+    initialCheck,
+    refreshAccessToken,
+    setupInterceptors,
+    isLoggedIn,
+    setUser,
+    isLoading,
+    user,
+    setIsLoggedIn,
+  };
 };

@@ -9,24 +9,26 @@ import {
   TextTheme,
   TextFont,
   TextWeight,
-  // useAuth,
+  loginSchema,
+  useAuth,
 } from '@org/foody-shared-components';
 
 import styles from './LoginForm.module.scss';
 import { useTranslation } from 'react-i18next';
 
-import { loginSchema } from '@org/shared';
-
 import { useFormik } from 'formik';
 
 import { LoadingOutlined } from '@ant-design/icons';
-import { Spin } from 'antd';
+import { notification, Spin } from 'antd';
+import { useAdminLogin } from '../model/hooks/useAdminLogin';
 
 export const LoginForm = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
-  // const { adminLogin, isLoading } = useAuth();
+  const adminLoginMutation = useAdminLogin();
+
+  const { isLoading } = useAuth();
 
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -37,8 +39,21 @@ export const LoginForm = () => {
     onSubmit: () => handleLogin(),
   });
 
-  const handleLogin = () => {
-    // adminLogin(values.email, values.password);
+  const handleLogin = async () => {
+    try {
+      // const response = await adminLoginMutation.mutateAsync({
+      //   login: values.email,
+      //   password: values.password
+      // })
+      await adminLoginMutation.mutateAsync({
+        login: values.email,
+        password: values.password,
+      });
+    } catch (error: any) {
+      notification.error({
+        message: error?.response?.data?.message || 'An error occurred during registration',
+      });
+    }
   };
 
   return (
@@ -81,11 +96,11 @@ export const LoginForm = () => {
         size={ButtonSize.XL}
         className={styles.loginBtn}
       >
-        {/* {isLoading ? (
+        {isLoading ? (
           <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
         ) : (
           t('Sign in')
-        )} */}
+        )}
       </Button>
     </form>
   );

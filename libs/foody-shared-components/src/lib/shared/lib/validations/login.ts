@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { yupTranslations } from '../../utils/yup-translations';
+import { yupTranslations } from '../../../utils/yup-translations';
 
 export const loginSchema = (lang: string) => {
   const t = (path: string) => {

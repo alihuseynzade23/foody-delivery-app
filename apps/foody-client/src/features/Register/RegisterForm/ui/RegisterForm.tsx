@@ -1,11 +1,19 @@
-import { Button, ButtonSize, ButtonTheme, Input, Spinner, 
-  // useAuth 
+import {
+  Button,
+  ButtonSize,
+  ButtonTheme,
+  Input,
+  Spinner,
+  registerSchema,
 } from '@org/foody-shared-components';
 import styles from './RegisterForm.module.scss';
 import { useFormik } from 'formik';
-import { registerSchema } from '@org/shared';
+// import { registerSchema } from '@org/shared';
 import { useTranslation } from 'react-i18next';
 import { FC } from 'react';
+import { notification } from 'antd';
+
+import { useRegister } from '../model/hooks/useRegister';
 
 interface RegisterFormProps {
   setAuthPage: (page: string) => void;
@@ -16,6 +24,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
 
   const lang = i18n.language;
   // const { register, isLoading } = useAuth();
+  const registerMutation = useRegister();
 
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -28,10 +37,23 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
     onSubmit: () => handleRegister(),
   });
 
-  const cb = () => setAuthPage('login');
-
-  const handleRegister = () => {
-    // register(values.email, values.password, cb);
+  const handleRegister = async () => {
+    try {
+      await registerMutation.mutateAsync({
+        login: values.email,
+        password: values.password,
+        username: values.username,
+        fullName: values.fullName,
+      });
+      setAuthPage('login');
+      notification.success({
+        message: 'Registration successful!',
+      });
+    } catch (error: any) {
+      notification.error({
+        message: error?.response.data.message || 'An error occurred during registration',
+      });
+    }
   };
 
   return (
@@ -41,7 +63,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         labelClassName={styles.label}
         label={t`Full name`}
         value={values.fullName}
-        // disabled={isLoading}
+        disabled={registerMutation.isPending}
         name="fullName"
         onChange={handleChange}
         type="text"
@@ -52,7 +74,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         inputClassName={styles.input}
         labelClassName={styles.label}
         value={values.username}
-        // disabled={isLoading}
+        disabled={registerMutation.isPending}
         name="username"
         onChange={handleChange}
         label="Username"
@@ -67,9 +89,9 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         // disabled={isLoading}
         name="email"
         onChange={handleChange}
-        label="Email"
+        label="email"
         type="text"
-        placeholder="Email"
+        placeholder="email"
         error={errors.email && touched.email ? errors.email : undefined}
       />
       <Input
@@ -84,9 +106,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setAuthPage }) => {
         placeholder={t`Password`}
         error={errors.password && touched.password ? errors.password : undefined}
       />
-      <Button type="submit" size={ButtonSize.L} className={styles.btn} theme={ButtonTheme.BG_RED}>
-        {/* {t('Register')} */}
-        {/* {isLoading ? <Spinner /> : t('Register')} */}
+      <Button
+        type="submit"
+        size={ButtonSize.L}
+        className={styles.btn}
+        disabled={registerMutation.isPending}
+        theme={ButtonTheme.BG_RED}
+      >
+        {registerMutation.isPending ? <Spinner /> : t('Register')}
       </Button>
     </form>
   );

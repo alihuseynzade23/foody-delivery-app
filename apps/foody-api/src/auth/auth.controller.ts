@@ -2,16 +2,19 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Get,
   Post,
   UnauthorizedException,
+  Headers,
   // UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto/auth.dto';
+import { AuthDto } from './dto/user.dto';
 import {
   ALREADY_REGISTERED_ERROR,
+  INVALID_ACCESS_TOKEN_ERROR,
   NOT_ADMIN_ERROR,
   REFRESH_TOKEN_REQUIRED_ERROR,
 } from './auth.constants';
@@ -64,5 +67,15 @@ export class AuthController {
       throw new UnauthorizedException(REFRESH_TOKEN_REQUIRED_ERROR);
     }
     return this.authService.generateNewAccessToken(refreshToken);
+  }
+
+  @Get('me')
+  async getUser(@Headers('authorization') authorization: string) {
+    if (!authorization || !authorization.startsWith('Bearer ')) {
+      throw new UnauthorizedException(INVALID_ACCESS_TOKEN_ERROR);
+    }
+
+    const accessToken = authorization.split(' ')[1];
+    return this.authService.getUserFromToken(accessToken);
   }
 }

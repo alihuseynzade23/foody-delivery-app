@@ -63,9 +63,17 @@
   }
 }
 
+.basketIcon {
+  cursor: pointer;
+}
+
+.userIcon {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 650px) {
-  .Navbar{
-    margin-top:0;
+  .Navbar {
+    margin-top: 0;
   }
   .burgerMenu {
     display: block;
@@ -82,6 +90,14 @@
   }
 
   .btn {
+    display: none;
+  }
+
+  .basketIcon {
+    display: none;
+  }
+  
+  .userIcon {
     display: none;
   }
 }
