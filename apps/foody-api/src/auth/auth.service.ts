@@ -73,7 +73,7 @@ export class AuthService {
     }
   }
 
-  async generateNewAccessToken(refreshToken: string) {
+  async generateNewTokens(refreshToken: string) {
     const decoded = await this.validateRefreshToken(refreshToken);
 
     const newAccessToken = await this.jwtService.signAsync(
@@ -81,8 +81,14 @@ export class AuthService {
       { expiresIn: '15m' },
     );
 
+    const newRefreshToken = await this.jwtService.signAsync(
+      { email: decoded.email, role: decoded.role },
+      { expiresIn: '7d' },
+    );
+
     return {
       access_token: newAccessToken,
+      refresh_token: newRefreshToken,
     };
   }
 

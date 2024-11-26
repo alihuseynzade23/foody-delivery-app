@@ -66,7 +66,7 @@ export class AuthController {
     if (!refreshToken) {
       throw new UnauthorizedException(REFRESH_TOKEN_REQUIRED_ERROR);
     }
-    return this.authService.generateNewAccessToken(refreshToken);
+    return this.authService.generateNewTokens(refreshToken);
   }
 
   @Get('me')

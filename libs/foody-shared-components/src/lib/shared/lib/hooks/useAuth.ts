@@ -1,14 +1,15 @@
 import { apiClient } from '../../../api/api-client';
 import { authStore } from '../store/auth';
-import axios from 'axios';
 
 export const useAuth = () => {
   const { isLoading, isLoggedIn, setIsLoggedIn, setIsLoading, setUser, user } = authStore();
 
   const handleTokens = (accessToken: string, refreshToken: string) => {
     localStorage.setItem('access_token', accessToken);
-    localStorage.setItem('refresh_token', refreshToken);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+    if (refreshToken) {
+      localStorage.setItem('refresh_token', refreshToken);
+    }
+    apiClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
   };
 
   const logout = () => {
@@ -27,11 +28,12 @@ export const useAuth = () => {
       }
 
       const response = await apiClient.post('/auth/refresh', {
-        refreshToken,
+        refresh_token: refreshToken,
       });
 
-      const { accessToken, refreshToken: newRefreshToken } = response.data;
-      handleTokens(accessToken, newRefreshToken);
+      const { access_token, refresh_token } = response.data;
+
+      handleTokens(access_token, refresh_token);
     } catch (error) {
       console.error('Error refreshing access token:', error);
       logout();
@@ -39,7 +41,7 @@ export const useAuth = () => {
   };
 
   const setupInterceptors = () => {
-    axios.interceptors.request.use(
+    apiClient.interceptors.request.use(
       config => {
         const accessToken = localStorage.getItem('access_token');
         if (accessToken) {
@@ -52,15 +54,15 @@ export const useAuth = () => {
       },
     );
 
-    axios.interceptors.response.use(
+    apiClient.interceptors.response.use(
       response => response,
       async error => {
         const originalRequest = error.config;
 
-        if (error.response?.status === 401 && !originalRequest._retry) {
+        if (error.response?.data?.statusCode === 401 && !originalRequest._retry) {
           originalRequest._retry = true;
           await refreshAccessToken();
-          return axios(originalRequest);
+          return apiClient(originalRequest);
         }
 
         return Promise.reject(error);
@@ -71,7 +73,6 @@ export const useAuth = () => {
   const initialCheck = async () => {
     setIsLoggedIn(true);
     const accessToken = localStorage.getItem('access_token');
-    const refreshToken = localStorage.getItem('refresh_token');
     if (!accessToken) {
       logout();
       setIsLoggedIn(false);
