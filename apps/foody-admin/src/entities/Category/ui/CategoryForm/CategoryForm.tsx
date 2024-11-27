@@ -7,16 +7,17 @@ import { useFormik } from 'formik';
 
 import { addStore } from '../../../Add';
 
-
 import { createCategorySchema } from '../../model/validations/createCategory';
 import { categoryStore } from '../../../../pages/CategoriesPage';
 
-import { createCategory } from '../../model/services/createCategory/createCategory';
+import { createCategory } from '../../model/services/createCategory/create-category';
 
 import { AddFormLayout } from '../../../Add';
 
 import { imageStore } from '@org/foody-shared-components';
 import { uploadImage } from '../../../../shared/utils/upload-image';
+import { useCategory } from '../../model/hooks/useCategory';
+import { notification } from 'antd';
 
 export const CategoryForm = () => {
   const { t } = useTranslation('category');
@@ -25,28 +26,40 @@ export const CategoryForm = () => {
   const { addCategory } = categoryStore();
   const { image } = imageStore();
 
+  const { createCategory } = useCategory();
+
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues: {
       name: '',
     },
     validationSchema: createCategorySchema(t`Name is required`),
-    // onSubmit: () => handleCreateCategory(),
-    onSubmit: () => console.log('log'),
+    onSubmit: () => handleCreateCategory(),
+    // onSubmit: () => console.log('test'),
   });
 
-  // const handleCreateCategory = async () => {
-  //   try {
-  //     const data = await createCategory(values.name);
-  //     uploadImage(image as File);
-  //     setClose();
-  //     // @ts-expect-error-next-line
-  //     addCategory(data);
-  //     toast.success('Category created successfully');
-  //   } catch (err: any) {
-  //     toast.error(err.message);
-  //   }
-  // };
-
+  const handleCreateCategory = async () => {
+    try {
+      // Call the createCategory mutation
+      await createCategory.mutateAsync({
+        name: values.name,
+        image, // Pass the image file
+      });
+  
+      // Close the modal or reset the form
+      setClose();
+  
+      // React Query will refetch the categories after this
+      notification.success({
+        message: t`Category created successfully`,
+      });
+    } catch (err: any) {
+      notification.error({
+        message: t`Category creation failed`,
+        description: err.message || 'An error occurred while creating the category.',
+      });
+    }
+  };
+  
   return (
     <AddFormLayout
       title={t`Add Category`}
