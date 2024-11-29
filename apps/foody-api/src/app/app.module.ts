@@ -19,6 +19,7 @@ import { FilesModule } from './files/files.module';
         )}/${configService.get('MONGO_AUTHDATABASE')}`,
       }),
     }),
+    
     AuthModule,
     CategoryModule,
     FilesModule,

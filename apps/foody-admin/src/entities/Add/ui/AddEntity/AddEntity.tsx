@@ -1,11 +1,11 @@
 import { classNames } from '@org/foody-shared-components';
-import { addStore } from '../../model/store/add-store';
 import styles from './AddEntity.module.scss';
 import closeSvg from '../../../../shared/assets/close.svg';
 import { CategoryForm } from '../../../Category';
+import { useAddStore } from '../../model/store/add-store';
 
 export const AddEntity = () => {
-  const { type, isOpen, setClose } = addStore();
+  const { type, isOpen, setClose } = useAddStore();
 
   return (
     <div

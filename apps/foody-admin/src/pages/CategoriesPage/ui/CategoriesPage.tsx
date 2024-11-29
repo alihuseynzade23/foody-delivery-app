@@ -4,18 +4,19 @@ import { HeaderBar } from '../../../widgets/HeaderBar';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { Spinner } from '@org/foody-shared-components';
-import { Table } from 'antd';
+import { notification, Table } from 'antd';
 import { useCategory } from '../../../entities/Category';
-import { addCb } from '../../../entities/Add';
 import { useQuery } from '@tanstack/react-query';
-
-// import image from '/apps/foody-admin/src/shared/assets/uploads/2024-11-27/cat';
+import { useAddStore } from '../../../entities/Add';
+import { HandleButtons } from '../../../features/handleProduct/ui/HandleButtons';
 
 export const CategoriesPage = () => {
   const { t } = useTranslation('category');
 
-  const { fetchCategories } = useCategory();
+  const { fetchCategories, deleteCategory } = useCategory();
   const { data: categories, isLoading, error } = useQuery(fetchCategories);
+
+  const { setType, setIsOpen, setId } = useAddStore();
 
   if (isLoading) {
     return <Spinner />;
@@ -31,6 +32,31 @@ export const CategoriesPage = () => {
     );
   }
 
+  const handleSidebarOpening = () => {
+    setType('category');
+    setIsOpen(true);
+  };
+
+  const handleDeleteCategory = async (id: string) => {
+    try {
+      await deleteCategory.mutateAsync(id);
+
+      notification.success({
+        message: t`Category deleted successfully`,
+      });
+    } catch (e: any) {
+      notification.error({
+        message: t`Category deletion failed`,
+        description: e.message || 'An error occurred while creating the category.',
+      });
+    }
+  };
+
+  const handleEditCategory = async (id: string) => {
+    handleSidebarOpening();
+    setId(id);
+  };
+
   return (
     <div>
       <Helmet>
@@ -38,7 +64,7 @@ export const CategoriesPage = () => {
         <meta name="description" content="Categories page" />
       </Helmet>
       <HeaderBar title={t('Category')}>
-        <Button onClick={addCb('category')} add>
+        <Button onClick={handleSidebarOpening} add>
           <Text weight={TextWeight.BOLD} size={TextSize.M}>
             {t('ADD CATEGORY')}
           </Text>
@@ -46,16 +72,30 @@ export const CategoriesPage = () => {
       </HeaderBar>
 
       <div className={styles.categoriesList}>
-        {/* <img src={image} alt="Category" style={{ width: '50px', height: '50px' }} /> */}
         <Table dataSource={categories || []} rowKey={record => record._id}>
-          <Table.Column title="ID" dataIndex="_id" key="_id" />
+          <Table.Column
+            title="ID"
+            dataIndex="_id"
+            key="_id"
+            render={text => {
+              return <p>{text.slice(0, 4)}</p>;
+            }}
+          />
           <Table.Column title="Name" dataIndex="name" key="name" />
           <Table.Column
             title="Image"
             dataIndex="image"
             key="image"
-            render={text => (
-              <img src={text} alt="Category" style={{ width: '50px', height: '50px' }} />
+            render={url => {
+              return <img src={url} alt="Category" style={{ width: '80px', height: '50px' }} />;
+            }}
+          />
+          <Table.Column
+            render={record => (
+              <HandleButtons
+                onEdit={() => handleEditCategory(record._id)}
+                onDelete={() => handleDeleteCategory(record._id)}
+              />
             )}
           />
         </Table>

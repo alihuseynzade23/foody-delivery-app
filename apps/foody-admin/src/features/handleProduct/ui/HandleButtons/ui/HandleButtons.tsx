@@ -9,7 +9,8 @@ import { FC } from 'react';
 type HandleButtonsProps = {
   className?: string;
   display?: string;
-  onClick: () => void;
+  onDelete: () => void;
+  onEdit: () => void;
 };
 
 export enum HandleButtonsDisplay {
@@ -18,7 +19,7 @@ export enum HandleButtonsDisplay {
 }
 
 export const HandleButtons: FC<HandleButtonsProps> = props => {
-  const { display = HandleButtonsDisplay.ROW, className, onClick } = props;
+  const { display = HandleButtonsDisplay.ROW, className, onDelete, onEdit } = props;
 
   const { openModal, isModalOpen } = useModal();
 
@@ -27,9 +28,9 @@ export const HandleButtons: FC<HandleButtonsProps> = props => {
   };
   return (
     <div className={classNames(styles.handleButtons, mods, [className])}>
-      <img src={editIcon} alt="edit" />
+      <img onClick={onEdit} src={editIcon} alt="edit" />
       <img src={deleteIcon} onClick={openModal} alt="delete" />
-      {isModalOpen && <Modal onClick={onClick} />}
+      {isModalOpen && <Modal onClick={onDelete} />}
     </div>
   );
 };

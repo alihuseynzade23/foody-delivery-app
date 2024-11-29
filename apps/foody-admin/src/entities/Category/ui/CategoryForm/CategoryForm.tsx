@@ -1,70 +1,77 @@
-import { Input, InputTheme } from '@org/foody-shared-components';
-import styles from './AddCategoryForm.module.scss';
+import { Input, InputTheme, Spinner } from '@org/foody-shared-components';
+import styles from './CategoryForm.module.scss';
 
-// import { AddFormLayout } from '../AddFormLayout/AddFormLayout';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 
-import { addStore } from '../../../Add';
+import { useAddStore } from '../../../Add';
 
 import { createCategorySchema } from '../../model/validations/createCategory';
-import { categoryStore } from '../../../../pages/CategoriesPage';
-
-import { createCategory } from '../../model/services/createCategory/create-category';
 
 import { AddFormLayout } from '../../../Add';
 
 import { imageStore } from '@org/foody-shared-components';
-import { uploadImage } from '../../../../shared/utils/upload-image';
 import { useCategory } from '../../model/hooks/useCategory';
 import { notification } from 'antd';
+import useGetCategory from '../../model/hooks/useGetOneCategory';
+import { useEffect } from 'react';
 
 export const CategoryForm = () => {
   const { t } = useTranslation('category');
-  const { setClose } = addStore();
+  const { setClose, id } = useAddStore();
 
-  const { addCategory } = categoryStore();
-  const { image } = imageStore();
+  const { data: category, isLoading } = useGetCategory(id);
+  const { image, setImage, setImageUrl } = imageStore();
 
   const { createCategory } = useCategory();
 
-  const { values, errors, touched, handleChange, handleSubmit } = useFormik({
+  const { values, errors, touched, handleChange, handleSubmit, setValues } = useFormik({
     initialValues: {
       name: '',
     },
     validationSchema: createCategorySchema(t`Name is required`),
-    onSubmit: () => handleCreateCategory(),
-    // onSubmit: () => console.log('test'),
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        await createCategory.mutateAsync({
+          name: values.name,
+          image,
+        });
+
+        resetForm();
+        setClose();
+        setImage(null);
+
+        notification.success({
+          message: t`Category created successfully`,
+        });
+      } catch (err: any) {
+        notification.error({
+          message: t`Category creation failed`,
+          description: err.message || 'An error occurred while creating the category.',
+        });
+      }
+    },
   });
 
-  const handleCreateCategory = async () => {
-    try {
-      // Call the createCategory mutation
-      await createCategory.mutateAsync({
-        name: values.name,
-        image, // Pass the image file
+  useEffect(() => {
+    if (category) {
+      setValues({
+        name: category.name,
       });
-  
-      // Close the modal or reset the form
-      setClose();
-  
-      // React Query will refetch the categories after this
-      notification.success({
-        message: t`Category created successfully`,
-      });
-    } catch (err: any) {
-      notification.error({
-        message: t`Category creation failed`,
-        description: err.message || 'An error occurred while creating the category.',
-      });
+      setImage(category.image);
+      setImageUrl(category.image);
     }
-  };
-  
+  }, [category, setValues, setImageUrl, setImage]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <AddFormLayout
       title={t`Add Category`}
       subtitle={t`Add category information`}
-      buttonText={t`Create Category`}
+      buttonText={id ? t`Update Category` : t`Create Category`}
       onSubmit={handleSubmit}
     >
       <div className={styles.container}>

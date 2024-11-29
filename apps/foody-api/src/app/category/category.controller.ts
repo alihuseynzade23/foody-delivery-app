@@ -28,12 +28,6 @@ export class CategoryController {
     private readonly filesService: FilesService,
   ) {}
 
-  @Get(':id')
-  @UseGuards(JwtAuthGuard)
-  async getOne(@Param('id') id: string) {
-    return this.categoryService.getCategoryById(id);
-  }
-
   @Post('create')
   @UseInterceptors(FileInterceptor('image'))
   @UseGuards(JwtAuthGuard)
@@ -58,6 +52,12 @@ export class CategoryController {
     return await this.categoryService.getAllCategories();
   }
 
+  @Get(':id')
+  @UseGuards(JwtAuthGuard)
+  async getOne(@Param('id') id: string) {
+    return this.categoryService.getCategoryById(id);
+  }
+
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
@@ -76,6 +76,5 @@ export class CategoryController {
     if (!deletedCategory) {
       throw new NotFoundException(CATEGORY_NOT_FOUND_ERROR);
     }
-    return { message: 'Category deleted successfully', deletedCategory };
   }
 }
