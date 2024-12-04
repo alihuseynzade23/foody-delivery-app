@@ -3,6 +3,7 @@ import styles from './AddEntity.module.scss';
 import closeSvg from '../../../../shared/assets/close.svg';
 import { CategoryForm } from '../../../Category';
 import { useAddStore } from '../../model/store/add-store';
+import { RestaurantForm } from '../../../Restaurant/ui/RestaurantForm/RestaurantForm';
 
 export const AddEntity = () => {
   const { type, isOpen, setClose } = useAddStore();
@@ -22,7 +23,7 @@ export const AddEntity = () => {
       <div className={styles.wrapper}>
         {type === 'product' && <div>Add products</div>}
         {type === 'category' && <CategoryForm />}
-        {type === 'restaurant' && <div>Restaurants</div>}
+        {type === 'restaurant' && <RestaurantForm />}
         {type === 'order' && <div>Orders</div>}
       </div>
     </div>

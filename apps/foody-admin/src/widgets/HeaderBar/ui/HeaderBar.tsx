@@ -18,12 +18,14 @@ export const HeaderBar: FC<HeaderBarProps> = ({ title, children, select, selectO
         <Text weight={TextWeight.MEDIUM} size={TextSize.L} className={styles.title}>
           {title}
         </Text>
-        <Flex gap="2rem" className={styles.childrenWrapper}>
+        <Flex align='center' gap="2rem" className={styles.childrenWrapper}>
           {children}
           {select && (
             <Select
               fieldNames={{ label: 'name', value: 'name' }}
-              defaultValue="Select"
+              defaultValue="Category"
+              variant='filled'
+              className={styles.select}
               options={selectOptions}
             />
           )}
