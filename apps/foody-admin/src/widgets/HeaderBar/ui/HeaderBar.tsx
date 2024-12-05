@@ -6,12 +6,19 @@ import { Flex, Select } from 'antd';
 
 interface HeaderBarProps {
   title: string;
-  children: any;
+  children?: any;
   select?: boolean;
   selectOptions?: any;
+  defaultValue?: string;
 }
 
-export const HeaderBar: FC<HeaderBarProps> = ({ title, children, select, selectOptions }) => {
+export const HeaderBar: FC<HeaderBarProps> = ({
+  title,
+  children,
+  select,
+  selectOptions,
+  defaultValue,
+}) => {
   return (
     <header className={styles.container}>
       <div className={styles.wrapper}>
@@ -23,7 +30,7 @@ export const HeaderBar: FC<HeaderBarProps> = ({ title, children, select, selectO
           {select && (
             <Select
               fieldNames={{ label: 'name', value: 'name' }}
-              defaultValue="Select"
+              defaultValue={defaultValue ? defaultValue : 'Select'}
               options={selectOptions}
             />
           )}
