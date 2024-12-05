@@ -1,7 +1,7 @@
 export type Restaurant = {
   _id?: string;
   name: string;
-  image: File | null;
+  image: string;
   cuisine: string;
   price: number;
   deliveryTime: number;

@@ -5,39 +5,35 @@ import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { useAddStore } from '../../../entities/Add';
 
-// import { getCategories } from '../../CategoriesPage';
 import { useQuery } from '@tanstack/react-query';
+import { RestaurantItem, useRestaurant } from '../../../entities/Restaurant';
+import { Restaurant } from '../../../entities/Restaurant/model/types/restaurant';
 import { useCategory } from '../../../entities/Category';
-import { RestaurantItem } from '../../../entities/Restaurant';
-import { Restaurant } from '../../../entities/Restaurant';
+import { useState } from 'react';
 
 export const RestaurantsPage = () => {
   const { t } = useTranslation('restaurant');
+  const { fetchRestaurants } = useRestaurant();
   const { fetchCategories } = useCategory();
-  const { data: categories, isLoading, error } = useQuery(fetchCategories);
-
-  // const [state, setState] = useState([]);
+  const { data: restaurants, isLoading, error } = useQuery(fetchRestaurants);
+  const { data: categories } = useQuery(fetchCategories);
 
   const { setIsOpen, setType } = useAddStore();
 
-  // useEffect(() => {
-  //   const fetchCategories = async () => {
-  //     try {
-  //       // const data = await getCategories();
-  //       // @ts-expect-error-next-line
-  //       setState(data);
-  //     } catch (err) {
-  //       console.error('Error fetching categories:', err);
-  //     }
-  //   };
-
-  //   fetchCategories();
-  // }, []);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleAdding = () => {
     setIsOpen(true);
     setType('restaurant');
   };
+
+  const handleCategoryChange = (value: string) => {
+    setSelectedCategory(value);
+  };
+
+  const filteredRestaurants = selectedCategory
+    ? restaurants?.filter((restaurant: Restaurant) => restaurant.categoryId === selectedCategory)
+    : restaurants;
 
   if (isLoading) {
     <Spinner />;
@@ -60,17 +56,23 @@ export const RestaurantsPage = () => {
         <meta name="description" content="Restaurants page" />
       </Helmet>
 
-      <HeaderBar selectOptions={categories || []} select title={t('Restaurant')}>
+      <HeaderBar
+        onSelectChange={handleCategoryChange}
+        selectOptions={categories || []}
+        select
+        title={t('Restaurant')}
+      >
         <Button onClick={handleAdding} add>
           <Text weight={TextWeight.BOLD} size={TextSize.M}>
             {t('ADD RESTAURANT')}
           </Text>
         </Button>
       </HeaderBar>
-
-      {categories.map((item: Restaurant) => (
-        <RestaurantItem key={item._id} data={item} />
-      ))}
+      <div className={styles.restaurantsWrapper}>
+        {filteredRestaurants?.map((item: Restaurant) => (
+          <RestaurantItem key={item._id} data={item} />
+        ))}
+      </div>
     </div>
   );
 };

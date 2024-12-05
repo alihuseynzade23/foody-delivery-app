@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createRestaurant } from '../services/createRestaurant/create-restaurant';
-import { getCategoriesQuery } from '../services/getCategories/get-categories';
-import { deleteCategory } from '../services/deleteCategory/delet-category';
+import { getRestaurantsQuery } from '../services/getRestaurants/get-restaurants';
+import { deleteRestaurant } from '../services/deleteRestaurant/delet-restaurant';
 // import { updateCategory } from '../services/updateCategory/update-category';
 
 export const useRestaurant = () => {
@@ -17,13 +17,13 @@ export const useRestaurant = () => {
     },
   });
 
-  // Delete a category
-  const deleteCategoryMutation = useMutation({
-    mutationFn: deleteCategory.mutationFn,
-    mutationKey: deleteCategory.mutationKey,
+  // Delete a restaurant
+  const deleteRestaurantMutation = useMutation({
+    mutationFn: deleteRestaurant.mutationFn,
+    mutationKey: deleteRestaurant.mutationKey,
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
+      queryClient.invalidateQueries({ queryKey: ['restaurants'] });
     },
   });
 
@@ -34,11 +34,11 @@ export const useRestaurant = () => {
   // });
 
   return {
-    // fetchCategories,
+    fetchRestaurants: getRestaurantsQuery,
     // fetchCategoryById,
-    fetchCategories: getCategoriesQuery,
     createRestaurant: createRestaurantMutation,
-    deleteCategory: deleteCategoryMutation,
+    // deleteCategory: deleteCategoryMutation,
+    deleteRestaurant: deleteRestaurantMutation,
     // updateCategory: updateCategoryMutation,
     // getCategory: getOneCategoryQuery,
     // updateCategory: updateCategoryMutation,

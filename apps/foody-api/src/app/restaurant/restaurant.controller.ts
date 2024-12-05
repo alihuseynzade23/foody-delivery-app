@@ -45,7 +45,7 @@ export class RestaurantController {
   }
 
   @Get('all')
-//   @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async getAll() {
     return this.restaurantService.getAllRestaurants();
   }
