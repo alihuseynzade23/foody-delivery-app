@@ -87,9 +87,6 @@ export class CategoryController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   async delete(@Param('id') id: string) {
-    const deletedCategory = await this.categoryService.deleteCategory(id);
-    if (!deletedCategory) {
-      throw new NotFoundException(CATEGORY_NOT_FOUND_ERROR);
-    }
+    return await this.categoryService.deleteCategory(id);
   }
 }

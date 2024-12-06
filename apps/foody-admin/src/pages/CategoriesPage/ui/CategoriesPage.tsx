@@ -9,6 +9,8 @@ import { useCategory } from '../../../entities/Category';
 import { useQuery } from '@tanstack/react-query';
 import { useAddStore } from '../../../entities/Add';
 import { HandleButtons } from '../../../features/handleProduct/ui/HandleButtons';
+import { useCallback } from 'react';
+import { Category } from '../../../entities/Category/model/types/category';
 
 export const CategoriesPage = () => {
   const { t } = useTranslation('category');
@@ -16,7 +18,36 @@ export const CategoriesPage = () => {
   const { fetchCategories, deleteCategory } = useCategory();
   const { data: categories, isLoading, error } = useQuery(fetchCategories);
 
-  const { setType, setIsOpen, setId } = useAddStore();
+  const { setType, setIsOpen, setId, id: categoryId } = useAddStore();
+
+  const handleDeleteCategory = async (id: string) => {
+    console.log(id, 'delete id');
+    setId(id);
+
+    // try {
+    //   await deleteCategory.mutateAsync(id);
+
+    //   notification.success({
+    //     message: t`Category deleted successfully`,
+    //   });
+    // } catch (e: any) {
+    //   notification.error({
+    //     message: t`Category deletion failed`,
+    //     description: e.message || 'An error occurred while creating the category.',
+    //   });
+    // }
+  };
+
+  const handleSidebarOpening = (type: string) => {
+    setType(type);
+    setIsOpen(true);
+  };
+
+  const handleEditCategory = (id: string) => {
+    console.log(id, 'edit id');
+    // handleSidebarOpening('updateCategory');
+    // setId(id);
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -31,31 +62,6 @@ export const CategoriesPage = () => {
       </div>
     );
   }
-
-  const handleSidebarOpening = (type: string) => {
-    setType(type);
-    setIsOpen(true);
-  };
-
-  const handleDeleteCategory = async (id: string) => {
-    try {
-      await deleteCategory.mutateAsync(id);
-
-      notification.success({
-        message: t`Category deleted successfully`,
-      });
-    } catch (e: any) {
-      notification.error({
-        message: t`Category deletion failed`,
-        description: e.message || 'An error occurred while creating the category.',
-      });
-    }
-  };
-
-  const handleEditCategory = async (id: string) => {
-    handleSidebarOpening('updateCategory');
-    setId(id);
-  };
 
   return (
     <div>
@@ -91,10 +97,10 @@ export const CategoriesPage = () => {
             }}
           />
           <Table.Column
-            render={record => (
+            render={(category: Category) => (
               <HandleButtons
-                onEdit={() => handleEditCategory(record._id)}
-                onDelete={() => handleDeleteCategory(record._id)}
+                onDelete={() => handleDeleteCategory(category._id)}
+                onEdit={() => handleEditCategory(category._id)}
               />
             )}
           />
