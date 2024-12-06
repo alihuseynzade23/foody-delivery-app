@@ -32,8 +32,8 @@ export const CategoriesPage = () => {
     );
   }
 
-  const handleSidebarOpening = () => {
-    setType('category');
+  const handleSidebarOpening = (type: string) => {
+    setType(type);
     setIsOpen(true);
   };
 
@@ -53,7 +53,7 @@ export const CategoriesPage = () => {
   };
 
   const handleEditCategory = async (id: string) => {
-    handleSidebarOpening();
+    handleSidebarOpening('updateCategory');
     setId(id);
   };
 
@@ -64,7 +64,7 @@ export const CategoriesPage = () => {
         <meta name="description" content="Categories page" />
       </Helmet>
       <HeaderBar title={t('Category')}>
-        <Button onClick={handleSidebarOpening} add>
+        <Button onClick={() => handleSidebarOpening('createCategory')} add>
           <Text weight={TextWeight.BOLD} size={TextSize.M}>
             {t('ADD CATEGORY')}
           </Text>

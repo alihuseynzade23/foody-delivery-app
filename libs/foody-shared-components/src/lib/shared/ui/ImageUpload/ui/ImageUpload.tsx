@@ -34,18 +34,22 @@ export const ImageUpload = ({
         if (fileReader.result) {
           const resultUrl = fileReader.result.toString();
           setPreviewUrl(resultUrl);
-
-          // Store the image as a base64 string in localStorage
-          // localStorage.setItem('foody-uploaded-image', resultUrl);
         }
       };
 
-      // Сброс значения файла после обработки
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
     }
   };
+
+  useEffect(() => {
+    if (url) {
+      console.log('URL updated:', url);
+      setPreviewUrl(url);
+      setImage(image);
+    }
+  }, [url, setPreviewUrl]);
 
   return (
     <div className={`${styles.fileUpload} ${className}`}>
@@ -54,7 +58,7 @@ export const ImageUpload = ({
           <label className={styles.label}>{labelName}</label>
           {previewUrl && image !== null && (
             <div className={styles.previewContainer}>
-              <img src={url ? url : previewUrl} alt="Preview" />
+              <img src={previewUrl} alt="Preview" />
             </div>
           )}
         </div>
