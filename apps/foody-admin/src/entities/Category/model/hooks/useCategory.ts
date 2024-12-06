@@ -3,6 +3,7 @@ import { createCategory } from '../services/createCategory/create-category';
 import { getCategoriesQuery } from '../services/getCategories/get-categories';
 import { deleteCategory } from '../services/deleteCategory/delet-category';
 import { updateCategory } from '../services/updateCategory/update-category';
+import { getCategoryByIdQuery } from '../services/getCategoryById/get-category-by-id';
 
 export const useCategory = () => {
   const queryClient = useQueryClient();
@@ -37,6 +38,7 @@ export const useCategory = () => {
     // fetchCategories,
     // fetchCategoryById,
     fetchCategories: getCategoriesQuery,
+    fetchCategoryById: getCategoryByIdQuery,
     createCategory: createCategoryMutation,
     deleteCategory: deleteCategoryMutation,
     updateCategory: updateCategoryMutation,

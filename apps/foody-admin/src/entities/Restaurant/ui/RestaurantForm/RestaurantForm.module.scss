@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .input {
+    border-radius: 14px;
+    padding: 0.25rem 0.5rem;
+
+    &::placeholder {
+      color: var(--primary-white);
+    }
+  }
+  .label {
+    font-weight: 500;
+    color: var(--secondary-dark-gray);
+  }
+}
+
+.selectWrapper {
+  width: 100%;
+  // border-radius: 50%;
+
+  .select {
+    width: 100%;
+    background-color: #5a5b70;
+    border-radius: 14px;
+    margin-top: 0.5rem;
+    color: var(--primary-white)
+  }
+  &::placeholder {
+    color: var(--primary-white);
+  }
+}

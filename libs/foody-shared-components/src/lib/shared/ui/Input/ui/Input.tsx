@@ -22,7 +22,7 @@ export interface InputProps extends HTMLInputProps {
   disabled?: boolean;
   label?: string;
   theme?: InputTheme;
-  type?: 'text' | 'password';
+  type?: 'text' | 'password' | 'number';
   placeholder?: string;
   inputWrapperClassName?: string;
   inputClassName?: string;
@@ -61,7 +61,7 @@ export const Input = memo((props: InputProps) => {
     [styles[theme]]: true,
     [styles.error]: !!error,
   };
-  
+
   return (
     <div className={classNames(styles.InputWrapper, {}, [inputWrapperClassName])}>
       {label && <label className={classNames(styles.label, {}, [labelClassName])}>{label}</label>}
@@ -78,10 +78,7 @@ export const Input = memo((props: InputProps) => {
         />
         {type === 'password' && (
           <span className={styles.eyeIcon} onClick={togglePasswordVisibility}>
-            <img
-              src={showPassword ? eyeIconSlash : eyeIcon}
-              alt="Toggle Password Visibility"
-            />
+            <img src={showPassword ? eyeIconSlash : eyeIcon} alt="Toggle Password Visibility" />
           </span>
         )}
       </div>

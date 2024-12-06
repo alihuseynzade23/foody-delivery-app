@@ -10,6 +10,7 @@ interface HeaderBarProps {
   select?: boolean;
   selectOptions?: any;
   defaultValue?: string;
+  
 }
 
 export const HeaderBar: FC<HeaderBarProps> = ({
@@ -25,7 +26,7 @@ export const HeaderBar: FC<HeaderBarProps> = ({
         <Text weight={TextWeight.MEDIUM} size={TextSize.L} className={styles.title}>
           {title}
         </Text>
-        <Flex gap="2rem" className={styles.childrenWrapper}>
+        <Flex align="center" gap="2rem" className={styles.childrenWrapper}>
           {children}
           {select && (
             <Select
