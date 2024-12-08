@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import styles from './AddButtons.module.scss';
-import { addStore } from '../../model/store/add-store';
+import { useAddStore } from '../../model/store/add-store';
 
 type AddButtonsProps = {
   buttonText: string;
@@ -13,7 +13,7 @@ type AddButtonsProps = {
 export const AddButtons: FC<AddButtonsProps> = ({ buttonText, onSubmit }) => {
   const { t } = useTranslation();
 
-  const { setClose } = addStore();
+  const { setClose } = useAddStore();
 
   return (
     <div className={styles.container}>

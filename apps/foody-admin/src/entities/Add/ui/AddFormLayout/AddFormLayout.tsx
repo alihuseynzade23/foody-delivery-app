@@ -5,7 +5,7 @@ import { AddButtons } from '../AddButtons/AddButtons';
 import styles from './AddFormLayout.module.scss';
 
 import closeSvg from '../../../../shared/assets/close.svg';
-import { addStore } from '../../model/store/add-store';
+import { useAddStore } from '../../model/store/add-store';
 
 interface AddFormLayoutProps {
   title: string;
@@ -22,7 +22,7 @@ export const AddFormLayout: FC<AddFormLayoutProps> = ({
   buttonText,
   onSubmit,
 }) => {
-  const { setClose } = addStore();
+  const { setClose } = useAddStore();
 
   return (
     <div className={styles.container}>

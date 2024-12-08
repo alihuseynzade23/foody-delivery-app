@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useRef, useEffect } from 'react';
 import styles from './ImageUpload.module.scss';
 import uploadAdmin from '../../../assets/upload-admin.svg';
 import uploadClient from '../../../assets/upload-client.svg';
@@ -16,9 +16,10 @@ export const ImageUpload = ({
   className = '',
   theme = 'admin',
 }: ImageUploadProps) => {
-  const { setImage } = imageStore();
-
+  const { setImage, image, url } = imageStore();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -31,22 +32,29 @@ export const ImageUpload = ({
         if (fileReader.result) {
           const resultUrl = fileReader.result.toString();
           setPreviewUrl(resultUrl);
-
-          // Store the image as a base64 string in localStorage
-          localStorage.setItem('foody-uploaded-image', resultUrl);
         }
       };
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
 
-  const themeClass = theme === 'client' ? styles.clientTheme : styles.adminTheme;
+  useEffect(() => {
+    if (url) {
+      console.log('URL updated:', url);
+      setPreviewUrl(url);
+      setImage(image);
+    }
+  }, [url, setPreviewUrl]);
 
   return (
-    <div className={`${styles.fileUpload} ${themeClass} ${className}`}>
+    <div className={`${styles.fileUpload} ${className}`}>
       <div className={styles.uploadContainer}>
         <div className={styles.imageContainer}>
           <label className={styles.label}>{labelName}</label>
-          {previewUrl && (
+          {previewUrl && image !== null && (
             <div className={styles.previewContainer}>
               <img src={previewUrl} alt="Preview" />
             </div>
@@ -57,6 +65,7 @@ export const ImageUpload = ({
             type="file"
             accept="image/*"
             className={styles.fileInput}
+            ref={fileInputRef}
             onChange={handleFileChange}
           />
           <div className={styles.iconTextContainer}>
