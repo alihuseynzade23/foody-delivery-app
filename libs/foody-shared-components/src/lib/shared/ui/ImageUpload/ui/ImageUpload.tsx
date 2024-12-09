@@ -20,7 +20,6 @@ export const ImageUpload = ({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && file.type.startsWith('image/')) {
@@ -43,7 +42,6 @@ export const ImageUpload = ({
 
   useEffect(() => {
     if (url) {
-      console.log('URL updated:', url);
       setPreviewUrl(url);
       setImage(image);
     }
@@ -54,7 +52,7 @@ export const ImageUpload = ({
       <div className={styles.uploadContainer}>
         <div className={styles.imageContainer}>
           <label className={styles.label}>{labelName}</label>
-          {previewUrl && image !== null && (
+          {previewUrl && image && (
             <div className={styles.previewContainer}>
               <img src={previewUrl} alt="Preview" />
             </div>

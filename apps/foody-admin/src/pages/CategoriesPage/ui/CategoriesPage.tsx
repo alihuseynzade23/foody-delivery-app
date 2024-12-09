@@ -9,7 +9,6 @@ import { useCategory } from '../../../entities/Category';
 import { useQuery } from '@tanstack/react-query';
 import { useAddStore } from '../../../entities/Add';
 import { HandleButtons } from '../../../features/handleProduct/ui/HandleButtons';
-import { useCallback } from 'react';
 import { Category } from '../../../entities/Category/model/types/category';
 
 export const CategoriesPage = () => {
@@ -20,22 +19,19 @@ export const CategoriesPage = () => {
 
   const { setType, setIsOpen, setId, id: categoryId } = useAddStore();
 
-  const handleDeleteCategory = async (id: string) => {
-    console.log(id, 'delete id');
-    setId(id);
+  const handleDeleteCategory = async () => {
+    try {
+      await deleteCategory.mutateAsync(localStorage.getItem('@foody_delete_category_id') || '');
 
-    // try {
-    //   await deleteCategory.mutateAsync(id);
-
-    //   notification.success({
-    //     message: t`Category deleted successfully`,
-    //   });
-    // } catch (e: any) {
-    //   notification.error({
-    //     message: t`Category deletion failed`,
-    //     description: e.message || 'An error occurred while creating the category.',
-    //   });
-    // }
+      notification.success({
+        message: t`Category deleted successfully`,
+      });
+    } catch (e: any) {
+      notification.error({
+        message: t`Category deletion failed`,
+        description: e.message || 'An error occurred while creating the category.',
+      });
+    }
   };
 
   const handleSidebarOpening = (type: string) => {
@@ -44,9 +40,8 @@ export const CategoriesPage = () => {
   };
 
   const handleEditCategory = (id: string) => {
-    console.log(id, 'edit id');
-    // handleSidebarOpening('updateCategory');
-    // setId(id);
+    handleSidebarOpening('updateCategory');
+    setId(id);
   };
 
   if (isLoading) {
@@ -99,7 +94,8 @@ export const CategoriesPage = () => {
           <Table.Column
             render={(category: Category) => (
               <HandleButtons
-                onDelete={() => handleDeleteCategory(category._id)}
+                id={category._id}
+                onDelete={handleDeleteCategory}
                 onEdit={() => handleEditCategory(category._id)}
               />
             )}
