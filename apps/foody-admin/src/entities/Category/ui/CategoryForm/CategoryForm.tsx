@@ -102,7 +102,7 @@ export const UpdateCategoryFrom = () => {
         };
         await updateCategory.mutateAsync({ payload, id });
 
-        resetForm();
+        // resetForm();
         setClose();
         setImage(null);
 
