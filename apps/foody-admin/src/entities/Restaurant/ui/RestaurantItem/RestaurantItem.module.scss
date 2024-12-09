@@ -1,0 +1,20 @@
+.container {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 247px;
+}
+
+.wrapper {
+  padding: 1rem 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+}

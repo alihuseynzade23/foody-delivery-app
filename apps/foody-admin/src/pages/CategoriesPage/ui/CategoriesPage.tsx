@@ -29,7 +29,7 @@ export const CategoriesPage = () => {
     } catch (e: any) {
       notification.error({
         message: t`Category deletion failed`,
-        description: e.message || 'An error occurred while creating the category.',
+        description: e.message || 'An error occurred while deleteing the category.',
       });
     }
   };

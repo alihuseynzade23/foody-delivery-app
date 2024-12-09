@@ -9,21 +9,31 @@ interface HeaderBarProps {
   children: any;
   select?: boolean;
   selectOptions?: any;
+  onSelectChange?: (value: string) => void;
 }
 
-export const HeaderBar: FC<HeaderBarProps> = ({ title, children, select, selectOptions }) => {
+export const HeaderBar: FC<HeaderBarProps> = ({
+  title,
+  children,
+  select,
+  selectOptions,
+  onSelectChange,
+}) => {
   return (
     <header className={styles.container}>
       <div className={styles.wrapper}>
         <Text weight={TextWeight.MEDIUM} size={TextSize.L} className={styles.title}>
           {title}
         </Text>
-        <Flex gap="2rem" className={styles.childrenWrapper}>
+        <Flex align="center" gap="2rem" className={styles.childrenWrapper}>
           {children}
           {select && (
             <Select
-              fieldNames={{ label: 'name', value: 'name' }}
-              defaultValue="Select"
+              onChange={onSelectChange}
+              fieldNames={{ label: 'name', value: '_id' }}
+              defaultValue="Category"
+              variant="filled"
+              className={styles.select}
               options={selectOptions}
             />
           )}

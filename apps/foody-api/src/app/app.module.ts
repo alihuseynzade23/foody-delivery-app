@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
 import { FilesModule } from './files/files.module';
+import { RestaurantModule } from './restaurant/restaurant.module';
 
 @Module({
   imports: [
@@ -19,10 +20,11 @@ import { FilesModule } from './files/files.module';
         )}/${configService.get('MONGO_AUTHDATABASE')}`,
       }),
     }),
-    
+
     AuthModule,
     CategoryModule,
     FilesModule,
+    RestaurantModule,
   ],
   controllers: [AppController],
   providers: [AppService],
