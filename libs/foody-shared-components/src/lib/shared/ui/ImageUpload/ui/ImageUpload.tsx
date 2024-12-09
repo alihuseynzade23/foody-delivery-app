@@ -20,7 +20,6 @@ export const ImageUpload = ({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && file.type.startsWith('image/')) {
@@ -32,27 +31,30 @@ export const ImageUpload = ({
         if (fileReader.result) {
           const resultUrl = fileReader.result.toString();
           setPreviewUrl(resultUrl);
-
-          // Store the image as a base64 string in localStorage
-          // localStorage.setItem('foody-uploaded-image', resultUrl);
         }
       };
 
-      // Сброс значения файла после обработки
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
     }
   };
 
+  useEffect(() => {
+    if (url) {
+      setPreviewUrl(url);
+      setImage(image);
+    }
+  }, [url, setPreviewUrl]);
+
   return (
     <div className={`${styles.fileUpload} ${className}`}>
       <div className={styles.uploadContainer}>
         <div className={styles.imageContainer}>
           <label className={styles.label}>{labelName}</label>
-          {previewUrl && image !== null && (
+          {previewUrl && image && (
             <div className={styles.previewContainer}>
-              <img src={url ? url : previewUrl} alt="Preview" />
+              <img src={previewUrl} alt="Preview" />
             </div>
           )}
         </div>

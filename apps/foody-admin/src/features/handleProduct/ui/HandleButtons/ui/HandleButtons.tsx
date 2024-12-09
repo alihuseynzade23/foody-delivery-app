@@ -11,6 +11,7 @@ type HandleButtonsProps = {
   display?: string;
   onDelete: () => void;
   onEdit: () => void;
+  id?: string | undefined;
 };
 
 export enum HandleButtonsDisplay {
@@ -19,17 +20,23 @@ export enum HandleButtonsDisplay {
 }
 
 export const HandleButtons: FC<HandleButtonsProps> = props => {
-  const { display = HandleButtonsDisplay.ROW, className, onDelete, onEdit } = props;
+  const { display = HandleButtonsDisplay.ROW, className, onDelete, onEdit, id } = props;
 
   const { openModal, isModalOpen } = useModal();
 
   const mods: Mods = {
     [styles[display]]: true,
   };
+
+  const handleDelete = () => {
+    localStorage.setItem('@foody_delete_category_id', id || '');
+    openModal();
+  };
+
   return (
     <div className={classNames(styles.handleButtons, mods, [className])}>
       <img onClick={onEdit} src={editIcon} alt="edit" />
-      <img src={deleteIcon} onClick={openModal} alt="delete" />
+      <img src={deleteIcon} onClick={handleDelete} alt="delete" />
       {isModalOpen && <Modal onClick={onDelete} />}
     </div>
   );

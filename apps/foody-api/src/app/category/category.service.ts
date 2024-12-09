@@ -3,7 +3,7 @@ import { Category, CategoryDocument } from './category.model';
 import { Model } from 'mongoose';
 import { CategoryDto } from './dto/category.dto';
 import { NotFoundException } from '@nestjs/common';
-import { CATEGORY_NOT_FOUND_ERROR } from './category.constants';
+import { CATEGORY_NOT_FOUND_ERROR, EXISTING_CATEGORY_ERROR } from './category.constants';
 
 export class CategoryService {
   constructor(
@@ -12,8 +12,11 @@ export class CategoryService {
   ) {}
 
   async createCategory(dto: CategoryDto): Promise<CategoryDocument> {
-    const newCategory = new this.categoryModel(dto);
-    return newCategory.save();
+    const existingProduct = await this.categoryModel.findOne({ name: dto.name });
+    if (existingProduct) {
+      throw new Error(EXISTING_CATEGORY_ERROR);
+    }
+    return await new this.categoryModel(dto).save();
   }
 
   async getCategoryById(id: string) {
@@ -39,6 +42,9 @@ export class CategoryService {
   }
 
   async deleteCategory(id: string) {
-    return this.categoryModel.findByIdAndDelete(id).exec();
+    const deletedCategory = await this.categoryModel.findByIdAndDelete(id).exec();
+    if (!deletedCategory) {
+      throw new NotFoundException(CATEGORY_NOT_FOUND_ERROR);
+    }
   }
 }
