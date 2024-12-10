@@ -4,7 +4,6 @@ export class RestaurantDto {
   @IsString()
   name: string;
 
-  @IsString()
   @IsOptional()
   image?: string;
 

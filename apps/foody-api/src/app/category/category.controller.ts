@@ -60,9 +60,24 @@ export class CategoryController {
 
   @Put(':id')
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(FileInterceptor('image'))
   @UsePipes(new ValidationPipe())
-  async update(@Param('id') id: string, @Body() dto: CategoryDto) {
-    const updatedCategory = await this.categoryService.updateCategory(id, dto);
+  async update(
+    @Param('id') id: string,
+    @UploadedFile() file: Express.Multer.File,
+    @Body() dto: CategoryDto,
+  ) {
+    let imageUrl = '';
+
+    if (file) {
+      const savedFiles = await this.filesService.saveFiles([new MFile(file)]);
+      imageUrl = savedFiles[0].url;
+    }
+
+    const updatedCategory = this.categoryService.updateCategory(id, {
+      name: dto.name,
+      image: imageUrl,
+    });
     if (!updatedCategory) {
       throw new NotFoundException(CATEGORY_NOT_FOUND_ERROR);
     }
@@ -72,9 +87,6 @@ export class CategoryController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   async delete(@Param('id') id: string) {
-    const deletedCategory = await this.categoryService.deleteCategory(id);
-    if (!deletedCategory) {
-      throw new NotFoundException(CATEGORY_NOT_FOUND_ERROR);
-    }
+    return await this.categoryService.deleteCategory(id);
   }
 }

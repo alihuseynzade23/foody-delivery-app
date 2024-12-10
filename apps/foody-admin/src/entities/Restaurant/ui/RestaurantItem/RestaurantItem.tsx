@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useAddStore } from '../../../Add';
 
 type Prop = {
-  data: Restaurant;
+  data: any;
 };
 
 export const RestaurantItem: FC<Prop> = ({ data }) => {
@@ -29,9 +29,9 @@ export const RestaurantItem: FC<Prop> = ({ data }) => {
 
   const { deleteRestaurant } = useRestaurant();
 
-  const handleDeleteRestaurant = async (id: string) => {
+  const handleDeleteRestaurant = async () => {
     try {
-      await deleteRestaurant.mutateAsync(id);
+      await deleteRestaurant.mutateAsync(localStorage.getItem('@foody_delete_item_id') || '');
 
       notification.success({
         message: t`Restaurant deleted succesfully`,
@@ -45,10 +45,12 @@ export const RestaurantItem: FC<Prop> = ({ data }) => {
   };
 
   const handleEditRestaurant = async (id: string) => {
-    setType('restaurant'); // should be changed to updateRestaurant
+    setType('updateRestaurant');
     setIsOpen(true);
     setId(id);
   };
+
+  console.log(data)
 
   return (
     <div className={styles.container}>
@@ -65,7 +67,8 @@ export const RestaurantItem: FC<Prop> = ({ data }) => {
       </div>
       <HandleButtons
         display={HandleButtonsDisplay.COLUMN}
-        onDelete={() => handleDeleteRestaurant(data._id ? data._id : '')}
+        id={data._id}
+        onDelete={handleDeleteRestaurant}
         onEdit={() => handleEditRestaurant(data._id ? data._id : '')}
       />
     </div>

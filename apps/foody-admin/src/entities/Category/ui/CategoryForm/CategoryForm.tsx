@@ -16,16 +16,15 @@ import { notification } from 'antd';
 import useGetCategory from '../../model/hooks/useGetOneCategory';
 import { useEffect } from 'react';
 
-export const CategoryForm = () => {
+export const CreateCategoryForm = () => {
   const { t } = useTranslation('category');
-  const { setClose, id } = useAddStore();
+  const { setClose } = useAddStore();
 
-  const { data: category, isLoading } = useGetCategory(id);
   const { image, setImage, setImageUrl } = imageStore();
 
   const { createCategory } = useCategory();
 
-  const { values, errors, touched, handleChange, handleSubmit, setValues } = useFormik({
+  const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues: {
       name: '',
     },
@@ -54,6 +53,71 @@ export const CategoryForm = () => {
   });
 
   useEffect(() => {
+    setImageUrl('');
+    setImage(null);
+  }, [setImageUrl, setImage]);
+
+  return (
+    <AddFormLayout
+      title={t`Add Category`}
+      subtitle={t`Add category information`}
+      buttonText={t`Create Category`}
+      onSubmit={handleSubmit}
+    >
+      <div className={styles.container}>
+        <Input
+          error={errors.name && touched.name ? errors.name : undefined}
+          name="name"
+          value={values.name}
+          onChange={handleChange}
+          theme={InputTheme.BG_ADMIN}
+          inputClassName={styles.input}
+          labelClassName={styles.label}
+          label="Name"
+        />
+      </div>
+    </AddFormLayout>
+  );
+};
+
+export const UpdateCategoryFrom = () => {
+  const { t } = useTranslation('category');
+  const { setClose, id } = useAddStore();
+
+  const { data: category, isLoading } = useGetCategory(id);
+  const { setImage, setImageUrl, image } = imageStore();
+
+  const { updateCategory } = useCategory();
+
+  const { values, errors, touched, handleChange, handleSubmit, setValues } = useFormik({
+    initialValues: {
+      name: '',
+    },
+    validationSchema: createCategorySchema(t`Name is required`),
+    onSubmit: async values => {
+      try {
+        const payload = {
+          name: values.name,
+          image,
+        };
+        await updateCategory.mutateAsync({ payload, id });
+
+        setClose();
+        // setImage(null);
+
+        notification.success({
+          message: t`Category updated successfully`,
+        });
+      } catch (err: any) {
+        notification.error({
+          message: t`Category update failed`,
+          description: err.message || 'An error occurred while updating the category.',
+        });
+      }
+    },
+  });
+
+  useEffect(() => {
     if (category) {
       setValues({
         name: category.name,
@@ -69,9 +133,9 @@ export const CategoryForm = () => {
 
   return (
     <AddFormLayout
-      title={t`Add Category`}
-      subtitle={t`Add category information`}
-      buttonText={id ? t`Update Category` : t`Create Category`}
+      title={t`Update Category`}
+      subtitle={t`Update category information`}
+      buttonText={t`Update Category`}
       onSubmit={handleSubmit}
     >
       <div className={styles.container}>

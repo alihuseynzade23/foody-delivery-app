@@ -1,11 +1,12 @@
 import {
-  Body,
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Post,
   Put,
+  Body,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -18,6 +19,7 @@ import { RestaurantDto } from './dto/restaurant.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FilesService } from '../files/files.service';
 import { MFile } from '../files/mfile.class';
+import { RESTAURANT_NOT_FOUND_ERROR } from './restaurant.constants';
 
 @Controller('restaurant')
 export class RestaurantController {
@@ -27,7 +29,7 @@ export class RestaurantController {
   ) {}
 
   @Post('create')
-//   @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('image'))
   @UsePipes(new ValidationPipe())
   async create(@UploadedFile() file: Express.Multer.File, @Body() dto: RestaurantDto) {
@@ -64,12 +66,12 @@ export class RestaurantController {
 
   @Put(':id')
   @UseGuards(JwtAuthGuard)
-  @UsePipes(new ValidationPipe())
   @UseInterceptors(FileInterceptor('image'))
+  @UsePipes(new ValidationPipe())
   async update(
-    @UploadedFile() file: Express.Multer.File,
     @Param('id') id: string,
-    dto: RestaurantDto,
+    @UploadedFile() file: Express.Multer.File,
+    @Body() dto: RestaurantDto,
   ) {
     let imageUrl = '';
 
@@ -78,10 +80,19 @@ export class RestaurantController {
       imageUrl = savedFiles[0].url;
     }
 
-    return await this.restaurantService.updateRestaurant(id, {
-      ...dto,
+    const updatedRestaurant = this.restaurantService.updateRestaurant(id, {
+      name: dto.name,
+      address: dto.address,
+      categoryId: dto.categoryId,
+      deliveryTime: dto.deliveryTime,
+      price: dto.price,
+      cuisine: dto.cuisine,
       image: imageUrl,
     });
+    if (!updatedRestaurant) {
+      throw new NotFoundException(RESTAURANT_NOT_FOUND_ERROR);
+    }
+    return updatedRestaurant;
   }
 
   @Delete(':id')

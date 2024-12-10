@@ -9,6 +9,7 @@ import { useCategory } from '../../../entities/Category';
 import { useQuery } from '@tanstack/react-query';
 import { useAddStore } from '../../../entities/Add';
 import { HandleButtons } from '../../../features/handleProduct/ui/HandleButtons';
+import { Category } from '../../../entities/Category/model/types/category';
 
 export const CategoriesPage = () => {
   const { t } = useTranslation('category');
@@ -17,6 +18,31 @@ export const CategoriesPage = () => {
   const { data: categories, isLoading, error } = useQuery(fetchCategories);
 
   const { setType, setIsOpen, setId } = useAddStore();
+
+  const handleDeleteCategory = async () => {
+    try {
+      await deleteCategory.mutateAsync(localStorage.getItem('@foody_delete_item_id') || '');
+
+      notification.success({
+        message: t`Category deleted successfully`,
+      });
+    } catch (e: any) {
+      notification.error({
+        message: t`Category deletion failed`,
+        description: e.message || 'An error occurred while deleteing the category.',
+      });
+    }
+  };
+
+  const handleSidebarOpening = (type: string) => {
+    setType(type);
+    setIsOpen(true);
+  };
+
+  const handleEditCategory = (id: string) => {
+    handleSidebarOpening('updateCategory');
+    setId(id);
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -32,31 +58,6 @@ export const CategoriesPage = () => {
     );
   }
 
-  const handleSidebarOpening = () => {
-    setType('category');
-    setIsOpen(true);
-  };
-
-  const handleDeleteCategory = async (id: string) => {
-    try {
-      await deleteCategory.mutateAsync(id);
-
-      notification.success({
-        message: t`Category deleted successfully`,
-      });
-    } catch (e: any) {
-      notification.error({
-        message: t`Category deletion failed`,
-        description: e.message || 'An error occurred while deleteing the category.',
-      });
-    }
-  };
-
-  const handleEditCategory = async (id: string) => {
-    handleSidebarOpening();
-    setId(id);
-  };
-
   return (
     <div>
       <Helmet>
@@ -64,7 +65,7 @@ export const CategoriesPage = () => {
         <meta name="description" content="Categories page" />
       </Helmet>
       <HeaderBar title={t('Category')}>
-        <Button onClick={handleSidebarOpening} add>
+        <Button onClick={() => handleSidebarOpening('createCategory')} add>
           <Text weight={TextWeight.BOLD} size={TextSize.M}>
             {t('ADD CATEGORY')}
           </Text>
@@ -91,10 +92,11 @@ export const CategoriesPage = () => {
             }}
           />
           <Table.Column
-            render={record => (
+            render={(category: Category) => (
               <HandleButtons
-                onEdit={() => handleEditCategory(record._id)}
-                onDelete={() => handleDeleteCategory(record._id)}
+                id={category._id}
+                onDelete={handleDeleteCategory}
+                onEdit={() => handleEditCategory(category._id)}
               />
             )}
           />
