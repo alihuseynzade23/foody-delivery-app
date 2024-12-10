@@ -6,10 +6,11 @@ import { Flex, Select } from 'antd';
 
 interface HeaderBarProps {
   title: string;
-  children: any;
+  children?: any;
   select?: boolean;
   selectOptions?: any;
-  onSelectChange?: (value: string) => void;
+  defaultValue?: string;
+  
 }
 
 export const HeaderBar: FC<HeaderBarProps> = ({
@@ -17,7 +18,7 @@ export const HeaderBar: FC<HeaderBarProps> = ({
   children,
   select,
   selectOptions,
-  onSelectChange,
+  defaultValue,
 }) => {
   return (
     <header className={styles.container}>
@@ -29,11 +30,8 @@ export const HeaderBar: FC<HeaderBarProps> = ({
           {children}
           {select && (
             <Select
-              onChange={onSelectChange}
-              fieldNames={{ label: 'name', value: '_id' }}
-              defaultValue="Category"
-              variant="filled"
-              className={styles.select}
+              fieldNames={{ label: 'name', value: 'name' }}
+              defaultValue={defaultValue ? defaultValue : 'Select'}
               options={selectOptions}
             />
           )}

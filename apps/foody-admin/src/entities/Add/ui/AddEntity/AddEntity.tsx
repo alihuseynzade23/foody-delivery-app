@@ -2,6 +2,7 @@ import { classNames } from '@org/foody-shared-components';
 import styles from './AddEntity.module.scss';
 import closeSvg from '../../../../shared/assets/close.svg';
 import { useAddStore } from '../../model/store/add-store';
+import { ProductForm } from '../../../Product';
 import {
   CreateRestaurantForm,
   UpdateRestaurantForm,
@@ -24,6 +25,7 @@ export const AddEntity = () => {
     >
       <img onClick={setClose} src={closeSvg} alt="close" className={styles.closeIcon} />
       <div className={styles.wrapper}>
+        {type === 'product' && <ProductForm />}
         {type === 'product' && <div>Add products</div>}
         {type === 'createRestaurant' && <CreateRestaurantForm />}
         {type === 'updateRestaurant' && <UpdateRestaurantForm />}

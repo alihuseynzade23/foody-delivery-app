@@ -125,6 +125,7 @@ export const CreateRestaurantForm = () => {
         <Input
           error={errors.price && touched.price ? errors.price : undefined}
           name="price"
+          type="number"
           value={values.price}
           onChange={handleChange}
           theme={InputTheme.BG_ADMIN}
@@ -136,6 +137,7 @@ export const CreateRestaurantForm = () => {
         <Input
           error={errors.deliveryTime && touched.deliveryTime ? errors.deliveryTime : undefined}
           name="deliveryTime"
+          type="number"
           value={values.deliveryTime}
           onChange={handleChange}
           theme={InputTheme.BG_ADMIN}
