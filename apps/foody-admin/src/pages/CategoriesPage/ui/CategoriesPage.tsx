@@ -17,11 +17,11 @@ export const CategoriesPage = () => {
   const { fetchCategories, deleteCategory } = useCategory();
   const { data: categories, isLoading, error } = useQuery(fetchCategories);
 
-  const { setType, setIsOpen, setId, id: categoryId } = useAddStore();
+  const { setType, setIsOpen, setId } = useAddStore();
 
   const handleDeleteCategory = async () => {
     try {
-      await deleteCategory.mutateAsync(localStorage.getItem('@foody_delete_category_id') || '');
+      await deleteCategory.mutateAsync(localStorage.getItem('@foody_delete_item_id') || '');
 
       notification.success({
         message: t`Category deleted successfully`,

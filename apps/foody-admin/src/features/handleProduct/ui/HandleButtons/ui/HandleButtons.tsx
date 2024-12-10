@@ -29,7 +29,7 @@ export const HandleButtons: FC<HandleButtonsProps> = props => {
   };
 
   const handleDelete = () => {
-    localStorage.setItem('@foody_delete_category_id', id || '');
+    localStorage.setItem('@foody_delete_item_id', id || '');
     openModal();
   };
 
