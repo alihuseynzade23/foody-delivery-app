@@ -10,6 +10,7 @@ import { RestaurantItem, useRestaurant } from '../../../entities/Restaurant';
 import { Restaurant } from '../../../entities/Restaurant/model/types/restaurant';
 import { useCategory } from '../../../entities/Category';
 import { useState } from 'react';
+import { useGetRestaurantsByCategoryId } from '../../../entities/Restaurant';
 
 export const RestaurantsPage = () => {
   const { t } = useTranslation('restaurant');
@@ -17,25 +18,27 @@ export const RestaurantsPage = () => {
   const { fetchCategories } = useCategory();
   const { data: restaurants, isLoading, error } = useQuery(fetchRestaurants);
   const { data: categories } = useQuery(fetchCategories);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const { data: filteredRestaurants, isLoading: filteredLoading } =
+    useGetRestaurantsByCategoryId(selectedCategory);
 
   const { setIsOpen, setType } = useAddStore();
 
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
   const handleAdding = () => {
     setIsOpen(true);
-    setType('restaurant');
+    setType('createRestaurant');
   };
 
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value);
   };
 
-  const filteredRestaurants = selectedCategory
-    ? restaurants?.filter((restaurant: Restaurant) => restaurant.categoryId === selectedCategory)
-    : restaurants;
-
   if (isLoading) {
+    <Spinner />;
+  }
+
+  if (filteredLoading) {
     <Spinner />;
   }
 
@@ -69,9 +72,17 @@ export const RestaurantsPage = () => {
         </Button>
       </HeaderBar>
       <div className={styles.restaurantsWrapper}>
-        {filteredRestaurants?.map((item: Restaurant) => (
-          <RestaurantItem key={item._id} data={item} />
-        ))}
+        {selectedCategory ? (
+          filteredRestaurants?.length > 0 ? (
+            filteredRestaurants.map((item: Restaurant) => (
+              <RestaurantItem key={item._id} data={item} />
+            ))
+          ) : (
+            <Text size={TextSize.L}>{t`Restaurants not found`}</Text>
+          )
+        ) : (
+          restaurants?.map((item: Restaurant) => <RestaurantItem key={item._id} data={item} />)
+        )}
       </div>
     </div>
   );

@@ -1,15 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '@org/foody-shared-components';
 
-const useGetOneCategory = (id: string) => {
+const useGetOneRestaurant = (id: string) => {
   return useQuery({
-    queryKey: ['category', id],
+    queryKey: ['restaurant', id],
     queryFn: async () => {
-      const response = await apiClient.get(`/category/${id}`);
+      const response = await apiClient.get(`/restaurant/${id}`);
       return response.data;
     },
     enabled: !!id,
   });
 };
 
-export default useGetOneCategory;
+export default useGetOneRestaurant;

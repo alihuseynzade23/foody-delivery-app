@@ -94,7 +94,7 @@ export const UpdateCategoryFrom = () => {
       name: '',
     },
     validationSchema: createCategorySchema(t`Name is required`),
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async values => {
       try {
         const payload = {
           name: values.name,
@@ -102,9 +102,8 @@ export const UpdateCategoryFrom = () => {
         };
         await updateCategory.mutateAsync({ payload, id });
 
-        // resetForm();
         setClose();
-        setImage(null);
+        // setImage(null);
 
         notification.success({
           message: t`Category updated successfully`,
