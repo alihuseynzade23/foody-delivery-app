@@ -43,7 +43,7 @@ export const Navbar: FC<NavbarProps> = ({ className, openSidebar }) => {
         <Logo theme={LogoTheme.PRIMARY} />
       </div>
       <div className={classNames(styles.infoWrapper)}>
-        <Button onClick={() => handleAdding('product')} add className={styles.addBtn}>
+        <Button onClick={() => handleAdding('createProduct')} add className={styles.addBtn}>
           <Text weight={TextWeight.BOLD} size={TextSize.S}>
             {t`ADD PRODUCT`}
           </Text>

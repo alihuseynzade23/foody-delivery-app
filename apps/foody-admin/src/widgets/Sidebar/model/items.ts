@@ -38,8 +38,8 @@ export const SidebarItemsList: SidebarItemType[] = [
     text: 'Orders',
   },
   {
-    path: '/offer',
+    path: '/offers',
     Icon: OfferIcon,
-    text: 'Offer',
+    text: 'Offers',
   },
 ];

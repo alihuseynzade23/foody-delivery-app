@@ -9,8 +9,8 @@ interface HeaderBarProps {
   children?: any;
   select?: boolean;
   selectOptions?: any;
+  onSelectChange?: (value: string) => void;
   defaultValue?: string;
-  
 }
 
 export const HeaderBar: FC<HeaderBarProps> = ({
@@ -19,6 +19,7 @@ export const HeaderBar: FC<HeaderBarProps> = ({
   select,
   selectOptions,
   defaultValue,
+  onSelectChange,
 }) => {
   return (
     <header className={styles.container}>
@@ -30,8 +31,11 @@ export const HeaderBar: FC<HeaderBarProps> = ({
           {children}
           {select && (
             <Select
-              fieldNames={{ label: 'name', value: 'name' }}
+              onChange={onSelectChange}
+              fieldNames={{ label: 'name', value: '_id' }}
               defaultValue={defaultValue ? defaultValue : 'Select'}
+              variant="filled"
+              className={styles.select}
               options={selectOptions}
             />
           )}

@@ -74,14 +74,10 @@ export class CategoryController {
       imageUrl = savedFiles[0].url;
     }
 
-    const updatedCategory = this.categoryService.updateCategory(id, {
+    return await this.categoryService.updateCategory(id, {
       name: dto.name,
       image: imageUrl,
     });
-    if (!updatedCategory) {
-      throw new NotFoundException(CATEGORY_NOT_FOUND_ERROR);
-    }
-    return updatedCategory;
   }
 
   @Delete(':id')

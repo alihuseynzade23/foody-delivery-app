@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const createCategorySchema = (validation: string) => {
+export const createProductSchema = (validation: string) => {
   return yup.object({
     name: yup.string().required(validation),
   });

@@ -5,7 +5,7 @@ import { LoginPage } from '../../../../pages/LoginPage';
 import {
   FullScreenLoading,
   NotFoundPage,
-  useAuth
+  useAuth,
   // authStore,
 } from '@org/foody-shared-components';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +16,8 @@ import { DashboardPage } from '../../../../pages/DashboardPage';
 import { ProductsPage } from '../../../../pages/ProductsPage';
 import { CategoriesPage } from '../../../../pages/CategoriesPage';
 import { RestaurantsPage } from '../../../../pages/RestaurantsPage';
+import { OrdersPage } from '../../../../pages/OrdersPage';
+import { OffersPage } from '../../../../pages/OffersPage';
 
 const ProtectedRoute: FC<{ children: ReactNode; header?: boolean }> = ({ children }) => {
   const { isLoggedIn } = useAuth();
@@ -62,6 +64,22 @@ export const AppRouter: FC = () => {
           element={
             <ProtectedRoute>
               <CategoriesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="orders"
+          element={
+            <ProtectedRoute>
+              <OrdersPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="offers"
+          element={
+            <ProtectedRoute>
+              <OffersPage />
             </ProtectedRoute>
           }
         />

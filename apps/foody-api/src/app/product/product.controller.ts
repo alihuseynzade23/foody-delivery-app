@@ -69,7 +69,7 @@ export class ProductController {
   async update(
     @UploadedFile() file: Express.Multer.File,
     @Param('id') id: string,
-    dto: ProductDto,
+    @Body() dto: ProductDto,
   ) {
     let imageUrl = '';
 
@@ -79,7 +79,10 @@ export class ProductController {
     }
 
     return await this.productService.updateProduct(id, {
-      ...dto,
+      name: dto.name,
+      restaurantId: dto.restaurantId,
+      price: dto.price,
+      description: dto.description,
       image: imageUrl,
     });
   }

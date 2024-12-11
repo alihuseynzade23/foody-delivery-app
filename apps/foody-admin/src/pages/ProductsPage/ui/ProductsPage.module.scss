@@ -1,0 +1,12 @@
+.productsWrapper {
+  display: flex;
+  gap: 2.75rem;
+  flex-wrap: wrap;
+  margin-top: 5rem;
+}
+
+@media screen and (max-width: 650px) {
+  .productsWrapper {
+    justify-content: center;
+  }
+}

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { OrdersChart } from '../../../../../foody-admin/src/shared/OrdersChart';
-import { TotalSalaryChart } from '../../../shared/TotalSalaryChart';
+import { OrdersChart } from '../../../widgets/OrdersChart';
+import { TotalSalaryChart } from '../../../widgets/TotalSalaryChart';
 import styles from './DashboardPage.module.scss';
 import { Helmet } from 'react-helmet';
 

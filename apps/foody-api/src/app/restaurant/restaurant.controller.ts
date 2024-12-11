@@ -80,7 +80,7 @@ export class RestaurantController {
       imageUrl = savedFiles[0].url;
     }
 
-    const updatedRestaurant = this.restaurantService.updateRestaurant(id, {
+    return await this.restaurantService.updateRestaurant(id, {
       name: dto.name,
       address: dto.address,
       categoryId: dto.categoryId,
@@ -89,10 +89,6 @@ export class RestaurantController {
       cuisine: dto.cuisine,
       image: imageUrl,
     });
-    if (!updatedRestaurant) {
-      throw new NotFoundException(RESTAURANT_NOT_FOUND_ERROR);
-    }
-    return updatedRestaurant;
   }
 
   @Delete(':id')

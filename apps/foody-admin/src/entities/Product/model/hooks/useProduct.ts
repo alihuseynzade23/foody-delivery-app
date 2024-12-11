@@ -2,12 +2,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createProduct } from '../services/createProduct/create-product';
 import { getProductsQuery } from '../services/getProducts/get-products';
 import { deleteProduct } from '../services/deleteProduct/delete-product';
-import { updateCategory } from '../services/updateCategory/update-category';
+import { updateProduct } from '../services/updateProduct/update-product';
 
 export const useProduct = () => {
   const queryClient = useQueryClient();
 
-  // Create a new category
+  // Create a new product
   const createProductMutation = useMutation({
     mutationFn: createProduct.mutationFn,
     mutationKey: createProduct.mutationKey,
@@ -17,7 +17,7 @@ export const useProduct = () => {
     },
   });
 
-  // Delete a category
+  // Delete a product
   const deleteProductMutation = useMutation({
     mutationFn: deleteProduct.mutationFn,
     mutationKey: deleteProduct.mutationKey,
@@ -27,20 +27,20 @@ export const useProduct = () => {
     },
   });
 
-  // Update an existing category
-  const updateCategoryMutation = useMutation({
-    mutationFn: updateCategory.mutationFn,
-    mutationKey: updateCategory.mutationKey,
+  // Update an existing product
+  const updateProductMutation = useMutation({
+    mutationFn: updateProduct.mutationFn,
+    mutationKey: updateProduct.mutationKey,
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+    },
   });
 
   return {
-    // fetchCategories,
-    // fetchCategoryById,
     fetchProducts: getProductsQuery,
     createProduct: createProductMutation,
     deleteProduct: deleteProductMutation,
-    updateCategory: updateCategoryMutation,
-    // getCategory: getOneCategoryQuery,
-    // updateCategory: updateCategoryMutation,
+    updateProduct: updateProductMutation,
   };
 };

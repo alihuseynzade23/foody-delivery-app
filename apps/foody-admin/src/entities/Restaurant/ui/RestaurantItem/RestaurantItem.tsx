@@ -50,8 +50,6 @@ export const RestaurantItem: FC<Prop> = ({ data }) => {
     setId(id);
   };
 
-  console.log(data)
-
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>

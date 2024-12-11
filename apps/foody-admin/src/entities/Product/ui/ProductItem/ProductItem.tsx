@@ -11,7 +11,7 @@ import { useAddStore } from '../../../Add';
 import { useRestaurant } from '../../../Restaurant';
 
 type Prop = {
-  data: Product;
+  data: any;
 };
 
 export const ProductItem: FC<Prop> = ({ data }) => {
@@ -26,9 +26,9 @@ export const ProductItem: FC<Prop> = ({ data }) => {
 
   const { deleteProduct } = useProduct();
 
-  const handleDeleteProduct = async (id: string) => {
+  const handleDeleteProduct = async () => {
     try {
-      await deleteProduct.mutateAsync(id);
+      await deleteProduct.mutateAsync(localStorage.getItem('@foody_delete_item_id') || '');
 
       notification.success({
         message: t`Product deleted successfully`,
@@ -36,13 +36,13 @@ export const ProductItem: FC<Prop> = ({ data }) => {
     } catch (e: any) {
       notification.error({
         message: t`Product deletion failed`,
-        description: e.message || 'An error occurred while creating the Product.',
+        description: e.message || 'An error occurred while creating the product.',
       });
     }
   };
 
   const handleEditProduct = async (id: string) => {
-    setType('product'); // should be changed to updateRestaurant
+    setType('updateProduct');
     setIsOpen(true);
     setId(id);
   };
@@ -50,7 +50,7 @@ export const ProductItem: FC<Prop> = ({ data }) => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <img src={data.image} alt="product" />
+        <img height={160} src={data.image} alt="product" />
         <div className={styles.textWrapper}>
           <Text size={TextSize.L} weight={TextWeight.MEDIUM} theme={TextTheme.BLACK}>
             {data.name}
@@ -62,7 +62,8 @@ export const ProductItem: FC<Prop> = ({ data }) => {
         <div className={styles.footer}>
           <p>${data.price}</p>
           <HandleButtons
-            onDelete={() => handleDeleteProduct(data._id ? data._id : '')}
+            id={data._id}
+            onDelete={handleDeleteProduct}
             onEdit={() => handleEditProduct(data._id ? data._id : '')}
           />
         </div>
