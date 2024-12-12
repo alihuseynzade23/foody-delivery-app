@@ -9,6 +9,7 @@ import { CategoryModule } from './category/category.module';
 import { FilesModule } from './files/files.module';
 import { RestaurantModule } from './restaurant/restaurant.module';
 import { ProductModule } from './product/product.module';
+import { RedisModule } from '@nestjs-modules/ioredis';
 
 @Module({
   imports: [
@@ -22,13 +23,25 @@ import { ProductModule } from './product/product.module';
       }),
     }),
 
+    RedisModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        type: 'single',
+        // host: configService.get<string>('REDIS_HOST'),
+        host: configService.get<string>('REDIS_HOST'),
+        port: configService.get<number>('REDIS_PORT'),
+      }),
+    }),
     AuthModule,
     CategoryModule,
     FilesModule,
     RestaurantModule,
     ProductModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports: [RedisModule],
 })
 export class AppModule {}
