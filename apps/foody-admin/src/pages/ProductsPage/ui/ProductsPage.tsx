@@ -1,46 +1,47 @@
 import styles from './ProductsPage.module.scss';
-import { Text, TextSize, TextWeight } from '@org/foody-shared-components';
+import { Spinner, Text, TextSize, TextWeight } from '@org/foody-shared-components';
 import { HeaderBar } from '../../../widgets/HeaderBar';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
-import { Spinner } from '@org/foody-shared-components';
-import { notification } from 'antd';
+
 import { useQuery } from '@tanstack/react-query';
-import { useAddStore } from '../../../entities/Add';
-import { ProductItem, useProduct } from '../../../entities/Product';
+import { useState } from 'react';
+import { ProductItem, useGetProductsByRestaurantId, useProduct } from '../../../entities/Product';
 import { Product } from '../../../entities/Product/model/types/product';
+import { useRestaurant } from '../../../entities/Restaurant';
 
 export const ProductsPage = () => {
   const { t } = useTranslation('product');
-
-  const { fetchProducts, deleteProduct } = useProduct();
+  const { fetchProducts } = useProduct();
   const { data: products, isLoading, error } = useQuery(fetchProducts);
+  const { fetchRestaurants } = useRestaurant();
+  const { data: restaurants } = useQuery(fetchRestaurants);
+  const [selectedRestaurant, setSelectedRestaurant] = useState<string | null>(null);
 
-  const { setType, setIsOpen, setId } = useAddStore();
+  const { data: filteredProducts, isLoading: filteredLoading } =
+    useGetProductsByRestaurantId(selectedRestaurant);
+
+  const handleRestaurantChange = (value: string) => {
+    setSelectedRestaurant(value);
+  };
 
   if (isLoading) {
-    return <Spinner />;
+    <Spinner />;
+  }
+
+  if (filteredLoading) {
+    <Spinner />;
   }
 
   if (error) {
     return (
       <div className={styles.error}>
         <Text weight={TextWeight.BOLD} size={TextSize.L}>
-          {t('Failed to load products. Please try again later.')}
+          {t('Failed to load restaurants. Please try again later.')}
         </Text>
       </div>
     );
   }
-
-  const handleSidebarOpening = () => {
-    setType('product');
-    setIsOpen(true);
-  };
-
-  // const handleEditCategory = async (id: string) => {
-  //   handleSidebarOpening();
-  //   setId(id);
-  // };
 
   return (
     <div>
@@ -48,12 +49,24 @@ export const ProductsPage = () => {
         <title>{t('Products page')}</title>
         <meta name="description" content="Products page" />
       </Helmet>
-      <HeaderBar defaultValue="Restaurant type" select title={t('Product')} />
 
-      <div className={styles.restaurantsWrapper}>
-        {products?.map((item: Product) => (
-          <ProductItem key={item._id} data={item} />
-        ))}
+      <HeaderBar
+        onSelectChange={handleRestaurantChange}
+        selectOptions={restaurants || []}
+        select
+        defaultValue="Restaurant"
+        title={t('Product')}
+      />
+      <div className={styles.productsWrapper}>
+        {selectedRestaurant ? (
+          filteredProducts?.length > 0 ? (
+            filteredProducts.map((item: Product) => <ProductItem key={item._id} data={item} />)
+          ) : (
+            <Text size={TextSize.L}>{t`Products not found`}</Text>
+          )
+        ) : (
+          products?.map((item: Product) => <ProductItem key={item._id} data={item} />)
+        )}
       </div>
     </div>
   );

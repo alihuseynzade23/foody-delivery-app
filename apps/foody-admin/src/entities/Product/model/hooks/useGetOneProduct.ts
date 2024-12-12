@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '@org/foody-shared-components';
 
-const useGetOneCategory = (id: string) => {
+const useGetOneProduct = (id: string) => {
   return useQuery({
-    queryKey: ['category', id],
+    queryKey: ['product', id],
     queryFn: async () => {
       const response = await apiClient.get(`/product/${id}`);
       return response.data;
@@ -12,4 +12,4 @@ const useGetOneCategory = (id: string) => {
   });
 };
 
-export default useGetOneCategory;
+export default useGetOneProduct;
