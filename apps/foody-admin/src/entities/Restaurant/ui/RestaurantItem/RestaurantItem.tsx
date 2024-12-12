@@ -26,42 +26,44 @@ export const RestaurantItem: FC<Prop> = ({ data }) => {
   });
 
   const { setType, setIsOpen, setId } = useAddStore();
-
   const { deleteRestaurant } = useRestaurant();
 
   const handleDeleteRestaurant = async () => {
     try {
-      await deleteRestaurant.mutateAsync(localStorage.getItem('@foody_delete_item_id') || '');
+      const restaurantId = localStorage.getItem('@foody_delete_item_id');
+      if (!restaurantId) {
+        throw new Error('Restaurant ID not found in local storage');
+      }
+
+      await deleteRestaurant.mutateAsync(restaurantId);
 
       notification.success({
-        message: t`Restaurant deleted succesfully`,
+        message: t('Restaurant deleted successfully'),
       });
     } catch (e: any) {
       notification.error({
-        message: t`Restaurant deletion failed`,
+        message: t('Restaurant deletion failed'),
         description: e.message || 'An error occurred while deleting the Restaurant.',
       });
     }
   };
 
-  const handleEditRestaurant = async (id: string) => {
+  const handleEditRestaurant = (id: string) => {
     setType('updateRestaurant');
     setIsOpen(true);
     setId(id);
   };
 
-  console.log(data)
-
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <img width={65} height={57} src={data.image} alt="restaurant" />
+        {data.image && <img width={65} height={57} src={data.image} alt="restaurant" />}
         <div className={styles.textWrapper}>
           <Text size={TextSize.L} weight={TextWeight.MEDIUM} theme={TextTheme.BLACK}>
             {data.name}
           </Text>
           <Text size={TextSize.S} theme={TextTheme.GRAY}>
-            {category?.name}
+            {category?.name || t('Unknown Category')}
           </Text>
         </div>
       </div>
@@ -69,7 +71,7 @@ export const RestaurantItem: FC<Prop> = ({ data }) => {
         display={HandleButtonsDisplay.COLUMN}
         id={data._id}
         onDelete={handleDeleteRestaurant}
-        onEdit={() => handleEditRestaurant(data._id ? data._id : '')}
+        onEdit={() => handleEditRestaurant(data._id || '')}
       />
     </div>
   );

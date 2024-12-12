@@ -4,11 +4,14 @@ import { Model } from 'mongoose';
 import { RestaurantDto } from './dto/restaurant.dto';
 import { EXISTING_RESTAURANT_ERROR, RESTAURANT_NOT_FOUND_ERROR } from './restaurant.constants';
 import { NotFoundException } from '@nestjs/common';
+import { InjectRedis } from '@nestjs-modules/ioredis';
+import Redis from 'ioredis';
 
 export class RestaurantService {
   constructor(
     @InjectModel(Restaurant.name)
     private readonly restaurantModel: Model<RestaurantDocument>,
+    @InjectRedis() private readonly redis: Redis,
   ) {}
 
   async createRestaurant(dto: RestaurantDto) {
@@ -20,7 +23,17 @@ export class RestaurantService {
   }
 
   async getAllRestaurants() {
-    return await this.restaurantModel.find().exec();
+    const redisKey = 'all_restaurants';
+
+    const cachedRestaurants = await this.redis.get(redisKey);
+    if (cachedRestaurants) {
+      return JSON.parse(cachedRestaurants);
+    }
+
+    const restaurants = await this.restaurantModel.find().exec();
+    await this.redis.set(redisKey, JSON.stringify(restaurants), 'EX', 60 * 60);
+
+    return restaurants;
   }
 
   async getRestaurantById(id: string) {
@@ -43,6 +56,10 @@ export class RestaurantService {
     if (!updatedRestaurant) {
       throw new NotFoundException(RESTAURANT_NOT_FOUND_ERROR);
     }
+
+    const redisKey = `restaurant:${id}`;
+    await this.redis.set(redisKey, JSON.stringify(updatedRestaurant), 'EX', 60 * 60);
+
     return updatedRestaurant;
   }
 
@@ -52,5 +69,7 @@ export class RestaurantService {
     if (!deletedRestaurant) {
       throw new NotFoundException(RESTAURANT_NOT_FOUND_ERROR);
     }
+    const redisKey = `restaurant:${id}`;
+    await this.redis.del(redisKey);
   }
 }
