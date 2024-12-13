@@ -1,15 +1,20 @@
 import styles from './CategoriesPage.module.scss';
-import { Button, Text, TextSize, TextWeight } from '@org/foody-shared-components';
+import {
+  Button,
+  Text,
+  TextSize,
+  TextWeight,
+  Spinner,
+  useCategory,
+} from '@org/foody-shared-components';
 import { HeaderBar } from '../../../widgets/HeaderBar';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
-import { Spinner } from '@org/foody-shared-components';
 import { notification, Table } from 'antd';
-import { useCategory } from '../../../entities/Category';
 import { useQuery } from '@tanstack/react-query';
 import { useAddStore } from '../../../entities/Add';
 import { HandleButtons } from '../../../features/handleProduct/ui/HandleButtons';
-import { Category } from '../../../entities/Category/model/types/category';
+import { Category } from '../../../entities/Category/lib/types/category';
 
 export const CategoriesPage = () => {
   const { t } = useTranslation('category');

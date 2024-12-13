@@ -1,14 +1,18 @@
 import { FC } from 'react';
-import { Restaurant } from '../../model/types/restaurant';
+import {
+  Text,
+  TextSize,
+  TextTheme,
+  TextWeight,
+  useRestaurant,
+  useCategory,
+} from '@org/foody-shared-components';
 import styles from './RestaurantItem.module.scss';
 import {
   HandleButtons,
   HandleButtonsDisplay,
 } from '../../../../features/handleProduct/ui/HandleButtons';
-import { useCategory } from '../../../Category';
 import { useQuery } from '@tanstack/react-query';
-import { Text, TextSize, TextTheme, TextWeight } from '@org/foody-shared-components';
-import { useRestaurant } from '../../model/hooks/useRestaurant';
 import { notification } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useAddStore } from '../../../Add';

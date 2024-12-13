@@ -159,7 +159,7 @@ export const Footer = () => {
 
       <div className={styles.policyText}>
         <Text
-          children="All rights reserved © 2003-2024 Foody TERMS OF USE | Privacy Policyc"
+          children={`All rights reserved © 2020-${new Date().getFullYear()} Foody TERMS OF USE | Privacy Policyc`}
           theme={TextTheme.DARK_GRAY}
           size={TextSize.S}
         />

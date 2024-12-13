@@ -1,14 +1,21 @@
 import styles from './ProductsPage.module.scss';
-import { Spinner, Text, TextSize, TextWeight } from '@org/foody-shared-components';
+import {
+  Spinner,
+  Text,
+  TextSize,
+  TextWeight,
+  useRestaurant,
+  useGetProductsByRestaurantId,
+  useProduct,
+} from '@org/foody-shared-components';
 import { HeaderBar } from '../../../widgets/HeaderBar';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { ProductItem, useGetProductsByRestaurantId, useProduct } from '../../../entities/Product';
-import { Product } from '../../../entities/Product/model/types/product';
-import { useRestaurant } from '../../../entities/Restaurant';
+import { ProductItem } from '../../../entities/Product';
+import { Product } from '../../../entities/Product/lib/types/product';
 
 export const ProductsPage = () => {
   const { t } = useTranslation('product');

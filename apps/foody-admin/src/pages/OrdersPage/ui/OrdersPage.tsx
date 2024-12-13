@@ -9,7 +9,7 @@ import { useCategory } from '../../../entities/Category';
 import { useQuery } from '@tanstack/react-query';
 import { useAddStore } from '../../../entities/Add';
 import { HandleButtons } from '../../../features/handleProduct/ui/HandleButtons';
-import { Category } from '../../../entities/Category/model/types/category';
+import { Category } from '../../../entities/Category/lib/types/category';
 
 export const OrdersPage = () => {
   const { t } = useTranslation('order');
