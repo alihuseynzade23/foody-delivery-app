@@ -11,8 +11,8 @@ export enum TextTheme {
   RED = 'red',
   GREEN = 'green',
   DARK_GRAY = 'darkGray',
-  DARK_BlACK ='darkBlack',
-  STRONG_GRAY ='strongGray'
+  DARK_BlACK = 'darkBlack',
+  STRONG_GRAY = 'strongGray',
 }
 
 export enum TextSize {
@@ -20,7 +20,7 @@ export enum TextSize {
   M = 'size_m',
   L = 'size_l',
   XL = 'size_xl',
-  XXL = 'size_xxl'
+  XXL = 'size_xxl',
 }
 
 export enum TextWeight {
@@ -29,7 +29,7 @@ export enum TextWeight {
   MEDIUM = 'medium',
   BOLD = 'bold',
   EXTRABOLD = 'extraBold',
-  M = "M",
+  M = 'M',
 }
 
 export enum TextFont {
@@ -45,6 +45,7 @@ interface TextProps {
   theme?: TextTheme;
   weight?: TextWeight;
   font?: TextFont;
+  onClick?: () => void;
 }
 
 export const Text = memo((props: TextProps) => {
@@ -53,6 +54,7 @@ export const Text = memo((props: TextProps) => {
     children,
     size = TextSize.M,
     theme = TextTheme.WHITE,
+    onClick,
     weight = TextWeight.NORMAL,
     font = TextFont.ROBOTO,
     ...otherProps
@@ -66,7 +68,7 @@ export const Text = memo((props: TextProps) => {
   };
 
   return (
-    <p className={classNames(styles.Text, mods, [className])} {...otherProps}>
+    <p onClick={onClick} className={classNames(styles.Text, mods, [className])} {...otherProps}>
       {children}
     </p>
   );
