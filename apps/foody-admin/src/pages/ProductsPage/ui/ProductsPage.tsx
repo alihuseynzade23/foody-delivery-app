@@ -32,6 +32,11 @@ export const ProductsPage = () => {
     setSelectedRestaurant(value);
   };
 
+  console.log(products, 'products');
+  console.log(filteredProducts, 'filtered products')
+
+  console.log(selectedRestaurant)
+
   if (isLoading) {
     <Spinner />;
   }

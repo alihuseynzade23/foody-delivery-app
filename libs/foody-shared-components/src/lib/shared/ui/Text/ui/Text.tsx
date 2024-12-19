@@ -13,6 +13,7 @@ export enum TextTheme {
   DARK_GRAY = 'darkGray',
   DARK_BlACK = 'darkBlack',
   STRONG_GRAY = 'strongGray',
+  PRIMARY_GRAY = 'primaryGray',
 }
 
 export enum TextSize {

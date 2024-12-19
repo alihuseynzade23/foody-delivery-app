@@ -19,7 +19,11 @@ export class ProductService {
     if (existingRestaurant) {
       throw new Error(EXISTING_PRODUCT_ERROR);
     }
-    return await new this.productModel(dto).save();
+    const newProduct = await new this.productModel(dto).save();
+
+    await this.redis.del('all_products');
+
+    return newProduct;
   }
 
   async getAllProducts() {
@@ -32,7 +36,7 @@ export class ProductService {
 
     const products = await this.productModel.find().exec();
 
-    await this.redis.set(redisKey, JSON.stringify(products), 'EX', 60 * 60);
+    await this.redis.set(redisKey, JSON.stringify(products), 'EX', 60);
 
     return products;
   }
@@ -66,8 +70,9 @@ export class ProductService {
       throw new NotFoundException(PRODUCT_NOT_FOUND_ERROR);
     }
 
-    const redisKey = `product:${id}`;
-    await this.redis.set(redisKey, JSON.stringify(updatedProduct), 'EX', 60 * 60);
+    // const redisKey = `product:${id}`;
+    await this.redis.del('all_products'); 
+    // await this.redis.set(redisKey, JSON.stringify(updatedProduct), 'EX', 60 * 60);
 
     return updatedProduct;
   }
@@ -79,7 +84,8 @@ export class ProductService {
       throw new NotFoundException(PRODUCT_NOT_FOUND_ERROR);
     }
 
-    const redisKey = `product:${id}`;
-    await this.redis.del(redisKey);
+    // const redisKey = `product:${id}`;
+    await this.redis.del('all_products');
+    // await this.redis.del(redisKey);
   }
 }
