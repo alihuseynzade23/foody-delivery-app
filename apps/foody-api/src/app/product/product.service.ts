@@ -36,7 +36,7 @@ export class ProductService {
 
     const products = await this.productModel.find().exec();
 
-    await this.redis.set(redisKey, JSON.stringify(products), 'EX', 60);
+    await this.redis.set(redisKey, JSON.stringify(products), 'EX', 60* 60);
 
     return products;
   }

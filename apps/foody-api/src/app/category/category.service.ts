@@ -19,6 +19,7 @@ export class CategoryService {
     if (existingCategory) {
       throw new Error(EXISTING_CATEGORY_ERROR);
     }
+    await this.redis.del('all_categories');
     return await new this.categoryModel(dto).save();
   }
 
@@ -57,8 +58,10 @@ export class CategoryService {
     }
     const redisKey = `category:${id}`;
     await this.redis.set(redisKey, JSON.stringify(updatedCategory), 'EX', 60 * 60);
+    await this.redis.del('all_categories');
     return updatedCategory;
   }
+
 
   async deleteCategory(id: string) {
     const deletedCategory = await this.categoryModel.findByIdAndDelete(id).exec();
