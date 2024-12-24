@@ -45,7 +45,7 @@ export const RestaurantDetailsPage: FC = () => {
     if (existingProduct) {
       setUserProducts(prev =>
         prev.map((item: Product) =>
-          item._id === product._id ? { ...item, quantity: item.quantity! + 1 } : item,
+          item._id === product._id ? { ...item, quantity: item.quantity || 0 + 1 } : item,
         ),
       );
     } else {
@@ -54,7 +54,7 @@ export const RestaurantDetailsPage: FC = () => {
   };
 
   const handleDecreaseProduct = (product: Product) => {
-    setUserProducts((prev: any) =>
+    setUserProducts((prev) =>
       prev.map((item: any) =>
         item.quantity > 1 && item._id === product._id
           ? { ...item, quantity: item.quantity - 1 }
@@ -76,6 +76,10 @@ export const RestaurantDetailsPage: FC = () => {
       return total + product.price * (product.quantity || 1);
     }, 0);
     return summ;
+  };
+
+  const goToCheckout = () => {
+    navigate('/user?page=checkout'); 
   };
 
   useEffect(() => {
@@ -211,7 +215,7 @@ export const RestaurantDetailsPage: FC = () => {
               </div>
             ))}
           </div>
-          <Flex justify='space-between' className={styles.checkoutWrapper}>
+          <Flex onClick={goToCheckout} justify='space-between' className={styles.checkoutWrapper}>
             <Text className={styles.checkoutText}>Checkout</Text>
             <Text className={styles.checkout} theme={TextTheme.RED} weight={TextWeight.MEDIUM}>${handleSummProducts()}</Text>
           </Flex>
