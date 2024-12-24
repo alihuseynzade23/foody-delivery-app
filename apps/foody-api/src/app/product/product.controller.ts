@@ -45,7 +45,7 @@ export class ProductController {
   }
 
   @Get('all')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   async getAll() {
     return this.productService.getAllProducts();
   }

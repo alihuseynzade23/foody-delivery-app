@@ -1,16 +1,24 @@
 import styles from './RestaurantsPage.module.scss';
-import { Button, Spinner, Text, TextSize, TextWeight } from '@org/foody-shared-components';
+import {
+  Button,
+  Spinner,
+  Text,
+  TextSize,
+  TextWeight,
+  useRestaurant,
+  useGetRestaurantsByCategoryId,
+  useCategory,
+} from '@org/foody-shared-components';
+
 import { HeaderBar } from '../../../widgets/HeaderBar';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { useAddStore } from '../../../entities/Add';
 
 import { useQuery } from '@tanstack/react-query';
-import { RestaurantItem, useRestaurant } from '../../../entities/Restaurant';
-import { Restaurant } from '../../../entities/Restaurant/model/types/restaurant';
-import { useCategory } from '../../../entities/Category';
+import { RestaurantItem } from '../../../entities/Restaurant';
+import { Restaurant } from '../../../entities/Restaurant/lib/types/restaurant';
 import { useState } from 'react';
-import { useGetRestaurantsByCategoryId } from '../../../entities/Restaurant';
 
 export const RestaurantsPage = () => {
   const { t } = useTranslation('restaurant');

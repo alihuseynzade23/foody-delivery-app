@@ -1,0 +1,13 @@
+.container {
+  height: 100vh;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  display: flex;
+  gap: 2.5rem;
+}
+
+.restaurantsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+}

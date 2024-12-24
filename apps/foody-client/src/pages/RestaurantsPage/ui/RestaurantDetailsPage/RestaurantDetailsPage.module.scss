@@ -1,0 +1,145 @@
+.container {
+  margin: 1rem 1.75rem 6rem 1.75rem;
+}
+
+.restaurantImage {
+  width: 500px;
+  height: 400px;
+  margin: 1rem auto;
+}
+
+.restaurantInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0 1rem 0;
+}
+
+.cuisineInfo {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+}
+
+.deliveryPrice {
+  border: 1px solid var(--primary-red);
+  border-radius: 5px;
+  padding: 0.8rem 0.2rem;
+}
+
+.goBack {
+  background-color: var(--primary-red);
+  color: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 5px;
+}
+
+.line {
+  background-color: var(--secondary-white);
+  height: 2px;
+  margin: 0 -2rem;
+}
+
+.productName {
+  display: flex;
+  flex-direction: column;
+}
+
+.productContainer {
+  background-color: var(--secondary-gray);
+  width: 100%;
+}
+
+.productWrapper {
+  border-top: 1px solid var(--primary-gray);
+  padding: 1.5rem 2.5rem;
+}
+
+.from {
+  color: var(--primary-gray);
+}
+
+.add {
+  font-size: 1.4rem;
+  border: 2px solid #bdbdbd;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.add:hover {
+  background-color: var(--primary-green);
+}
+
+.productsTitle {
+  text-align: center;
+  padding: 2.5rem 0;
+}
+
+.productsWrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 2rem;
+  gap: 3rem;
+  justify-content: space-between;
+}
+
+.quantityWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 20px;
+  margin-right: 0.8rem;
+}
+
+.basketWrapper {
+  background-color: var(--secondary-gray);
+  width: 100%;
+  max-width: 397px;
+  padding: 1rem;
+  
+}
+
+.basket {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--primary-gray);
+  padding: 1.5rem 0rem;
+  justify-content: space-between;
+}
+
+
+.productItems {
+  margin-bottom: 0.9rem;
+}
+
+.basketIcons {
+  cursor: pointer;
+  color: #000;
+  font-size: 1.2rem;
+}
+
+.delete {
+  cursor: pointer;
+}
+
+
+.checkoutWrapper {
+  background-color: var(--primary-red);
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.checkout {
+  background-color: #fff;
+  margin: 0.2rem 0.2rem;
+  width: 100%;
+  max-width: 135px; 
+  text-align: center;
+  padding-top: 0.4rem;
+  border-radius: 100px;
+}
+
+.checkoutText {
+  padding: 0.6rem 1rem;
+}

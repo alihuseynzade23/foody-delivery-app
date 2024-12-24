@@ -36,5 +36,7 @@ export * from './lib/shared/lib/validations/login';
 // API
 export * from './lib/api/api-client';
 
-// DTOs
-// export * from '../../../apps/foody-api/src/auth/dto/user.dto';
+// Entity
+export * from './lib/entities/Restaurant';
+export * from './lib/entities/Product';
+export * from './lib/entities/Category';

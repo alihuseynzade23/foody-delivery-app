@@ -1,4 +1,13 @@
-import { Input, InputTheme, Spinner, Text } from '@org/foody-shared-components';
+import {
+  Input,
+  InputTheme,
+  Spinner,
+  Text,
+  useRestaurant,
+  useProduct,
+  createProductSchema,
+  useGetOneProduct,
+} from '@org/foody-shared-components';
 import styles from './ProductForm.module.scss';
 
 import { useTranslation } from 'react-i18next';
@@ -10,15 +19,9 @@ import { AddFormLayout } from '../../../Add';
 
 import { imageStore } from '@org/foody-shared-components';
 import { notification, Select } from 'antd';
-import { useCategory } from '../../../Category/model/hooks/useCategory';
 import { useQuery } from '@tanstack/react-query';
-import { Category } from '../../../Category/model/types/category';
 import { useEffect } from 'react';
-import { useRestaurant } from '../../../Restaurant';
-import { useProduct } from '../../model/hooks/useProduct';
-import { createProductSchema } from '../../model/validations/createProduct';
-import { Restaurant } from '../../../Restaurant/model/types/restaurant';
-import useGetOneProduct from '../../model/hooks/useGetOneProduct';
+import { Restaurant } from '../../../Restaurant/lib/types/restaurant';
 
 export const CreateProductForm = () => {
   const { t } = useTranslation('product');

@@ -27,15 +27,17 @@
 }
 
 .darkGray {
-  color: var( --secondary-dark-gray);
+  color: var(--secondary-dark-gray);
 }
 .darkBlack {
-  color: var( --dark-black);
+  color: var(--dark-black);
 }
 .strongGray {
-  color: var( --dark-gray);
+  color: var(--dark-gray);
 }
-
+.primaryGray {
+  color: var(--primary-gray);
+}
 
 .size_s {
   font-size: 0.75rem;

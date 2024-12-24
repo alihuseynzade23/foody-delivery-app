@@ -1,4 +1,13 @@
-import { Input, InputTheme, Spinner } from '@org/foody-shared-components';
+import {
+  Input,
+  InputTheme,
+  Spinner,
+  imageStore,
+  useCategory,
+  createCategorySchema,
+  useGetOneCategory,
+} from '@org/foody-shared-components';
+
 import styles from './CategoryForm.module.scss';
 
 import { useTranslation } from 'react-i18next';
@@ -6,14 +15,13 @@ import { useFormik } from 'formik';
 
 import { useAddStore } from '../../../Add';
 
-import { createCategorySchema } from '../../model/validations/createCategory';
+// import { createCategorySchema } from '../../model/validations/createCategory';
 
 import { AddFormLayout } from '../../../Add';
 
-import { imageStore } from '@org/foody-shared-components';
-import { useCategory } from '../../model/hooks/useCategory';
+// import { useCategory } from '../../model/hooks/useCategory';
 import { notification } from 'antd';
-import useGetCategory from '../../model/hooks/useGetOneCategory';
+// import useGetCategory from '../../model/hooks/useGetOneCategory';
 import { useEffect } from 'react';
 
 export const CreateCategoryForm = () => {
@@ -84,7 +92,7 @@ export const UpdateCategoryFrom = () => {
   const { t } = useTranslation('category');
   const { setClose, id } = useAddStore();
 
-  const { data: category, isLoading } = useGetCategory(id);
+  const { data: category, isLoading } = useGetOneCategory(id);
   const { setImage, setImageUrl, image } = imageStore();
 
   const { updateCategory } = useCategory();

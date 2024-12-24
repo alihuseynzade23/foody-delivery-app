@@ -13,7 +13,7 @@ import { BaseLayout } from '../../../layouts/BaseLayout/ui/BaseLayout';
 
 import { AuthPage } from '../../../../pages/AuthPage';
 import { HomePage } from '../../../../pages/HomePage';
-import { RestaurantsPage } from '../../../../pages/RestaurantsPage';
+import { RestaurantDetailsPage, RestaurantsPage } from '../../../../pages/RestaurantsPage';
 import { ProfilePage } from '../../../../pages/ProfilePage';
 
 const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
@@ -28,7 +28,7 @@ const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
 
 export const AppRouter: FC = () => {
   const { t } = useTranslation();
- 
+
   return (
     <Suspense fallback={<FullScreenLoading text={t`Loading`} />}>
       <Routes>
@@ -49,6 +49,14 @@ export const AppRouter: FC = () => {
           }
         />
         <Route
+          path="/restaurants/:id"
+          element={
+            <ProtectedRoute>
+              <RestaurantDetailsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/profile"
           element={
             <ProtectedRoute>
@@ -56,13 +64,6 @@ export const AppRouter: FC = () => {
             </ProtectedRoute>
           }
         />
-        {/* <Route
-          path='/user'
-          element={
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          } */}
 
         <Route path="*" element={<NotFoundPage title={t`Page not found`} />} />
       </Routes>

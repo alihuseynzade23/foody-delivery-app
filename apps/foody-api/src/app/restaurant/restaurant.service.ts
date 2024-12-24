@@ -19,6 +19,7 @@ export class RestaurantService {
     if (existingRestaurant) {
       throw new Error(EXISTING_RESTAURANT_ERROR);
     }
+    await this.redis.del('all_restaurants');
     return await new this.restaurantModel(dto).save();
   }
 
@@ -59,6 +60,7 @@ export class RestaurantService {
 
     const redisKey = `restaurant:${id}`;
     await this.redis.set(redisKey, JSON.stringify(updatedRestaurant), 'EX', 60 * 60);
+    await this.redis.del('all_restaurants');
 
     return updatedRestaurant;
   }
@@ -70,6 +72,7 @@ export class RestaurantService {
       throw new NotFoundException(RESTAURANT_NOT_FOUND_ERROR);
     }
     const redisKey = `restaurant:${id}`;
+    await this.redis.del('all_restaurants');
     await this.redis.del(redisKey);
   }
 }

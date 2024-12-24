@@ -1,14 +1,19 @@
 import { FC } from 'react';
-import { Product } from '../../model/types/product';
+import {
+  Text,
+  TextSize,
+  TextTheme,
+  TextWeight,
+  useRestaurant,
+  useProduct,
+} from '@org/foody-shared-components';
+import { Product } from '../../lib/types/product';
 import styles from './ProductItem.module.scss';
 import { HandleButtons } from '../../../../features/handleProduct/ui/HandleButtons';
 import { useQuery } from '@tanstack/react-query';
-import { Text, TextSize, TextTheme, TextWeight } from '@org/foody-shared-components';
-import { useProduct } from '../../model/hooks/useProduct';
 import { notification } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useAddStore } from '../../../Add';
-import { useRestaurant } from '../../../Restaurant';
 
 type Prop = {
   data: any;

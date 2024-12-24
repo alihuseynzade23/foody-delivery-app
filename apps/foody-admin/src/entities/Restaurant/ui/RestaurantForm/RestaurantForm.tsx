@@ -1,4 +1,14 @@
-import { Input, InputTheme, Spinner, Text } from '@org/foody-shared-components';
+import {
+  Input,
+  InputTheme,
+  Spinner,
+  Text,
+  useRestaurant,
+  useGetOneRestaurant,
+  createRestaurantSchema,
+  imageStore,
+  useCategory,C
+} from '@org/foody-shared-components';
 import styles from './RestaurantForm.module.scss';
 
 import { useTranslation } from 'react-i18next';
@@ -6,17 +16,12 @@ import { useFormik } from 'formik';
 
 import { useAddStore } from '../../../Add';
 
-import { createRestaurantSchema } from '../../model/validations/createRestaurant';
-
 import { AddFormLayout } from '../../../Add';
 
-import { imageStore } from '@org/foody-shared-components';
-import { useRestaurant } from '../../model/hooks/useRestaurant';
 import { notification, Select } from 'antd';
-import { useCategory } from '../../../Category/model/hooks/useCategory';
+// import { useCategory } from '../../../Category/model/hooks/useCategory';
 import { useQuery } from '@tanstack/react-query';
-import { Category } from '../../../Category/model/types/category';
-import useGetOneRestaurant from '../../model/hooks/useGetOneRestaurant';
+import { Category } from '../../../Category/lib/types/category';
 import { useEffect } from 'react';
 
 export const CreateRestaurantForm = () => {
@@ -190,7 +195,7 @@ export const UpdateRestaurantForm = () => {
       try {
         const payload = {
           name: values.name,
-          image,  
+          image,
           cuisine: values.cuisine,
           price: Number(values.price),
           deliveryTime: Number(values.deliveryTime),
