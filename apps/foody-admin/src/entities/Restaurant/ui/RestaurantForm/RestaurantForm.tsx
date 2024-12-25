@@ -7,7 +7,7 @@ import {
   useGetOneRestaurant,
   createRestaurantSchema,
   imageStore,
-  useCategory,C
+  useCategory,
 } from '@org/foody-shared-components';
 import styles from './RestaurantForm.module.scss';
 

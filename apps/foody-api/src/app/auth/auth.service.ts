@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './user.model';
 import { Model } from 'mongoose';
@@ -12,6 +12,7 @@ import {
   WRONG_PASSWORD_ERROR,
 } from './auth.constants';
 import { AuthDto } from './dto/user.dto';
+import { UserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -90,6 +91,20 @@ export class AuthService {
       access_token: newAccessToken,
       refresh_token: newRefreshToken,
     };
+  }
+
+  async updateUser(id: string, partialDto: Partial<UserDto>) {
+    const filteredDto = Object.fromEntries(
+      Object.entries(partialDto).filter(([_, value]) => value !== null && value !== ''),
+    );
+
+    const updatedUser = await this.userModel
+      .findByIdAndUpdate(id, { $set: filteredDto }, { new: true })
+      .exec();
+    if (!updatedUser) {
+      throw new NotFoundException(USER_NOT_FOUND_ERROR);
+    }
+    return updatedUser;
   }
 
   async getUserFromToken(accessToken: string) {

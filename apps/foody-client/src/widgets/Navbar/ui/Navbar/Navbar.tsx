@@ -70,7 +70,7 @@ export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
           </>
         ) : (
           <Button
-            onClick={() => navigate('/profile')}
+            onClick={() => navigate('/user?page=profile')}
             theme={ButtonTheme.BG_RED}
             className={styles.btn}
             size={ButtonSize.M}

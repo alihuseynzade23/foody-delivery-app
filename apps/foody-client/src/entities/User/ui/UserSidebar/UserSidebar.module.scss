@@ -1,0 +1,25 @@
+.container {
+    background-color: var(--secondary-gray);
+    width: 100%;
+    max-width: 325px;
+    overflow-y: auto;
+    display: flex;
+    height: 515px;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.5rem 2rem 1.5rem 1rem;
+  }
+  
+  .categoryWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem;
+  }
+  
+  .active {
+    background-color: rgb(255, 220, 225);
+  }
+  
