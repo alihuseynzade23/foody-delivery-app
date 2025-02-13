@@ -28,6 +28,7 @@ export const RestaurantDetailsPage: FC = () => {
 
   const navigate = useNavigate();
 
+
   const { data: restaurant, isLoading, error } = useGetOneRestaurant(id || '');
   const {
     data: products,
@@ -44,8 +45,8 @@ export const RestaurantDetailsPage: FC = () => {
 
     if (existingProduct) {
       setUserProducts(prev =>
-        prev.map((item: Product) =>
-          item._id === product._id ? { ...item, quantity: item.quantity || 0 + 1 } : item,
+        prev.map(item =>
+          item._id === product._id ? { ...item, quantity: (item.quantity || 0) + 1 } : item,
         ),
       );
     } else {
@@ -54,12 +55,14 @@ export const RestaurantDetailsPage: FC = () => {
   };
 
   const handleDecreaseProduct = (product: Product) => {
-    setUserProducts((prev) =>
-      prev.map((item: any) =>
-        item.quantity > 1 && item._id === product._id
-          ? { ...item, quantity: item.quantity - 1 }
-          : item,
-      ),
+    setUserProducts(prev =>
+      prev
+        .map(item =>
+          item._id === product._id && item.quantity && item.quantity > 1
+            ? { ...item, quantity: item.quantity - 1 }
+            : item,
+        )
+        .filter(item => item.quantity && item.quantity > 0),
     );
   };
 
@@ -72,26 +75,31 @@ export const RestaurantDetailsPage: FC = () => {
   };
 
   const handleSummProducts = () => {
-    const summ = userProducts.reduce((total, product) => {
-      return total + product.price * (product.quantity || 1);
-    }, 0);
-    return summ;
+    return userProducts.reduce(
+      (total, product) => total + (product.price || 0) * (product.quantity || 1),
+      0,
+    );
   };
 
   const goToCheckout = () => {
-    navigate('/user?page=checkout'); 
+    navigate('/user?page=checkout');
   };
 
   useEffect(() => {
+    // Загружаем данные из localStorage только если они существуют
     const savedProducts = localStorage.getItem('@foody_user_products');
     if (savedProducts) {
-      setUserProducts(JSON.parse(savedProducts || ''));
+      setUserProducts(JSON.parse(savedProducts));
     }
-  }, []);
-
+  }, []); // Срабатывает только при монтировании
+  
   useEffect(() => {
-    localStorage.setItem('@foody_user_products', JSON.stringify(userProducts));
-  }, [userProducts]);
+    // Сохраняем данные в localStorage при изменении userProducts
+    if (userProducts.length > 0) {
+      localStorage.setItem('@foody_user_products', JSON.stringify(userProducts));
+    }
+  }, [userProducts]); // Срабатывает при изменении userProducts
+  
 
   if (error || productIsError) return <Text>{t`Failed to fetch data`}</Text>;
   if (isLoading || productIsLoading) return <Spinner />;
@@ -215,9 +223,11 @@ export const RestaurantDetailsPage: FC = () => {
               </div>
             ))}
           </div>
-          <Flex onClick={goToCheckout} justify='space-between' className={styles.checkoutWrapper}>
+          <Flex onClick={goToCheckout} justify="space-between" className={styles.checkoutWrapper}>
             <Text className={styles.checkoutText}>Checkout</Text>
-            <Text className={styles.checkout} theme={TextTheme.RED} weight={TextWeight.MEDIUM}>${handleSummProducts()}</Text>
+            <Text className={styles.checkout} theme={TextTheme.RED} weight={TextWeight.MEDIUM}>
+              ${handleSummProducts()}
+            </Text>
           </Flex>
         </section>
       </div>
