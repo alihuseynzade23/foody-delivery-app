@@ -33,7 +33,7 @@ export const Profile = () => {
   const id: string = user?._id || '';
 
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
-    initialValues: {
+    initialValues: {                
       fullName: '',
       contactNumber: '',
       username: '',

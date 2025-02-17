@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #f8f8f8;
+  border-radius: 10px;
+}
+
+.basketHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.basketItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.productImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.productInfo {
+  flex-grow: 1;
+  margin-left: 1rem;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quantityButton {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #e53935;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.deleteIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkoutSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-top: 1px solid #ddd;
+}
+
+.checkoutButton {
+  background: #e53935;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.totalPrice {
+  font-size: 1.2rem;
+}

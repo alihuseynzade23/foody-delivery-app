@@ -18,9 +18,9 @@ import { useTranslation } from 'react-i18next';
 
 import burgerIconBlack from '../../../../shared/assets/burger-icon-black.svg';
 import basketIcon from '../../../../shared/assets/basket.svg';
-import userIcon from '../../../../shared/assets/user.svg';
 
 import { useNavigate } from 'react-router-dom';
+import { UserMenu } from '../../../UserMenu/UserMenu';
 
 interface NavbarProps {
   className?: string;
@@ -66,7 +66,8 @@ export const Navbar: FC<NavbarProps> = ({ className, isOpen }) => {
         {isLoggedIn ? (
           <>
             <img src={basketIcon} alt="basket" className={styles.basketIcon} />
-            <img src={userIcon} alt="basket" className={styles.userIcon} />
+            {/* <img src={userIcon} alt="basket" className={styles.userIcon} /> */}
+            <UserMenu navigate={navigate} />
           </>
         ) : (
           <Button
