@@ -14,7 +14,7 @@ import { BaseLayout } from '../../../layouts/BaseLayout/ui/BaseLayout';
 import { AuthPage } from '../../../../pages/AuthPage';
 import { HomePage } from '../../../../pages/HomePage';
 import { RestaurantDetailsPage, RestaurantsPage } from '../../../../pages/RestaurantsPage';
-import { ProfilePage } from '../../../../pages/ProfilePage';
+import { UserPage } from '../../../../pages/UserPage';
 
 const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
   const { isLoggedIn } = useAuth();
@@ -57,10 +57,10 @@ export const AppRouter: FC = () => {
           }
         />
         <Route
-          path="/profile"
+          path="/user"
           element={
             <ProtectedRoute>
-              <ProfilePage />
+              <UserPage />
             </ProtectedRoute>
           }
         />

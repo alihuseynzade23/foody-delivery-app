@@ -1,0 +1,31 @@
+.userMenuWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.userIcon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.userMenu {
+  position: absolute;
+  padding: 23px 19px;
+  top: 40px;
+  right: 0;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 180px;
+  z-index: 1000;
+}
+
+.userMenu div {
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.userMenu div:hover {
+  background: #f1f1f1;
+}

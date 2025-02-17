@@ -9,6 +9,7 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { RedisModule } from '@nestjs-modules/ioredis';
+import { FilesService } from '../files/files.service';
 
 @Module({
   imports: [
@@ -23,6 +24,6 @@ import { RedisModule } from '@nestjs-modules/ioredis';
     RedisModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, FilesService],
 })
 export class AuthModule {}

@@ -11,9 +11,9 @@ import {
 } from '@org/foody-shared-components';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { useCategoryIdStore } from '../model/store/category-type-store';
+import { useCategoryIdStore } from '../../model/store/category-type-store';
 
-import miniPizzaIcon from '../../../shared/assets/mini-pizza.svg';
+import miniPizzaIcon from '../../../../shared/assets/mini-pizza.svg';
 
 export const RestaurantSidebar = () => {
   const { fetchCategories } = useCategory();

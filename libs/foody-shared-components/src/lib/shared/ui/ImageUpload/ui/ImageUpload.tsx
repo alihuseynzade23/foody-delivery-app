@@ -48,8 +48,12 @@ export const ImageUpload = ({
   }, [url, setPreviewUrl]);
 
   return (
-    <div className={`${styles.fileUpload} ${className}`}>
-      <div className={styles.uploadContainer}>
+    <div
+      className={`${styles.fileUpload} ${
+        theme === 'admin' ? styles.adminTheme : styles.clientTheme
+      }`}
+    >
+      <div className={`${styles.uploadContainer} ${className}`}>
         <div className={styles.imageContainer}>
           <label className={styles.label}>{labelName}</label>
           {previewUrl && image && (

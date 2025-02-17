@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Button,
@@ -18,13 +18,22 @@ import { Product } from '../../../../shared/lib/types/product';
 
 import basketIcon from '../../../../shared/assets/basket.svg';
 import deleteIcon from '../../../../shared/assets/delete_sweep.svg';
+// import { useBasket } from '../../../../entities/User/model/hooks/useBasket';
+import { useBasket } from '../../../../entities/User';
 
 export const RestaurantDetailsPage: FC = () => {
   const { id } = useParams<{ id: string }>();
 
   const { t } = useTranslation('restaurant');
 
-  const [userProducts, setUserProducts] = useState<Product[]>([]);
+  const {
+    userProducts,
+    setUserProducts,
+    addProduct,
+    decreaseProduct,
+    deleteProduct,
+    getTotalPrice,
+  } = useBasket();
 
   const navigate = useNavigate();
 
@@ -39,58 +48,21 @@ export const RestaurantDetailsPage: FC = () => {
     navigate(-1);
   };
 
-  const handleAddProduct = (product: Product) => {
-    const existingProduct = userProducts.find(element => element._id === product._id);
-
-    if (existingProduct) {
-      setUserProducts(prev =>
-        prev.map((item: Product) =>
-          item._id === product._id ? { ...item, quantity: item.quantity || 0 + 1 } : item,
-        ),
-      );
-    } else {
-      setUserProducts(prev => [...prev, { ...product, quantity: 1 }]);
-    }
-  };
-
-  const handleDecreaseProduct = (product: Product) => {
-    setUserProducts((prev) =>
-      prev.map((item: any) =>
-        item.quantity > 1 && item._id === product._id
-          ? { ...item, quantity: item.quantity - 1 }
-          : item,
-      ),
-    );
-  };
-
-  const handleDeleteProduct = (productId: string) => {
-    setUserProducts(prev => {
-      const updatedProducts = prev.filter(item => item._id !== productId);
-      localStorage.setItem('@foody_user_products', JSON.stringify(updatedProducts));
-      return updatedProducts;
-    });
-  };
-
-  const handleSummProducts = () => {
-    const summ = userProducts.reduce((total, product) => {
-      return total + product.price * (product.quantity || 1);
-    }, 0);
-    return summ;
-  };
-
   const goToCheckout = () => {
-    navigate('/user?page=checkout'); 
+    navigate('/user?page=checkout');
   };
 
   useEffect(() => {
     const savedProducts = localStorage.getItem('@foody_user_products');
     if (savedProducts) {
-      setUserProducts(JSON.parse(savedProducts || ''));
+      setUserProducts(JSON.parse(savedProducts));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('@foody_user_products', JSON.stringify(userProducts));
+    if (userProducts.length > 0) {
+      localStorage.setItem('@foody_user_products', JSON.stringify(userProducts));
+    }
   }, [userProducts]);
 
   if (error || productIsError) return <Text>{t`Failed to fetch data`}</Text>;
@@ -163,7 +135,7 @@ export const RestaurantDetailsPage: FC = () => {
                   <Text size={TextSize.L} weight={TextWeight.MEDIUM} theme={TextTheme.BLACK}>
                     <span className={styles.from}>From</span> ${product.price}
                   </Text>
-                  <Button onClick={() => handleAddProduct(product)} className={styles.add}>
+                  <Button onClick={() => addProduct(product)} className={styles.add}>
                     +
                   </Button>
                 </Flex>
@@ -190,22 +162,19 @@ export const RestaurantDetailsPage: FC = () => {
                 </Flex>
                 <Flex>
                   <div className={styles.quantityWrapper}>
-                    <Button className={styles.basketIcons} onClick={() => handleAddProduct(item)}>
+                    <Button className={styles.basketIcons} onClick={() => addProduct(item)}>
                       +
                     </Button>
                     <Text weight={TextWeight.MEDIUM} theme={TextTheme.BLACK}>
                       {item.quantity}
                     </Text>
-                    <Button
-                      className={styles.basketIcons}
-                      onClick={() => handleDecreaseProduct(item)}
-                    >
+                    <Button className={styles.basketIcons} onClick={() => decreaseProduct(item)}>
                       —
                     </Button>
                   </div>
                   <div>
                     <img
-                      onClick={() => handleDeleteProduct(item._id || '')}
+                      onClick={() => deleteProduct(item._id || '')}
                       className={styles.delete}
                       src={deleteIcon}
                       alt="delete"
@@ -215,9 +184,11 @@ export const RestaurantDetailsPage: FC = () => {
               </div>
             ))}
           </div>
-          <Flex onClick={goToCheckout} justify='space-between' className={styles.checkoutWrapper}>
+          <Flex onClick={goToCheckout} justify="space-between" className={styles.checkoutWrapper}>
             <Text className={styles.checkoutText}>Checkout</Text>
-            <Text className={styles.checkout} theme={TextTheme.RED} weight={TextWeight.MEDIUM}>${handleSummProducts()}</Text>
+            <Text className={styles.checkout} theme={TextTheme.RED} weight={TextWeight.MEDIUM}>
+              ${getTotalPrice()}
+            </Text>
           </Flex>
         </section>
       </div>

@@ -9,6 +9,12 @@ import {
   // UseGuards,
   UsePipes,
   ValidationPipe,
+  Put,
+  Param,
+  UseGuards,
+  UseInterceptors,
+  UploadedFile,
+  Patch,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/user.dto';
@@ -21,12 +27,18 @@ import {
 // import { RolesGuard } from './guards/role.guard';
 // import { Roles } from './decorators/roles.decorator';
 import { ConfigService } from '@nestjs/config';
+import { JwtAuthGuard } from './guards/jwt.guard';
+import { UserDto } from './dto/update-user.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { FilesService } from '../files/files.service';
+import { MFile } from '../files/mfile.class';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly configService: ConfigService,
+    private readonly filesService: FilesService,
   ) {}
 
   @UsePipes(new ValidationPipe())
@@ -59,6 +71,31 @@ export class AuthController {
     }
 
     return this.authService.login(login);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
+  @UseInterceptors(FileInterceptor('avatar'))
+  @Patch(':id')
+  async update(
+    @Body() partialDto: Partial<UserDto>,
+    @Param('id') id: string,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    let imageUrl = '';
+    if (file) {
+      const savedFiles = await this.filesService.saveFiles([new MFile(file)]);
+      imageUrl = savedFiles[0].url;
+    }
+
+    return await this.authService.updateUser(id, {
+      fullName: partialDto.fullName,
+      address: partialDto.address,
+      username: partialDto.username,
+      contactNumber: partialDto.contactNumber,
+      avatar: imageUrl,
+      email: partialDto.email,
+    });
   }
 
   @Post('refresh')

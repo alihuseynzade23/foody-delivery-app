@@ -36,7 +36,7 @@ export const registeredUserItems: SidebarItemType[] = [
     text: 'Restaurants',
   },
   {
-    path: '/profile',
+    path: '/user?page=profile',
     text: 'Profile',
   },
   {

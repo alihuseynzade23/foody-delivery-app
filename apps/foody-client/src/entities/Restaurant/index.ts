@@ -1,3 +1,3 @@
-export { RestaurantSidebar } from './RestaurantSidebar/RestaurantSidebar';
+export { RestaurantSidebar } from './ui/RestaurantSidebar/RestaurantSidebar';
 export { useCategoryIdStore } from './model/store/category-type-store';
-export { RestaurantItem } from './RestaurantItem/RestaurantItem';
+export { RestaurantItem } from './ui/RestaurantItem/RestaurantItem';
